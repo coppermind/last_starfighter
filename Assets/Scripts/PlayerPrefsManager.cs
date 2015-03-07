@@ -52,10 +52,8 @@ public class PlayerPrefsManager : MonoBehaviour {
 	
 	public static int GetDifficulty() {
 		if (PlayerPrefs.HasKey(DIFFICULTY_KEY)) {
-			Debug.Log("Has Difficulty Key");
 			return PlayerPrefs.GetInt(DIFFICULTY_KEY);
 		} else {
-			Debug.Log("Has NO Difficulty Key");
 			return DEFAULT_DIFFICULTY;
 		}
 	}
