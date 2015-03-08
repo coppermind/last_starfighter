@@ -1,13 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Player : MonoBehaviour {
+public class PlayerShip : MonoBehaviour {
 
 	public float shipSpeed = 8f;
 	public float shipPadding = 0.5f;
-	
-	public float defaultProjectileSpeed = 10f;
-	public float defaultProjectileRate = 0.2f;
 	
 	public float hitPoints = 100f;
 	public int numberOfLives = 3;
@@ -16,22 +13,27 @@ public class Player : MonoBehaviour {
 	
 	private float minX, maxX, minY, maxY;
 	private Animator animator;
+	
+	private PlayerShield shield;
+	private PlayerShooter shooter;
+	
 	//private LevelManager levelManager;
 	
 	void Start () {
-		//levelManager = FindObjectOfType<LevelManager>();
+		CalculateCameraDistance();
 		
+		//levelManager = FindObjectOfType<LevelManager>();
+		shooter = GetComponentInChildren<PlayerShooter>();
+	}
+
+	void CalculateCameraDistance ()
+	{
 		Camera camera = Camera.main;
 		float distance = transform.position.z - camera.transform.position.z;
-		
-		minX = camera.ViewportToWorldPoint(new Vector3(0, 0, distance)).x + shipPadding;
-		minY = camera.ViewportToWorldPoint(new Vector3(0, 0, distance)).y + shipPadding;
-		
-		maxX = camera.ViewportToWorldPoint(new Vector3(1, 1, distance)).x - shipPadding;
-		maxY = camera.ViewportToWorldPoint(new Vector3(1, 1, distance)).y - shipPadding;
-		
-		animator = GetComponent<Animator>();
-		animator.SetTrigger("Spawn trigger");
+		minX = camera.ViewportToWorldPoint (new Vector3 (0, 0, distance)).x + shipPadding;
+		minY = camera.ViewportToWorldPoint (new Vector3 (0, 0, distance)).y + shipPadding;
+		maxX = camera.ViewportToWorldPoint (new Vector3 (1, 1, distance)).x - shipPadding;
+		maxY = camera.ViewportToWorldPoint (new Vector3 (1, 1, distance)).y - shipPadding;
 	}
 	
 	void Update () {
@@ -53,10 +55,10 @@ public class Player : MonoBehaviour {
 		UpdateShipPosition(shipPosition, newXPosition, newYPosition);
 		
 		if (Input.GetMouseButtonDown(0)) {
-			Debug.Log("Mouse button 0 pressed.");
+			StartPrimaryWeapon();
 		}
 		if (Input.GetMouseButtonUp(0)) {
-			Debug.Log("Mouse button 0 released.");
+			StopPrimaryWeapon();
 		}
 		if (Input.GetMouseButtonDown(1)) {
 			Debug.Log("Mouse button 1 pressed.");
@@ -72,4 +74,15 @@ public class Player : MonoBehaviour {
 		transform.position = ship;
 	}
 	
+	void StartPrimaryWeapon() {
+		shooter.StartFiringPrimaryWeapon();
+	}
+	
+	void StopPrimaryWeapon() {
+		shooter.StopFiringPrimaryWeapon();
+	}
+	
+	void FireSecondary() {
+		Debug.Log("Firing secondary weapon");
+	}
 }

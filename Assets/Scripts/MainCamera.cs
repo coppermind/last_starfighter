@@ -3,8 +3,8 @@ using System.Collections;
 
 public class MainCamera : MonoBehaviour {
 
-	float width = 35f;
-	float height = 20f;
+	float width = 31.5f;
+	float height = 18f;
 
 	void OnDrawGizmos() {
 		float xMin, xMax, yMin, yMax;
