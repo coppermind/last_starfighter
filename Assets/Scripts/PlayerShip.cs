@@ -19,14 +19,14 @@ public class PlayerShip : MonoBehaviour {
 	
 	//private LevelManager levelManager;
 	
-	void Start () {
+	void Start() {
 		CalculateCameraDistance();
 		
 		//levelManager = FindObjectOfType<LevelManager>();
 		shooter = GetComponentInChildren<PlayerShooter>();
 	}
 
-	void CalculateCameraDistance ()
+	void CalculateCameraDistance()
 	{
 		Camera camera = Camera.main;
 		float distance = transform.position.z - camera.transform.position.z;
@@ -36,7 +36,7 @@ public class PlayerShip : MonoBehaviour {
 		maxY = camera.ViewportToWorldPoint (new Vector3 (1, 1, distance)).y - shipPadding;
 	}
 	
-	void Update () {
+	void Update() {
 		Vector3 shipPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z);
 		
 		float newXPosition = shipPosition.x;
@@ -85,4 +85,5 @@ public class PlayerShip : MonoBehaviour {
 	void FireSecondary() {
 		Debug.Log("Firing secondary weapon");
 	}
+	
 }

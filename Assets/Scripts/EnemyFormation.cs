@@ -41,7 +41,7 @@ public class EnemyFormation : MonoBehaviour {
 	}
 	
 	void SpawnUntilFull() {
-		Debug.Log("Spawning until full...");
+		//Debug.Log("Spawning until full...");
 		Transform freePosition = NextFreePosition();
 		if (null != freePosition) {
 			SpawnEnemyShipAt(freePosition, freePosition.position);
@@ -64,7 +64,7 @@ public class EnemyFormation : MonoBehaviour {
 	}
 	
 	void SpawnEnemyShipAt(Transform parentElement, Vector3 shipPosition) {
-		Debug.Log("SpawnEnemyShipAt");
+		//Debug.Log("SpawnEnemyShipAt");
 		GameObject enemy = Instantiate(enemyPrefab, shipPosition, Quaternion.identity) as GameObject;
 		enemy.transform.parent = parentElement;
 		enemy.transform.position = shipPosition;

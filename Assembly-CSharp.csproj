@@ -47,8 +47,10 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\EnemyFormation.cs" />
+     <Compile Include="Assets\Scripts\EnemyLaser.cs" />
      <Compile Include="Assets\Scripts\EnemyPosition.cs" />
      <Compile Include="Assets\Scripts\EnemyShip.cs" />
+     <Compile Include="Assets\Scripts\EnemyShooter.cs" />
      <Compile Include="Assets\Scripts\LevelManager.cs" />
      <Compile Include="Assets\Scripts\MainCamera.cs" />
      <Compile Include="Assets\Scripts\MusicPlayer.cs" />
