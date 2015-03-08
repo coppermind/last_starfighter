@@ -15,10 +15,11 @@ public class Player : MonoBehaviour {
 	public AudioClip defaultEffects;
 	
 	private float minX, maxX, minY, maxY;
-	private LevelManager levelManager;
-
+	private Animator animator;
+	//private LevelManager levelManager;
+	
 	void Start () {
-		levelManager = FindObjectOfType<LevelManager>();
+		//levelManager = FindObjectOfType<LevelManager>();
 		
 		Camera camera = Camera.main;
 		float distance = transform.position.z - camera.transform.position.z;
@@ -29,7 +30,8 @@ public class Player : MonoBehaviour {
 		maxX = camera.ViewportToWorldPoint(new Vector3(1, 1, distance)).x - shipPadding;
 		maxY = camera.ViewportToWorldPoint(new Vector3(1, 1, distance)).y - shipPadding;
 		
-		Debug.Log("maxX: " + maxX.ToString());
+		animator = GetComponent<Animator>();
+		animator.SetTrigger("Spawn trigger");
 	}
 	
 	void Update () {
@@ -55,6 +57,12 @@ public class Player : MonoBehaviour {
 		}
 		if (Input.GetMouseButtonUp(0)) {
 			Debug.Log("Mouse button 0 released.");
+		}
+		if (Input.GetMouseButtonDown(1)) {
+			Debug.Log("Mouse button 1 pressed.");
+		}
+		if (Input.GetMouseButtonUp(1)) {
+			Debug.Log("Mouse button 1 released.");
 		}
 	}
 	
