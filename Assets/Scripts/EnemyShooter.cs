@@ -32,7 +32,6 @@ public class EnemyShooter : MonoBehaviour {
 	}
 	
 	void FirePrimaryWeapon() {
-		Debug.Log("Firing primary weapon!");
 		GameObject laser = Instantiate(weaponPrefab, transform.position, Quaternion.identity) as GameObject;
 		laser.GetComponent<Rigidbody2D>().velocity = new Vector3(0f, currentProjectileSpeed, 0f);
 	}

@@ -17,17 +17,21 @@ public class PlayerShip : MonoBehaviour {
 	private PlayerShield shield;
 	private PlayerShooter shooter;
 	
-	//private LevelManager levelManager;
+	private float currentHitPoints;
+	
+	private LevelManager levelManager;
 	
 	void Start() {
 		CalculateCameraDistance();
 		
-		//levelManager = FindObjectOfType<LevelManager>();
+		levelManager = FindObjectOfType<LevelManager>();
 		shooter = GetComponentInChildren<PlayerShooter>();
+		shield  = GetComponentInChildren<PlayerShield>();
+		
+		currentHitPoints = hitPoints;
 	}
 
-	void CalculateCameraDistance()
-	{
+	void CalculateCameraDistance() {
 		Camera camera = Camera.main;
 		float distance = transform.position.z - camera.transform.position.z;
 		minX = camera.ViewportToWorldPoint (new Vector3 (0, 0, distance)).x + shipPadding;
@@ -86,4 +90,24 @@ public class PlayerShip : MonoBehaviour {
 		Debug.Log("Firing secondary weapon");
 	}
 	
+	void OnTriggerEnter2D(Collider2D collider) {
+		EnemyLaser enemyLaser = collider.GetComponent<EnemyLaser>();
+		
+		if (enemyLaser) {
+			if (!shield.shieldIsDown()) {
+				shield.HitWith(enemyLaser.damagePoints);
+			} else {
+				HitWith(enemyLaser.damagePoints);
+				Debug.Log("Ship shield is down, player hit with " + enemyLaser.damagePoints + " damage.");
+			}
+		}
+	}
+	
+	void HitWith(float damage) {
+		currentHitPoints -= damage;
+		if (0f <= currentHitPoints) {
+			Destroy(gameObject);
+			levelManager.LoadLevel("04 Lose Screen");
+		}
+	}
 }

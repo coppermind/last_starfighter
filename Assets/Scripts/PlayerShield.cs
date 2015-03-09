@@ -25,11 +25,6 @@ public class PlayerShield : MonoBehaviour {
 		}
 	}
 	
-	void HitWith(float damage) {
-		totalHitPoints -= damage;
-		UpdateSprite();
-	}
-	
 	void UpdateSprite() {
 		float level = (currentHitPoints / totalHitPoints) * 100;
 		Sprite sprite = (level > 0) ? shieldLevels[1] : shieldLevels[0];
@@ -43,7 +38,15 @@ public class PlayerShield : MonoBehaviour {
 		spriteRenderer.sprite = sprite;
 	}
 	
+	public void HitWith(float damage) {
+		currentHitPoints -= damage;
+		if (0f >= currentHitPoints) {
+			currentHitPoints = -5f;
+		}
+		UpdateSprite();
+	}
+	
 	public bool shieldIsDown() {
-		return 0f <= currentHitPoints;
+		return !(0f <= currentHitPoints);
 	}
 }
