@@ -16,6 +16,18 @@ public class PlayerShooter : MonoBehaviour {
 		currentProjectileSpeed = defaultProjectileSpeed;
 	}
 	
+	void Update() {
+		if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space)) {
+			StartFiringPrimaryWeapon();
+		}
+		if (Input.GetMouseButtonUp(0) || Input.GetKeyUp(KeyCode.Space)) {
+			StopFiringPrimaryWeapon();
+		}
+		if (Input.GetMouseButton(1)) {
+			Debug.Log("Mouse button 1 pressed.");
+		}
+	}
+	
 	public void StartFiringPrimaryWeapon() {
 		InvokeRepeating("FirePrimaryWeapon", 0.0001f, currentProjectileRate);
 	}

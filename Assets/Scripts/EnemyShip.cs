@@ -9,10 +9,7 @@ public class EnemyShip : MonoBehaviour {
 
 	void Start () {
 		currentHitPoints = hitPoints;
-	}
-	
-	void Update () {
-	
+		
 	}
 	
 	void OnTriggerEnter2D(Collider2D collider) {

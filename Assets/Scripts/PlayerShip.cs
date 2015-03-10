@@ -15,7 +15,6 @@ public class PlayerShip : MonoBehaviour {
 	private Animator animator;
 	
 	private PlayerShield shield;
-	private PlayerShooter shooter;
 	
 	private float currentHitPoints;
 	
@@ -25,7 +24,6 @@ public class PlayerShip : MonoBehaviour {
 		CalculateCameraDistance();
 		
 		levelManager = FindObjectOfType<LevelManager>();
-		shooter = GetComponentInChildren<PlayerShooter>();
 		shield  = GetComponentInChildren<PlayerShield>();
 		
 		currentHitPoints = hitPoints;
@@ -46,48 +44,23 @@ public class PlayerShip : MonoBehaviour {
 		float newXPosition = shipPosition.x;
 		float newYPosition = shipPosition.y;
 		
-		if (Input.GetKey(KeyCode.A)) {
+		if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)) {
 			newXPosition = transform.position.x - shipSpeed * Time.deltaTime;
-		} else if (Input.GetKey(KeyCode.D)) {
+		} else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) {
 			newXPosition = transform.position.x + shipSpeed * Time.deltaTime;
 		}
-		if (Input.GetKey(KeyCode.W)) {
+		if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)) {
 			newYPosition = transform.position.y + shipSpeed * Time.deltaTime;
-		} else if (Input.GetKey(KeyCode.S)) {
+		} else if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)) {
 			newYPosition = transform.position.y - shipSpeed * Time.deltaTime;
 		}
 		UpdateShipPosition(shipPosition, newXPosition, newYPosition);
-		
-		if (Input.GetMouseButtonDown(0)) {
-			StartPrimaryWeapon();
-		}
-		if (Input.GetMouseButtonUp(0)) {
-			StopPrimaryWeapon();
-		}
-		if (Input.GetMouseButtonDown(1)) {
-			Debug.Log("Mouse button 1 pressed.");
-		}
-		if (Input.GetMouseButtonUp(1)) {
-			Debug.Log("Mouse button 1 released.");
-		}
 	}
 	
 	void UpdateShipPosition(Vector3 ship, float x, float y) {
 		ship.x = Mathf.Clamp(x, minX, maxX);
 		ship.y = Mathf.Clamp(y, minY, maxY);
 		transform.position = ship;
-	}
-	
-	void StartPrimaryWeapon() {
-		shooter.StartFiringPrimaryWeapon();
-	}
-	
-	void StopPrimaryWeapon() {
-		shooter.StopFiringPrimaryWeapon();
-	}
-	
-	void FireSecondary() {
-		Debug.Log("Firing secondary weapon");
 	}
 	
 	void OnTriggerEnter2D(Collider2D collider) {
