@@ -98,12 +98,12 @@ public class PlayerShip : MonoBehaviour {
 				shield.HitWith(enemyLaser.damagePoints);
 			} else {
 				HitWith(enemyLaser.damagePoints);
-				Debug.Log("Ship shield is down, player hit with " + enemyLaser.damagePoints + " damage.");
 			}
 		}
 	}
 	
 	void HitWith(float damage) {
+		Debug.Log("Ship shield is down, player hit with " + damage + " damage.");
 		currentHitPoints -= damage;
 		if (0f <= currentHitPoints) {
 			Destroy(gameObject);

@@ -3,13 +3,31 @@ using System.Collections;
 
 public class EnemyShip : MonoBehaviour {
 
-	// Use this for initialization
+	public float hitPoints = 20f;
+	
+	private float currentHitPoints;
+
 	void Start () {
+		currentHitPoints = hitPoints;
+	}
+	
+	void Update () {
 	
 	}
 	
-	// Update is called once per frame
-	void Update () {
+	void OnTriggerEnter2D(Collider2D collider) {
+		PlayerLaser laser = collider.GetComponent<PlayerLaser>();
+		
+		if (laser) {
+			HitWith(laser.damagePoints);
+		}
+	}
 	
+	void HitWith(float damage) {
+		currentHitPoints -= damage;
+		
+		if (0f >= currentHitPoints) {
+			Destroy(gameObject);
+		}
 	}
 }
