@@ -6,17 +6,17 @@ public class EnemyLaser : MonoBehaviour {
 	[SerializeField]
 	private float damagePoints = 20f;
 	
-	private float screenTopEdge;
+	private float screenBottomEdge;
 	
 	void Start () {
 		Camera camera  = Camera.main;
 		float distance = transform.position.z - camera.transform.position.z;
-		screenTopEdge  = camera.ViewportToWorldPoint(new Vector3(0, 0, distance)).y;
+		screenBottomEdge  = camera.ViewportToWorldPoint(new Vector3(0, 0, distance)).y;
 	}
 	
 	void Update () {
 		float laserBottomEdge = transform.position.y;
-		if (laserBottomEdge <= screenTopEdge) {
+		if (laserBottomEdge <= screenBottomEdge) {
 			Destroy(gameObject);
 		}
 	}

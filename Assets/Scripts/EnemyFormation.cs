@@ -77,7 +77,6 @@ public class EnemyFormation : MonoBehaviour {
 	}
 	
 	void SpawnUntilFull() {
-		//Debug.Log("Spawning until full...");
 		Transform freePosition = NextFreePosition();
 		if (null != freePosition) {
 			SpawnEnemyShipAt(freePosition, freePosition.position);
