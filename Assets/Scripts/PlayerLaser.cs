@@ -3,7 +3,8 @@ using System.Collections;
 
 public class PlayerLaser : MonoBehaviour {
 
-	public float damagePoints = 20f;
+	[SerializeField]
+	private float damagePoints = 20f;
 	
 	private float screenTopEdge;
 	private EnemyFormation enemyFormation;
@@ -30,5 +31,10 @@ public class PlayerLaser : MonoBehaviour {
 			Destroy(gameObject);
 			enemyFormation.KillEnemy();
 		}
+	}
+	
+	public float DamagePoints {
+		get { return damagePoints; }
+		set { damagePoints = value; }
 	}
 }

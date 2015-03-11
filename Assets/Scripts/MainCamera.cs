@@ -3,8 +3,11 @@ using System.Collections;
 
 public class MainCamera : MonoBehaviour {
 
-	float width = 31.5f;
-	float height = 18f;
+	[SerializeField]
+	private Transform target;
+
+	private float width = 31.5f;
+	private float height = 18f;
 
 	void OnDrawGizmos() {
 		float xMin, xMax, yMin, yMax;
@@ -20,4 +23,10 @@ public class MainCamera : MonoBehaviour {
 		Gizmos.DrawLine(new Vector3(xMax, yMin, 0f), new Vector3(xMax, yMax, 0f));
 	}
 
+	void LateUpdate() {
+		if (target) {
+			Vector3 newPosition = new Vector3(target.position.x, transform.position.y, transform.position.z);
+			transform.position = newPosition;
+		}
+	}
 }

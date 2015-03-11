@@ -3,9 +3,14 @@ using System.Collections;
 
 public class PlayerShield : MonoBehaviour {
 
-	public Sprite[] shieldLevels;
-	public float totalHitPoints;
-	public float regenerationRate;
+	[SerializeField]
+	private Sprite[] shieldLevels;
+	
+	[SerializeField]
+	private float totalHitPoints;
+	
+	[SerializeField]
+	private float regenerationRate;
 	
 	private float currentHitPoints;
 	private SpriteRenderer spriteRenderer;

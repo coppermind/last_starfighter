@@ -3,7 +3,8 @@ using System.Collections;
 
 public class EnemyLaser : MonoBehaviour {
 
-	public float damagePoints = 20f;
+	[SerializeField]
+	private float damagePoints = 20f;
 	
 	private float screenTopEdge;
 	
@@ -26,5 +27,10 @@ public class EnemyLaser : MonoBehaviour {
 			Debug.Log("Hit player ship!");
 			Destroy(gameObject);
 		}
+	}
+	
+	public float DamagePoints {
+		get { return damagePoints; }
+		set { damagePoints = value; }
 	}
 }

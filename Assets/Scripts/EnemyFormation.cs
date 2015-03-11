@@ -5,13 +5,26 @@ public class EnemyFormation : MonoBehaviour {
 
 	public int enemiesInThisLevel = 100;
 
-	public GameObject enemyPrefab;
-	public float width         = 15f;
-	public float height        = 10f;
-	public float padding       = 0.5f;
-	public float spawnInterval = 0.5f;
-	public float speed         = 1.5f;
-	public int   shipCount     = 0;
+	[SerializeField]
+	private GameObject enemyPrefab;
+	
+	[SerializeField]
+	private float width         = 15f;
+	
+	[SerializeField]
+	private float height        = 10f;
+	
+	[SerializeField]
+	private float padding       = 0.5f;
+	
+	[SerializeField]
+	private float spawnInterval = 0.5f;
+	
+	[SerializeField]
+	private float speed         = 1.5f;
+	
+	[SerializeField]
+	private int   shipCount     = 0;
 	
 	private int direction      = 1;
 	

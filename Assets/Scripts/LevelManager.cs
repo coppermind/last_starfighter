@@ -3,8 +3,11 @@ using System.Collections;
 
 public class LevelManager : MonoBehaviour {
 
-	public int autoloadNextLevelInSeconds;
-	public float levelTransition;
+	[SerializeField]
+	private int autoloadNextLevelInSeconds;
+	
+	[SerializeField]
+	private float levelTransition;
 
 	void Start() {
 		if (0 < autoloadNextLevelInSeconds) {

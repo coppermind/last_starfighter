@@ -4,9 +4,14 @@ using System.Collections;
 
 public class PlayerOptions : MonoBehaviour {
 
-	public Slider musicSlider;
-	public Slider effectsSlider;
-	public Slider difficultySlider;
+	[SerializeField]
+	private Slider musicSlider;
+	
+	[SerializeField]
+	private Slider effectsSlider;
+	
+	[SerializeField]
+	private Slider difficultySlider;
 	
 	private MusicPlayer musicPlayer;
 	private Animator animator;

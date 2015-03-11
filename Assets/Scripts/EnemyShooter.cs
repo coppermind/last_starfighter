@@ -3,10 +3,14 @@ using System.Collections;
 
 public class EnemyShooter : MonoBehaviour {
 
-	public GameObject weaponPrefab;
+	[SerializeField]
+	private GameObject weaponPrefab;
 	
-	public float defaultProjectileSpeed = -10f;
-	public float defaultProjectileRate = 0.2f;
+	[SerializeField]
+	private float defaultProjectileSpeed = -10f;
+	
+	[SerializeField]
+	private float defaultProjectileRate = 0.2f;
 	
 	private float currentProjectileSpeed;
 	private float currentProjectileRate;

@@ -2,14 +2,21 @@
 using System.Collections;
 
 public class PlayerShip : MonoBehaviour {
-
-	public float shipSpeed = 8f;
-	public float shipPadding = 0.5f;
 	
-	public float hitPoints = 100f;
-	public int numberOfLives = 3;
+	[SerializeField]
+	private float shipSpeed = 8f;
+	
+	[SerializeField]
+	private float shipPadding = 0.5f;
+	
+	[SerializeField]
+	private float hitPoints = 100f;
+	
+	[SerializeField]
+	private int numberOfLives = 3;
 
-	public AudioClip defaultEffects;
+	[SerializeField]
+	private AudioClip defaultEffects;
 	
 	private float minX, maxX, minY, maxY;
 	private Animator animator;
@@ -68,9 +75,9 @@ public class PlayerShip : MonoBehaviour {
 		
 		if (enemyLaser) {
 			if (!shield.shieldIsDown()) {
-				shield.HitWith(enemyLaser.damagePoints);
+				shield.HitWith(enemyLaser.DamagePoints);
 			} else {
-				HitWith(enemyLaser.damagePoints);
+				HitWith(enemyLaser.DamagePoints);
 			}
 		}
 	}

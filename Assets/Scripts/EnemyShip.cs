@@ -3,7 +3,8 @@ using System.Collections;
 
 public class EnemyShip : MonoBehaviour {
 
-	public float hitPoints = 20f;
+	[SerializeField]
+	private float hitPoints = 20f;
 	
 	private float currentHitPoints;
 
@@ -16,7 +17,7 @@ public class EnemyShip : MonoBehaviour {
 		PlayerLaser laser = collider.GetComponent<PlayerLaser>();
 		
 		if (laser) {
-			HitWith(laser.damagePoints);
+			HitWith(laser.DamagePoints);
 		}
 	}
 	
