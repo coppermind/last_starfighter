@@ -43,6 +43,11 @@ public class PlayerShield : MonoBehaviour {
 		spriteRenderer.sprite = sprite;
 	}
 	
+	public void DestroyShield() {
+		currentHitPoints = -5f;
+		UpdateSprite();
+	}
+	
 	public void HitWith(float damage) {
 		currentHitPoints -= damage;
 		if (0f >= currentHitPoints) {

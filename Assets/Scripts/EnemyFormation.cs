@@ -9,6 +9,9 @@ public class EnemyFormation : MonoBehaviour {
 	private GameObject enemyPrefab;
 	
 	[SerializeField]
+	private float spawnY;
+	
+	[SerializeField]
 	private float width         = 15f;
 	
 	[SerializeField]
@@ -101,7 +104,7 @@ public class EnemyFormation : MonoBehaviour {
 	void SpawnEnemyShipAt(Transform parentElement, Vector3 shipPosition) {
 		GameObject enemy = Instantiate(enemyPrefab, shipPosition, Quaternion.identity) as GameObject;
 		enemy.transform.parent = parentElement;
-		enemy.transform.position = shipPosition;
+		enemy.transform.position = new Vector3(shipPosition.x, spawnY, shipPosition.z);
 		shipCount++;
 	}
 	

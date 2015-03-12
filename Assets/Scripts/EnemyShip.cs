@@ -7,7 +7,10 @@ public class EnemyShip : MonoBehaviour {
 	private float hitPoints = 20f;
 	
 	[SerializeField]
-	private float warpSpeed = 2f;
+	private float warpOutSpeed = 2f;
+	
+	[SerializeField]
+	private float warpInSpeed = 2f;
 	
 	[SerializeField]
 	private float exitRate = 0.5f;
@@ -17,12 +20,14 @@ public class EnemyShip : MonoBehaviour {
 	private float screenBottomEdge;
 	
 	private bool engageWarp = false;
+	private bool isSpawning = true;
 	
 	private Vector3 warpTarget;
 	
 	private EnemyFormation enemyFormation;
 
 	void Start() {
+		isSpawning = true;
 		currentHitPoints = hitPoints;
 		
 		enemyFormation = FindObjectOfType<EnemyFormation>();
@@ -35,18 +40,32 @@ public class EnemyShip : MonoBehaviour {
 	}
 	
 	void Update() {
-		float probability = exitRate * Time.deltaTime;
-		if (Random.value < probability) {
-			engageWarp = true;
+		if (isSpawning) {
+			WarpIn();
+			
+			if (transform.position == transform.parent.position) {
+				isSpawning = false;
+				Debug.Log("Spawning Finished");
+			}
+		} else {
+			float probability = exitRate * Time.deltaTime;
+			if (Random.value < probability) {
+				engageWarp = true;
+			}
+			
+			if (engageWarp) {
+				WarpShip();
+			}
+			
+			if (transform.position.y <= screenBottomEdge) {
+				Suicide();
+			}
 		}
-		
-		if (engageWarp) {
-			WarpShip();
-		}
-		
-		if (transform.position.y <= screenBottomEdge) {
-			Suicide();
-		}
+	}
+	
+	void WarpIn() {
+		float step = warpInSpeed * Time.deltaTime;
+		transform.position = Vector3.MoveTowards(transform.position, transform.parent.position, step);
 	}
 	
 	void OnTriggerEnter2D(Collider2D collider) {
@@ -66,7 +85,7 @@ public class EnemyShip : MonoBehaviour {
 	}
 	
 	void WarpShip() {
-		float step = warpSpeed * Time.deltaTime;
+		float step = warpOutSpeed * Time.deltaTime;
 		transform.position = Vector3.MoveTowards(transform.position, warpTarget, step);
 	}
 	

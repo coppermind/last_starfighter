@@ -23,6 +23,7 @@ public class EnemyLaser : MonoBehaviour {
 	
 	void OnTriggerEnter2D(Collider2D collider) {
 		PlayerShip player = collider.gameObject.GetComponent<PlayerShip>();
+		
 		if (player) {
 			Debug.Log("Hit player ship!");
 			Destroy(gameObject);

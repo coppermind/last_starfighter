@@ -48,6 +48,8 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\Asteroid.cs" />
      <Compile Include="Assets\Scripts\AsteroidController.cs" />
+     <Compile Include="Assets\Scripts\BackgroundFight.cs" />
+     <Compile Include="Assets\Scripts\DistantFight.cs" />
      <Compile Include="Assets\Scripts\EnemyFormation.cs" />
      <Compile Include="Assets\Scripts\EnemyLaser.cs" />
      <Compile Include="Assets\Scripts\EnemyPosition.cs" />

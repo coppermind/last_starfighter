@@ -4,7 +4,7 @@ using System.Collections;
 public class AsteroidController : MonoBehaviour {
 
 	[SerializeField]
-	GameObject asteroidPrefab;
+	GameObject[] asteroidPrefabs;
 
 	[SerializeField]
 	private float spawnRate;
@@ -21,10 +21,14 @@ public class AsteroidController : MonoBehaviour {
 	void Update () {
 		float probability = spawnRate * Time.deltaTime;
 		if (Random.value < probability) {
-			Debug.Log("Spawning asteroid...");
 			Vector3 position = GetRandomPosition();
-			Instantiate(asteroidPrefab, position, Quaternion.identity);
+			Instantiate(GetRandomAsteroid(), position, Quaternion.identity);
 		}
+	}
+	
+	GameObject GetRandomAsteroid() {
+		int i = Random.Range(0, asteroidPrefabs.Length);
+		return asteroidPrefabs[i];
 	}
 	
 	Vector3 GetRandomPosition() {
