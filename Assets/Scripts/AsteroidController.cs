@@ -3,12 +3,7 @@ using System.Collections;
 
 public class AsteroidController : MonoBehaviour {
 
-	[SerializeField]
-	GameObject[] asteroidPrefabs;
-
-	[SerializeField]
-	private float spawnRate;
-	
+	#region Transform Members
 	[SerializeField]
 	private float spawnY;
 	
@@ -17,7 +12,19 @@ public class AsteroidController : MonoBehaviour {
 	
 	[SerializeField]
 	private float maxX;
+	#endregion
+		
 	
+	#region Gameplay Members
+	[SerializeField]
+	GameObject[] asteroidPrefabs;
+
+	[SerializeField]
+	private float spawnRate;
+	#endregion
+	
+	
+	#region Unity Methods	
 	void Update () {
 		float probability = spawnRate * Time.deltaTime;
 		if (Random.value < probability) {
@@ -25,7 +32,10 @@ public class AsteroidController : MonoBehaviour {
 			Instantiate(GetRandomAsteroid(), position, Quaternion.identity);
 		}
 	}
+	#endregion
 	
+	
+	#region Private Methods
 	GameObject GetRandomAsteroid() {
 		int i = Random.Range(0, asteroidPrefabs.Length);
 		return asteroidPrefabs[i];
@@ -35,4 +45,5 @@ public class AsteroidController : MonoBehaviour {
 		float x = Random.Range(minX, maxX);
 		return new Vector3(x, spawnY, 0f);
 	}
+	#endregion
 }

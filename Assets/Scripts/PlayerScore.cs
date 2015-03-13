@@ -5,15 +5,24 @@ using System.Collections;
 public class PlayerScore : MonoBehaviour {
 
 	private Text text;
-	private int totalScore = 0;
+	private static int totalScore = 0;
 	
 	void Start () {
 		text = GetComponent<Text>();
+		UpdateText();
+	}
+	
+	void UpdateText() {
 		text.text = totalScore.ToString();
 	}
 	
-	void AddScore(int points) {
+	public void AddScore(int points) {
 		totalScore += points;
-		text.text = totalScore.ToString();
+		UpdateText();
 	}
+	
+	public void ResetScore() {
+		totalScore = 0;
+	}
+	
 }

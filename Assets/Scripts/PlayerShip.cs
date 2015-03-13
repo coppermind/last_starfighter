@@ -3,23 +3,15 @@ using System.Collections;
 
 public class PlayerShip : MonoBehaviour {
 	
+	#region Transform Members
 	[SerializeField]
 	private float shipSpeed = 8f;
-	
-	[SerializeField]
-	private float warpInSpeed = 2f;
 	
 	[SerializeField]
 	private float shipPadding = 0.5f;
 	
 	[SerializeField]
-	private float hitPoints = 100f;
-	
-	[SerializeField]
-	private int numberOfLives = 3;
-
-	[SerializeField]
-	private AudioClip defaultEffects;
+	private float spawnWarpSpeed = 2.5f;
 	
 	[SerializeField]
 	private float spawnTargetX = 16f;
@@ -27,50 +19,66 @@ public class PlayerShip : MonoBehaviour {
 	[SerializeField]
 	private float spawnTargetY = 1f;
 	
-	private Vector3 warpInTarget;
+	private Vector3 spawnTarget;
 	
 	private float minX, maxX, minY, maxY;
-	private Animator animator;
+	#endregion	
 	
+	
+	#region Gameplay Members
+	[SerializeField]
+	private AudioClip defaultEffects;
+	
+	[SerializeField]
+	private float hitPoints = 100f;
 	private float currentHitPoints;
 	
-	private bool isSpawning;
+	/*
+	[SerializeField]
+	private int numberOfLives = 3;
+	*/
+	#endregion
+
+
+	#region Component Members
+	private Animator animator;
 	
-	private LevelManager levelManager;
 	private PlayerShield shield;
 	
 	private CircleCollider2D shipCollider;
-	
-	void Start() {
-		isSpawning = true;
+	#endregion
+
 		
+	#region GameObject Members
+	private LevelManager levelManager;
+	
+	private GameManager gameManager;
+	#endregion
+	
+	
+	#region Unity Methods
+	void Start() {
 		levelManager = FindObjectOfType<LevelManager>();
-		shield  = GetComponentInChildren<PlayerShield>();
+		gameManager  = FindObjectOfType<GameManager>();
+		
+		shield       = GetComponentInChildren<PlayerShield>();
+
 		shipCollider = GetComponent<CircleCollider2D>();
 		shipCollider.enabled = false;
 		
-		warpInTarget = new Vector3(spawnTargetX, spawnTargetY, transform.position.z);
+		gameManager.PlayerIsSpawning = true;
+		spawnTarget = new Vector3(spawnTargetX, spawnTargetY, transform.position.z);
 		
 		currentHitPoints = hitPoints;
 		CalculateCameraDistance();
 	}
 
-	void CalculateCameraDistance() {
-		Camera camera = Camera.main;
-		float distance = transform.position.z - camera.transform.position.z;
-		minX = camera.ViewportToWorldPoint (new Vector3 (0, 0, distance)).x + shipPadding;
-		minY = camera.ViewportToWorldPoint (new Vector3 (0, 0, distance)).y + shipPadding;
-		maxX = camera.ViewportToWorldPoint (new Vector3 (1, 1, distance)).x - shipPadding;
-		maxY = camera.ViewportToWorldPoint (new Vector3 (1, 1, distance)).y - shipPadding;
-	}
-	
 	void Update() {
-		if (isSpawning) {
+		if (gameManager.PlayerIsSpawning) {
 			WarpIn();
-			if (transform.position == warpInTarget) {
-				isSpawning = false;
+			if (transform.position == spawnTarget) {
+				gameManager.PlayerIsSpawning = false;
 				shipCollider.enabled = true;
-				Debug.Log("Spawning Finished");
 			}
 		} else {
 			Vector3 shipPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z);
@@ -92,17 +100,6 @@ public class PlayerShip : MonoBehaviour {
 		}
 	}
 	
-	void WarpIn() {
-		float step = warpInSpeed * Time.deltaTime;
-		transform.position = Vector3.MoveTowards(transform.position, warpInTarget, step);
-	}
-	
-	void UpdateShipPosition(Vector3 ship, float x, float y) {
-		ship.x = Mathf.Clamp(x, minX, maxX);
-		ship.y = Mathf.Clamp(y, minY, maxY);
-		transform.position = ship;
-	}
-	
 	void OnTriggerEnter2D(Collider2D collider) {
 		EnemyLaser enemyLaser = collider.GetComponent<EnemyLaser>();
 		Asteroid asteroid = collider.GetComponent<Asteroid>();
@@ -116,7 +113,6 @@ public class PlayerShip : MonoBehaviour {
 		}
 		
 		if (asteroid) {
-			Debug.Log("Asteroid HIT!");
 			if (!shield.shieldIsDown()) {
 				shield.DestroyShield();
 			} else {
@@ -124,13 +120,36 @@ public class PlayerShip : MonoBehaviour {
 			}
 		}
 	}
+	#endregion
+	
+	
+	#region Private Methods
+	void CalculateCameraDistance() {
+		Camera camera = Camera.main;
+		float distance = transform.position.z - camera.transform.position.z;
+		minX = camera.ViewportToWorldPoint (new Vector3 (0, 0, distance)).x + shipPadding;
+		minY = camera.ViewportToWorldPoint (new Vector3 (0, 0, distance)).y + shipPadding;
+		maxX = camera.ViewportToWorldPoint (new Vector3 (1, 1, distance)).x - shipPadding;
+		maxY = camera.ViewportToWorldPoint (new Vector3 (1, 1, distance)).y - shipPadding;
+	}
 	
 	void HitWith(float damage) {
-		Debug.Log("Ship shield is down, player hit with " + damage + " damage.");
 		currentHitPoints -= damage;
 		if (0f <= currentHitPoints) {
 			Destroy(gameObject);
 			levelManager.LoadLevel("04 Lose Screen");
 		}
 	}
+	
+	void UpdateShipPosition(Vector3 ship, float x, float y) {
+		ship.x = Mathf.Clamp(x, minX, maxX);
+		ship.y = Mathf.Clamp(y, minY, maxY);
+		transform.position = ship;
+	}
+	
+	void WarpIn() {
+		float step = spawnWarpSpeed * Time.deltaTime;
+		transform.position = Vector3.MoveTowards(transform.position, spawnTarget, step);
+	}
+	#endregion
 }

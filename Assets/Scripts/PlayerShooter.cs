@@ -8,36 +8,33 @@ public class PlayerShooter : MonoBehaviour {
 	
 	[SerializeField]
 	private float defaultProjectileSpeed = 10f;
+	private float currentProjectileSpeed;
 	
 	[SerializeField]
 	private float defaultProjectileRate = 0.2f;
-	
-	private float currentProjectileSpeed;
 	private float currentProjectileRate;
 	
+	private GameManager gameManager;
+	
 	void Start() {
+		gameManager = FindObjectOfType<GameManager>();
+		
 		currentProjectileRate  = defaultProjectileRate;
 		currentProjectileSpeed = defaultProjectileSpeed;
 	}
 	
 	void Update() {
-		if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space)) {
-			StartFiringPrimaryWeapon();
+		if (!gameManager.PlayerIsSpawning) {
+			if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space)) {
+				StartFiringPrimaryWeapon();
+			}
+			if (Input.GetMouseButtonUp(0) || Input.GetKeyUp(KeyCode.Space)) {
+				StopFiringPrimaryWeapon();
+			}
+			if (Input.GetMouseButton(1)) {
+				Debug.Log("Mouse button 1 pressed.");
+			}
 		}
-		if (Input.GetMouseButtonUp(0) || Input.GetKeyUp(KeyCode.Space)) {
-			StopFiringPrimaryWeapon();
-		}
-		if (Input.GetMouseButton(1)) {
-			Debug.Log("Mouse button 1 pressed.");
-		}
-	}
-	
-	public void StartFiringPrimaryWeapon() {
-		InvokeRepeating("FirePrimaryWeapon", 0.0001f, currentProjectileRate);
-	}
-	
-	public void StopFiringPrimaryWeapon() {
-		CancelInvoke("FirePrimaryWeapon");
 	}
 	
 	void FirePrimaryWeapon() {
@@ -46,6 +43,14 @@ public class PlayerShooter : MonoBehaviour {
 	}
 	
 	void FireSecondaryWeapon() {
+		
+	}
 	
+	public void StartFiringPrimaryWeapon() {
+		InvokeRepeating("FirePrimaryWeapon", 0.0001f, currentProjectileRate);
+	}
+	
+	public void StopFiringPrimaryWeapon() {
+		CancelInvoke("FirePrimaryWeapon");
 	}
 }

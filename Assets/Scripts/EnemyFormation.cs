@@ -3,50 +3,59 @@ using System.Collections;
 
 public class EnemyFormation : MonoBehaviour {
 
-	public int enemiesInThisLevel = 100;
-
-	[SerializeField]
-	private GameObject enemyPrefab;
-	
+	#region Transform Members
 	[SerializeField]
 	private float spawnY;
 	
 	[SerializeField]
-	private float width         = 15f;
+	private float width   = 15f;
 	
 	[SerializeField]
-	private float height        = 10f;
+	private float height  = 10f;
 	
 	[SerializeField]
-	private float padding       = 0.5f;
+	private float padding = 0.5f;
 	
 	[SerializeField]
-	private float spawnInterval = 0.5f;
+	private float speed   = 1.5f;
 	
-	[SerializeField]
-	private float speed         = 1.5f;
-	
-	[SerializeField]
-	private int   shipCount     = 0;
-	
-	private int direction      = 1;
+	private int direction = 1;
 	
 	private float screenRightEdge, screenLeftEdge;
+	#endregion
+	
+	
+	#region Gameplay Members
+	[SerializeField]
+	private float spawnRate        = 0.5f;
+	
+	[SerializeField]
+	private int shipCount          = 0;
+	
+	[SerializeField]
+	private int enemiesInThisLevel = 100;
 	private int enemiesLeft;
-	private LevelManager levelManager;
+	#endregion
 
+
+	#region GameObject Members
+	[SerializeField]
+	private GameObject enemyPrefab;
+	
+	private LevelManager levelManager;
+	
+	private GameManager gameManager;
+	#endregion
+	
+	
+	#region Unity Methods
 	void Start () {
-		Camera camera = Camera.main;
-		float distance = transform.position.z - camera.transform.position.z;
-		
-		screenLeftEdge   = camera.ViewportToWorldPoint(new Vector3(0, 0, distance)).x + padding;
-		screenRightEdge  = camera.ViewportToWorldPoint(new Vector3(1, 1, distance)).x - padding;
+		levelManager = FindObjectOfType<LevelManager>();
+		gameManager  = FindObjectOfType<GameManager>();
 		
 		enemiesLeft = enemiesInThisLevel;
 		
-		levelManager = FindObjectOfType<LevelManager>();
-		
-		SpawnUntilFull();
+		GetCameraPosition();
 	}
 	
 	void Update () {
@@ -60,8 +69,8 @@ public class EnemyFormation : MonoBehaviour {
 		}
 		transform.position += new Vector3(direction * speed * Time.deltaTime, 0, 0);
 		
-		if (AllShipsAreDead()) {
-			SpawnUntilFull();
+		if (!gameManager.PlayerIsSpawning) {
+			SpawnEnemyShip();
 		}
 	}
 	
@@ -78,12 +87,26 @@ public class EnemyFormation : MonoBehaviour {
 		Gizmos.DrawLine(new Vector3(xMin, yMax, 0f), new Vector3(xMax, yMax, 0f));
 		Gizmos.DrawLine(new Vector3(xMax, yMin, 0f), new Vector3(xMax, yMax, 0f));
 	}
+	#endregion
 	
-	void SpawnUntilFull() {
-		Transform freePosition = NextFreePosition();
-		if (null != freePosition) {
-			SpawnEnemyShipAt(freePosition, freePosition.position);
-			Invoke("SpawnUntilFull", spawnInterval);
+	
+	#region Private Methods
+	void GetCameraPosition() {
+		Camera camera   = Camera.main;
+		float distance  = transform.position.z - camera.transform.position.z;
+		screenLeftEdge  = camera.ViewportToWorldPoint (new Vector3 (0, 0, distance)).x + padding;
+		screenRightEdge = camera.ViewportToWorldPoint (new Vector3 (1, 1, distance)).x - padding;
+	}
+	
+	void SpawnEnemyShip() {
+		if (0 < enemiesLeft) {
+			float probability = spawnRate * Time.deltaTime;
+			if (Random.value < probability) {
+				Transform freePosition = NextFreePosition();
+				if (null != freePosition) {
+					SpawnEnemyShipAt(freePosition, freePosition.position);
+				}
+			}
 		}
 	}
 	
@@ -96,14 +119,13 @@ public class EnemyFormation : MonoBehaviour {
 			if (0 == spawnPoints[current].transform.childCount) {
 				return spawnPoints[current].transform;
 			}
-
 		}
 		return null;
 	}
 	
 	void SpawnEnemyShipAt(Transform parentElement, Vector3 shipPosition) {
-		GameObject enemy = Instantiate(enemyPrefab, shipPosition, Quaternion.identity) as GameObject;
-		enemy.transform.parent = parentElement;
+		GameObject enemy         = Instantiate(enemyPrefab, shipPosition, Quaternion.identity) as GameObject;
+		enemy.transform.parent   = parentElement;
 		enemy.transform.position = new Vector3(shipPosition.x, spawnY, shipPosition.z);
 		shipCount++;
 	}
@@ -116,7 +138,10 @@ public class EnemyFormation : MonoBehaviour {
 		}
 		return true;
 	}
+	#endregion
 	
+	
+	#region Public Methods
 	public void KillEnemy() {
 		enemiesLeft--;
 		if (0 >= enemiesLeft) {
@@ -124,4 +149,5 @@ public class EnemyFormation : MonoBehaviour {
 			levelManager.LoadNextLevel();
 		}
 	}
+	#endregion
 }

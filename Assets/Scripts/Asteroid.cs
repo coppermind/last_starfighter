@@ -3,9 +3,12 @@ using System.Collections;
 
 public class Asteroid : MonoBehaviour {
 	
-	[SerializeField]
-	private GameObject explosionPrefab;
+	#region Transform Properties
+	private float screenBottomEdge;
+	#endregion
 	
+	
+	#region Gameplay Properties
 	[SerializeField]
 	private float minGravity;
 	
@@ -14,11 +17,21 @@ public class Asteroid : MonoBehaviour {
 	
 	[SerializeField]
 	private float damagePoints = 30f;
+	#endregion
 
+
+	#region Component Properties
 	private Rigidbody2D rigidBody;
+	#endregion
 	
-	private float screenBottomEdge;
-
+	
+	#region GameObject Properties
+	[SerializeField]
+	private GameObject explosionPrefab;
+	#endregion
+	
+	
+	#region Unity Methods
 	void Start() {
 		rigidBody         = GetComponent<Rigidbody2D>();
 		
@@ -34,22 +47,33 @@ public class Asteroid : MonoBehaviour {
 			Destroy(gameObject);
 		}
 	}
+	#endregion
 	
+	
+	#region Private Methods
 	void SetRandomGravity() {
 		float gravityScale = Random.Range(minGravity, maxGravity);
 		rigidBody.gravityScale = gravityScale;
 	}
+	#endregion
 	
-	public float DamagePoints {
-		get { return damagePoints; }
-		set { damagePoints = value; }
-	}
 	
+	#region Public Methods
 	public void Destroy() {
 		Destroy(gameObject);
 		
 		GameObject explosion = Instantiate(explosionPrefab, transform.position, Quaternion.identity) as GameObject;
 		Destroy(explosion, 0.2f);
 	}
-
+	#endregion
+	
+	
+	#region Properties
+	public float DamagePoints {
+		get { return damagePoints; }
+		set { damagePoints = value; }
+	}
+	
+	
+	#endregion
 }
