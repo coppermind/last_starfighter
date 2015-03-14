@@ -33,7 +33,7 @@ public class EnemyFormation : MonoBehaviour {
 	private int shipCount = 0;
 	
 	[SerializeField]
-	private int enemiesInThisLevel = 100;
+	private int enemiesInThisLevel = 10;
 	private int enemiesLeft;
 	#endregion
 
@@ -42,16 +42,16 @@ public class EnemyFormation : MonoBehaviour {
 	[SerializeField]
 	private GameObject enemyPrefab;
 	
-	private LevelManager levelManager;
-	
 	private GameManager gameManager;
+	
+	private PlayerShip playerShip;
 	#endregion
 	
 	
 	#region Unity Methods
 	void Start () {
-		levelManager = FindObjectOfType<LevelManager>();
 		gameManager  = FindObjectOfType<GameManager>();
+		playerShip   = FindObjectOfType<PlayerShip>();
 		
 		enemiesLeft = enemiesInThisLevel;
 		
@@ -138,8 +138,7 @@ public class EnemyFormation : MonoBehaviour {
 	public void KillEnemy() {
 		enemiesLeft--;
 		if (0 >= enemiesLeft) {
-			Debug.Log("You win this level!");
-			levelManager.LoadNextLevel();
+			playerShip.LoadNextLevel();
 		}
 	}
 	#endregion

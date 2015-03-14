@@ -22,7 +22,14 @@ public class PlayerShip : MonoBehaviour {
 	[SerializeField]
 	private float spawnTargetY = 1f;
 	
-	private Vector3 spawnTarget;
+	[SerializeField]
+	private float exitWarpSpeed = 5f;
+	
+	[SerializeField]
+	private float exitTargetY = 21f;
+	
+	private Vector3 spawnInTarget;
+	private Vector3 exitTarget;
 	
 	private float minX, maxX, minY;
 	#endregion	
@@ -70,7 +77,7 @@ public class PlayerShip : MonoBehaviour {
 		shipCollider.enabled = false;
 		
 		gameManager.PlayerIsSpawning = true;
-		spawnTarget = new Vector3(spawnTargetX, spawnTargetY, transform.position.z);
+		spawnInTarget = new Vector3(spawnTargetX, spawnTargetY, transform.position.z);
 		
 		currentHitPoints = hitPoints;
 		CalculateCameraDistance();
@@ -83,27 +90,26 @@ public class PlayerShip : MonoBehaviour {
 		
 		if (gameManager.PlayerIsSpawning) {
 			WarpIn();
-			if (transform.position == spawnTarget) {
+			
+			if (transform.position == spawnInTarget) {
 				gameManager.PlayerIsSpawning = false;
 				shipCollider.enabled = true;
 			}
+			
+		} else if (gameManager.PlayerHasWon) {
+			PlayerLaser[] lasers = FindObjectsOfType<PlayerLaser>();
+			
+			if (0 == lasers.Length) {
+				exitTarget = new Vector3(transform.position.x, exitTargetY, transform.position.z);
+				WarpOut();
+			
+				if (transform.position == exitTarget) {
+					levelManager.LoadNextLevel();
+				}
+			}
+			
 		} else {
-			Vector3 shipPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z);
-			
-			float newXPosition = shipPosition.x;
-			float newYPosition = shipPosition.y;
-			
-			if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)) {
-				newXPosition = transform.position.x - shipSpeed * Time.deltaTime;
-			} else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) {
-				newXPosition = transform.position.x + shipSpeed * Time.deltaTime;
-			}
-			if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)) {
-				newYPosition = transform.position.y + shipSpeed * Time.deltaTime;
-			} else if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)) {
-				newYPosition = transform.position.y - shipSpeed * Time.deltaTime;
-			}
-			UpdateShipPosition(shipPosition, newXPosition, newYPosition);
+			ManeuverShip();
 		}
 	}
 	
@@ -137,7 +143,6 @@ public class PlayerShip : MonoBehaviour {
 		minX = (float) b["minX"];
 		minY = (float) b["minY"];
 		maxX = (float) b["maxX"];
-//		maxY = (float) b["maxY"];
 	}
 	
 	void HitWith(float damage) {
@@ -146,6 +151,27 @@ public class PlayerShip : MonoBehaviour {
 			Destroy(gameObject);
 			levelManager.LoadLevel("04 Lose Screen");
 		}
+	}
+
+	void ManeuverShip() {
+		Vector3 shipPosition = new Vector3 (transform.position.x, transform.position.y, transform.position.z);
+		float newXPosition = shipPosition.x;
+		float newYPosition = shipPosition.y;
+		if (Input.GetKey (KeyCode.A) || Input.GetKey (KeyCode.LeftArrow)) {
+			newXPosition = transform.position.x - shipSpeed * Time.deltaTime;
+		}
+		else
+			if (Input.GetKey (KeyCode.D) || Input.GetKey (KeyCode.RightArrow)) {
+				newXPosition = transform.position.x + shipSpeed * Time.deltaTime;
+			}
+		if (Input.GetKey (KeyCode.W) || Input.GetKey (KeyCode.UpArrow)) {
+			newYPosition = transform.position.y + shipSpeed * Time.deltaTime;
+		}
+		else
+			if (Input.GetKey (KeyCode.S) || Input.GetKey (KeyCode.DownArrow)) {
+				newYPosition = transform.position.y - shipSpeed * Time.deltaTime;
+			}
+		UpdateShipPosition (shipPosition, newXPosition, newYPosition);
 	}
 	
 	void UpdateShipPosition(Vector3 ship, float x, float y) {
@@ -156,7 +182,17 @@ public class PlayerShip : MonoBehaviour {
 	
 	void WarpIn() {
 		float step = spawnWarpSpeed * Time.deltaTime;
-		transform.position = Vector3.MoveTowards(transform.position, spawnTarget, step);
+		transform.position = Vector3.MoveTowards(transform.position, spawnInTarget, step);
+	}
+	
+	void WarpOut() {
+		float step = exitWarpSpeed * Time.deltaTime;
+		transform.position = Vector3.MoveTowards(transform.position, exitTarget, step);
 	}
 	#endregion
+	
+	
+	public void LoadNextLevel() {
+		gameManager.PlayerHasWon = true;
+	}
 }

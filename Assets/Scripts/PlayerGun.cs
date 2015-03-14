@@ -19,12 +19,12 @@ public class PlayerGun : MonoBehaviour {
 	}
 	
 	void Update() {
-		if (gameManager.GameIsPaused) {
+		if (gameManager.GameIsPaused || gameManager.PlayerHasWon) {
 			CancelInvoke("FirePrimaryWeapon");
 			return;
 		}
 		
-		if (!gameManager.PlayerIsSpawning) {
+		if (!gameManager.PlayerIsSpawning && !gameManager.PlayerHasWon) {
 			if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space)) {
 				StartFiringPrimaryWeapon();
 			}

@@ -4,7 +4,8 @@ using System.Collections;
 public class GameManager : MonoBehaviour {
 	
 	private bool gamePaused = false;
-	private bool playerSpawning = true;
+	private bool playerSpawnIn = true;
+	private bool playerWins = false;
 	
 	public void PauseGame() {
 		gamePaused = true;
@@ -20,8 +21,13 @@ public class GameManager : MonoBehaviour {
 	}
 	
 	public bool PlayerIsSpawning {
-		get { return playerSpawning; }
-		set { playerSpawning = value; }
+		get { return playerSpawnIn; }
+		set { playerSpawnIn = value; }
+	}
+	
+	public bool PlayerHasWon {
+		get { return playerWins; }
+		set { playerWins = value; }
 	}
 	
 	public void TogglePause() {
