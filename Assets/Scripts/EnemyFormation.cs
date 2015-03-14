@@ -59,6 +59,10 @@ public class EnemyFormation : MonoBehaviour {
 	}
 	
 	void Update () {
+		if (gameManager.GameIsPaused) {
+			return;
+		}
+			
 		float formationRightEdge = transform.position.x + padding * width;
 		float formationLeftEdge  = transform.position.x - padding * width;
 		
@@ -85,7 +89,7 @@ public class EnemyFormation : MonoBehaviour {
 		Hashtable b = GameCamera.GetBoundaries(Camera.main, transform, padding);
 		
 		screenLeftEdge  = (float) b["minX"];
-		screenRightEdge = (float) b["minY"];
+		screenRightEdge = (float) b["maxX"];
 	}
 	
 	void SpawnEnemyShip() {

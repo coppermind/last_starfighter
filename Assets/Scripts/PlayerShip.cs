@@ -74,6 +74,10 @@ public class PlayerShip : MonoBehaviour {
 	}
 
 	void Update() {
+		if (gameManager.GameIsPaused) {
+			return;
+		}
+		
 		if (gameManager.PlayerIsSpawning) {
 			WarpIn();
 			if (transform.position == spawnTarget) {

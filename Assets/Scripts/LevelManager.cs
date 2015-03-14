@@ -15,6 +15,13 @@ public class LevelManager : MonoBehaviour {
 		}
 	}
 	
+	void OnLevelWasLoaded() {
+		// Reset score if in Main Menu
+		if (Application.loadedLevel == 1) {
+			PlayerScore.ResetScore();
+		}
+	}
+	
 	public void LoadLevel(string name) {
 		Application.LoadLevel(name);
 	}

@@ -14,16 +14,17 @@ public class PlayerScore : MonoBehaviour {
 	}
 	
 	void UpdateText() {
-		text.text = totalScore.ToString();
+		text.text = PlayerScore.totalScore.ToString();
 	}
 	
 	public void AddScore(int points) {
-		totalScore += points;
+		PlayerScore.totalScore += points;
+		Debug.Log("Points: " + points);
 		UpdateText();
 	}
 	
-	public void ResetScore() {
-		totalScore = 0;
+	public static void ResetScore() {
+		PlayerScore.totalScore = 0;
 	}
 	
 }

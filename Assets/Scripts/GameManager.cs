@@ -2,20 +2,21 @@
 using System.Collections;
 
 public class GameManager : MonoBehaviour {
-
-	private bool paused = false;
+	
+	private bool gamePaused = false;
 	private bool playerSpawning = true;
 	
 	public void PauseGame() {
-		paused = true;
+		gamePaused = true;
 	}
 	
 	public void UnpauseGame() {
-		paused = false;
+		gamePaused = false;
 	}
 	
-	public bool IsPaused() {
-		return paused;
+	public bool GameIsPaused {
+		get { return gamePaused; }
+		set { gamePaused = value; }
 	}
 	
 	public bool PlayerIsSpawning {

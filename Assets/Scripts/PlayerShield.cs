@@ -32,8 +32,6 @@ public class PlayerShield : MonoBehaviour {
 		if (0f < regenerationRate && currentHitPoints < totalHitPoints) {
 			currentHitPoints += regenerationRate * Time.deltaTime;
 			UpdateSprite();
-		} else {
-			//Debug.Log("Not regenerating shield");
 		}
 	}
 	#endregion

@@ -10,13 +10,15 @@ public class Asteroid : MonoBehaviour {
 	
 	#region Gameplay Properties
 	[SerializeField]
+	private float damagePoints = 30f;
+	
+	[SerializeField]
 	private float minGravity;
 	
 	[SerializeField]
 	private float maxGravity;
 	
-	[SerializeField]
-	private float damagePoints = 30f;
+	private float gravityScale;
 	#endregion
 
 
@@ -28,19 +30,29 @@ public class Asteroid : MonoBehaviour {
 	#region GameObject Properties
 	[SerializeField]
 	private GameObject explosionPrefab;
+	
+	private GameManager gameManager;
 	#endregion
 	
 	
 	#region Unity Methods
 	void Start() {
-		rigidBody         = GetComponent<Rigidbody2D>();
+		gameManager = FindObjectOfType<GameManager>();
+	
+		rigidBody = GetComponent<Rigidbody2D>();
 		
-		screenBottomEdge  = (float) GameCamera.GetBoundaries(Camera.main, transform)["minY"];
+		screenBottomEdge = (float) GameCamera.GetBoundaries(Camera.main, transform)["minY"];
 
 		SetRandomGravity();
 	}
 	
 	void Update() {
+		if (gameManager.GameIsPaused) {
+			rigidBody.gravityScale = 0f;
+		} else {
+			rigidBody.gravityScale = gravityScale;
+		}
+		
 		if (transform.position.y <= screenBottomEdge) {
 			Destroy(gameObject);
 		}
@@ -50,7 +62,7 @@ public class Asteroid : MonoBehaviour {
 	
 	#region Private Methods
 	void SetRandomGravity() {
-		float gravityScale = Random.Range(minGravity, maxGravity);
+		gravityScale = Random.Range(minGravity, maxGravity);
 		rigidBody.gravityScale = gravityScale;
 	}
 	#endregion

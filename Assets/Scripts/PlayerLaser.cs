@@ -7,11 +7,8 @@ public class PlayerLaser : MonoBehaviour {
 	private float damagePoints = 20f;
 	
 	private float screenTopEdge;
-	private EnemyFormation enemyFormation;
 
 	void Start () {
-		enemyFormation = FindObjectOfType<EnemyFormation>();
-		
 		screenTopEdge  = (float) GameCamera.GetBoundaries(Camera.main, transform)["maxY"];
 	}
 	
@@ -27,9 +24,8 @@ public class PlayerLaser : MonoBehaviour {
 		Asteroid asteroid = collider.gameObject.GetComponent<Asteroid>();
 		
 		if (enemy) {
-			Debug.Log("Hit enemy ship!");
 			Destroy(gameObject);
-			enemyFormation.KillEnemy();
+			enemy.HitWith(damagePoints);
 		} 
 		
 		if (asteroid) {

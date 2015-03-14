@@ -18,7 +18,7 @@ public class EnemyShip : MonoBehaviour {
 	
 	#region Gameplay Members
 	[SerializeField]
-	private float score;
+	private int scorePoints;
 	
 	[SerializeField]
 	private float hitPoints = 20f;
@@ -36,16 +36,22 @@ public class EnemyShip : MonoBehaviour {
 	[SerializeField]
 	private GameObject explosionPrefab;
 	
+	private PlayerScore playerScore;
+	
 	private EnemyFormation enemyFormation;
+	
+	private GameManager gameManager;
 	#endregion
 
 
 	#region Unity Methods
 	void Start() {
+		enemyFormation = FindObjectOfType<EnemyFormation>();
+		gameManager    = FindObjectOfType<GameManager>();
+		playerScore    = FindObjectOfType<PlayerScore>();
+		
 		isSpawning = true;
 		currentHitPoints = hitPoints;
-		
-		enemyFormation = FindObjectOfType<EnemyFormation>();
 		
 		warpTarget = new Vector3(transform.position.x, -10, transform.position.z);
 		
@@ -53,6 +59,10 @@ public class EnemyShip : MonoBehaviour {
 	}
 	
 	void Update() {
+		if (gameManager.GameIsPaused) {
+			return;
+		}
+		
 		if (isSpawning) {
 			WarpIn();
 			
@@ -74,24 +84,23 @@ public class EnemyShip : MonoBehaviour {
 			}
 		}
 	}
-	
-	void OnTriggerEnter2D(Collider2D collider) {
-		PlayerLaser laser = collider.GetComponent<PlayerLaser>();
-		
-		if (laser) {
-			HitWith(laser.DamagePoints);
-		}
-	}
 	#endregion
 	
 	
 	#region Private Methods
-	void HitWith(float damage) {
-		currentHitPoints -= damage;
+	void Die() {
+		GameObject explosion = Instantiate(explosionPrefab, transform.position, Quaternion.identity) as GameObject;
+		explosion.transform.parent = transform;
 		
-		if (0f >= currentHitPoints) {
-			Die();
+		Transform body = transform.Find("Body");
+		if (body) {
+			Destroy(body.gameObject);
 		}
+		
+		Destroy(gameObject, 0.5f);
+		enemyFormation.KillEnemy();
+		
+		playerScore.AddScore(scorePoints);
 	}
 	
 	void Suicide() {
@@ -110,14 +119,12 @@ public class EnemyShip : MonoBehaviour {
 	}
 	#endregion
 	
-	public void Die() {
-		GameObject explosion = Instantiate(explosionPrefab, transform.position, Quaternion.identity) as GameObject;
-		explosion.transform.parent = transform;
+	
+	public void HitWith(float damage) {
+		currentHitPoints -= damage;
 		
-		GameObject body = transform.FindChild("Body").gameObject;
-		Destroy(body);
-		
-//		Destroy(explosion, 0.5f);
-		Destroy(gameObject, 0.5f);
+		if (0f >= currentHitPoints) {
+			Die();
+		}
 	}
 }
