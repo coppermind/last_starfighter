@@ -2,6 +2,7 @@
 using UnityEngine.UI;
 using System.Collections;
 
+[RequireComponent (typeof (Animator))]
 public class PlayerOptions : MonoBehaviour {
 
 	[SerializeField]
@@ -16,7 +17,10 @@ public class PlayerOptions : MonoBehaviour {
 	private MusicPlayer musicPlayer;
 	private Animator animator;
 	
+	private GameManager gameManager;
+	
 	void Start () {
+		gameManager = FindObjectOfType<GameManager>();
 		musicPlayer = FindObjectOfType<MusicPlayer>();
 		
 		animator = GetComponent<Animator>();
@@ -27,11 +31,17 @@ public class PlayerOptions : MonoBehaviour {
 	}
 	
 	public void ShowPanel() {
+		if (gameManager) {
+			gameManager.PauseGame();
+		}
 		animator.SetTrigger("ShowOptions trigger");
 	}
 	
 	public void HidePanel() {
 		animator.SetTrigger("HideOptions trigger");
+		if (gameManager) {
+			gameManager.UnpauseGame();
+		}
 	}
 	
 	public void SaveMusicVolume() {

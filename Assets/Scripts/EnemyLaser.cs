@@ -46,7 +46,6 @@ public class EnemyLaser : MonoBehaviour {
 		PlayerShip player = collider.gameObject.GetComponent<PlayerShip>();
 		
 		if (player) {
-			Debug.Log("Hit player ship!");
 			Destroy(gameObject);
 		}
 	}

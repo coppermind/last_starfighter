@@ -41,7 +41,7 @@ public class EnemyGun : MonoBehaviour {
 	
 	#region Private Methods
 	void FirePrimaryWeapon() {
-		GameObject laser = Instantiate(weaponPrefab, transform.position, Quaternion.identity) as GameObject;
+		Instantiate(weaponPrefab, transform.position, Quaternion.identity);
 	}
 	
 	void FireSecondaryWeapon() {
