@@ -26,8 +26,7 @@ public class AsteroidController : MonoBehaviour {
 	
 	#region Unity Methods	
 	void Update () {
-		float probability = spawnRate * Time.deltaTime;
-		if (Random.value < probability) {
+		if (GameMath.IsProbable(spawnRate)) {
 			Vector3 position = GetRandomPosition();
 			Instantiate(GetRandomAsteroid(), position, Quaternion.identity);
 		}

@@ -70,6 +70,7 @@
      <Compile Include="Assets\Scripts\PlayerShooter.cs" />
      <Compile Include="Assets\Scripts\Utilities\GameCamera.cs" />
      <Compile Include="Assets\Scripts\Utilities\GameGizmos.cs" />
+     <Compile Include="Assets\Scripts\Utilities\GameMath.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>/Applications/Unity 5/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

@@ -22,8 +22,7 @@ public class BackgroundFight : MonoBehaviour {
 	private float maxY = 20f;
 
 	void Update () {
-		float probability = spawnRate * Time.deltaTime;
-		if (Random.value < probability) {
+		if (GameMath.IsProbable(spawnRate)) {
 			SpawnBackground();
 		}
 	}

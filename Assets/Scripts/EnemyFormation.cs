@@ -90,8 +90,7 @@ public class EnemyFormation : MonoBehaviour {
 	
 	void SpawnEnemyShip() {
 		if (0 < enemiesLeft) {
-			float probability = spawnRate * Time.deltaTime;
-			if (Random.value < probability) {
+			if (GameMath.IsProbable(spawnRate)) {
 				Transform freePosition = NextFreePosition();
 				if (null != freePosition) {
 					SpawnEnemyShipAt(freePosition, freePosition.position);

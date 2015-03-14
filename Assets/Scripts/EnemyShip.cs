@@ -33,6 +33,9 @@ public class EnemyShip : MonoBehaviour {
 	
 	
 	#region GameObject Members
+	[SerializeField]
+	private GameObject explosionPrefab;
+	
 	private EnemyFormation enemyFormation;
 	#endregion
 
@@ -57,12 +60,12 @@ public class EnemyShip : MonoBehaviour {
 				isSpawning = false;
 			}
 		} else {
-			float probability = exitRate * Time.deltaTime;
-			if (Random.value < probability) {
+			
+			if (GameMath.IsProbable(exitRate)) {
 				isLeaving = true;
 			}
 			
-			if (isLeaving) {
+			if (isLeaving) { 
 				WarpOut();
 			}
 			
@@ -87,7 +90,7 @@ public class EnemyShip : MonoBehaviour {
 		currentHitPoints -= damage;
 		
 		if (0f >= currentHitPoints) {
-			Destroy(gameObject);
+			Die();
 		}
 	}
 	
@@ -106,4 +109,15 @@ public class EnemyShip : MonoBehaviour {
 		transform.position = Vector3.MoveTowards(transform.position, warpTarget, step);
 	}
 	#endregion
+	
+	public void Die() {
+		GameObject explosion = Instantiate(explosionPrefab, transform.position, Quaternion.identity) as GameObject;
+		explosion.transform.parent = transform;
+		
+		GameObject body = transform.FindChild("Body").gameObject;
+		Destroy(body);
+		
+//		Destroy(explosion, 0.5f);
+		Destroy(gameObject, 0.5f);
+	}
 }

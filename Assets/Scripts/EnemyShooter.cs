@@ -35,8 +35,7 @@ public class EnemyShooter : MonoBehaviour {
 	
 	void Update() {
 		if (!gameManager.PlayerIsSpawning) {
-			float probability = currentProjectileRate * Time.deltaTime;
-			if (Random.value < probability) {
+			if (GameMath.IsProbable(currentProjectileRate)) {
 				FirePrimaryWeapon();
 			}
 		}
