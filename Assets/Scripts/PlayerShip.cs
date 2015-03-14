@@ -11,6 +11,9 @@ public class PlayerShip : MonoBehaviour {
 	private float shipPadding = 0.5f;
 	
 	[SerializeField]
+	private float maxY = 4f;
+	
+	[SerializeField]
 	private float spawnWarpSpeed = 2.5f;
 	
 	[SerializeField]
@@ -21,7 +24,7 @@ public class PlayerShip : MonoBehaviour {
 	
 	private Vector3 spawnTarget;
 	
-	private float minX, maxX, minY, maxY;
+	private float minX, maxX, minY;
 	#endregion	
 	
 	
@@ -134,7 +137,7 @@ public class PlayerShip : MonoBehaviour {
 		minX = (float) b["minX"];
 		minY = (float) b["minY"];
 		maxX = (float) b["maxX"];
-		maxY = (float) b["maxY"];
+//		maxY = (float) b["maxY"];
 	}
 	
 	void HitWith(float damage) {
