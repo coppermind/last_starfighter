@@ -19,7 +19,6 @@ public class PlayerScore : MonoBehaviour {
 	
 	public void AddScore(int points) {
 		PlayerScore.totalScore += points;
-		Debug.Log("Points: " + points);
 		UpdateText();
 	}
 	

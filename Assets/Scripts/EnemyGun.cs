@@ -3,13 +3,6 @@ using System.Collections;
 
 public class EnemyGun : MonoBehaviour {
 
-	#region Transform Members
-	[SerializeField]
-	private float defaultProjectileSpeed = -10f;
-	private float currentProjectileSpeed;
-	#endregion
-
-
 	#region Gameplay Members
 	[SerializeField]
 	private GameObject weaponPrefab;
@@ -30,7 +23,6 @@ public class EnemyGun : MonoBehaviour {
 		gameManager = FindObjectOfType<GameManager>();
 		
 		currentProjectileRate  = defaultProjectileRate;
-		currentProjectileSpeed = defaultProjectileSpeed;
 	}
 	
 	void Update() {
@@ -50,7 +42,6 @@ public class EnemyGun : MonoBehaviour {
 	#region Private Methods
 	void FirePrimaryWeapon() {
 		GameObject laser = Instantiate(weaponPrefab, transform.position, Quaternion.identity) as GameObject;
-		laser.GetComponent<Rigidbody2D>().velocity = new Vector3(0f, currentProjectileSpeed, 0f);
 	}
 	
 	void FireSecondaryWeapon() {

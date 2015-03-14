@@ -7,10 +7,6 @@ public class PlayerGun : MonoBehaviour {
 	private GameObject weaponPrefab;
 	
 	[SerializeField]
-	private float defaultProjectileSpeed = 10f;
-	private float currentProjectileSpeed;
-	
-	[SerializeField]
 	private float defaultProjectileRate = 0.2f;
 	private float currentProjectileRate;
 	
@@ -20,11 +16,11 @@ public class PlayerGun : MonoBehaviour {
 		gameManager = FindObjectOfType<GameManager>();
 		
 		currentProjectileRate  = defaultProjectileRate;
-		currentProjectileSpeed = defaultProjectileSpeed;
 	}
 	
 	void Update() {
 		if (gameManager.GameIsPaused) {
+			CancelInvoke("FirePrimaryWeapon");
 			return;
 		}
 		
@@ -43,7 +39,6 @@ public class PlayerGun : MonoBehaviour {
 	
 	void FirePrimaryWeapon() {
 		GameObject laser = Instantiate(weaponPrefab, transform.position, Quaternion.identity) as GameObject;
-		laser.GetComponent<Rigidbody2D>().velocity = new Vector3(0f, currentProjectileSpeed, 0f);
 	}
 	
 	void FireSecondaryWeapon() {

@@ -23,5 +23,9 @@ public class GameManager : MonoBehaviour {
 		get { return playerSpawning; }
 		set { playerSpawning = value; }
 	}
+	
+	public void TogglePause() {
+		gamePaused = !gamePaused;
+	}
 
 }

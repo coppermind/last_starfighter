@@ -49,7 +49,9 @@ public class Asteroid : MonoBehaviour {
 	void Update() {
 		if (gameManager.GameIsPaused) {
 			rigidBody.gravityScale = 0f;
+			rigidBody.isKinematic = true;
 		} else {
+			rigidBody.isKinematic = false;
 			rigidBody.gravityScale = gravityScale;
 		}
 		
