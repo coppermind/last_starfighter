@@ -35,9 +35,7 @@ public class Asteroid : MonoBehaviour {
 	void Start() {
 		rigidBody         = GetComponent<Rigidbody2D>();
 		
-		Camera camera     = Camera.main;
-		float distance    = transform.position.z - camera.transform.position.z;
-		screenBottomEdge  = camera.ViewportToWorldPoint(new Vector3(0, 0, distance)).y;
+		screenBottomEdge  = (float) GameCamera.GetBoundaries(Camera.main, transform)["minY"];
 
 		SetRandomGravity();
 	}

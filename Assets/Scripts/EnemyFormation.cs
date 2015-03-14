@@ -8,16 +8,16 @@ public class EnemyFormation : MonoBehaviour {
 	private float spawnY;
 	
 	[SerializeField]
-	private float width   = 15f;
+	private float width = 15f;
 	
 	[SerializeField]
-	private float height  = 10f;
+	private float height = 10f;
 	
 	[SerializeField]
 	private float padding = 0.5f;
 	
 	[SerializeField]
-	private float speed   = 1.5f;
+	private float speed = 1.5f;
 	
 	private int direction = 1;
 	
@@ -27,10 +27,10 @@ public class EnemyFormation : MonoBehaviour {
 	
 	#region Gameplay Members
 	[SerializeField]
-	private float spawnRate        = 0.5f;
+	private float spawnRate = 0.5f;
 	
 	[SerializeField]
-	private int shipCount          = 0;
+	private int shipCount = 0;
 	
 	[SerializeField]
 	private int enemiesInThisLevel = 100;
@@ -75,27 +75,17 @@ public class EnemyFormation : MonoBehaviour {
 	}
 	
 	void OnDrawGizmos() {
-		float xMin, xMax, yMin, yMax;
-		
-		xMin = transform.position.x - padding * width;
-		xMax = transform.position.x + padding * width;
-		yMin = transform.position.y - padding * height;
-		yMax = transform.position.y + padding * height;
-		
-		Gizmos.DrawLine(new Vector3(xMin, yMin, 0f), new Vector3(xMin, yMax, 0f));
-		Gizmos.DrawLine(new Vector3(xMin, yMin, 0f), new Vector3(xMax, yMin, 0f));
-		Gizmos.DrawLine(new Vector3(xMin, yMax, 0f), new Vector3(xMax, yMax, 0f));
-		Gizmos.DrawLine(new Vector3(xMax, yMin, 0f), new Vector3(xMax, yMax, 0f));
+		GameGizmos.DrawBox(transform, width, height, padding);
 	}
 	#endregion
 	
 	
 	#region Private Methods
 	void GetCameraPosition() {
-		Camera camera   = Camera.main;
-		float distance  = transform.position.z - camera.transform.position.z;
-		screenLeftEdge  = camera.ViewportToWorldPoint (new Vector3 (0, 0, distance)).x + padding;
-		screenRightEdge = camera.ViewportToWorldPoint (new Vector3 (1, 1, distance)).x - padding;
+		Hashtable b = GameCamera.GetBoundaries(Camera.main, transform, padding);
+		
+		screenLeftEdge  = (float) b["minX"];
+		screenRightEdge = (float) b["minY"];
 	}
 	
 	void SpawnEnemyShip() {

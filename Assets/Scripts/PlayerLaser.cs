@@ -10,11 +10,9 @@ public class PlayerLaser : MonoBehaviour {
 	private EnemyFormation enemyFormation;
 
 	void Start () {
-		Camera camera  = Camera.main;
-		float distance = transform.position.z - camera.transform.position.z;
-		screenTopEdge  = camera.ViewportToWorldPoint(new Vector3(1, 1, distance)).y;
-		
 		enemyFormation = FindObjectOfType<EnemyFormation>();
+		
+		screenTopEdge  = (float) GameCamera.GetBoundaries(Camera.main, transform)["maxY"];
 	}
 	
 	void Update () {

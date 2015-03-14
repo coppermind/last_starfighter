@@ -3,18 +3,25 @@ using System.Collections;
 
 public class PlayerShield : MonoBehaviour {
 
+	#region Gameplay Members
 	[SerializeField]
 	private Sprite[] shieldLevels;
 	
 	[SerializeField]
 	private float totalHitPoints;
+	private float currentHitPoints;
 	
 	[SerializeField]
 	private float regenerationRate;
+	#endregion
 	
-	private float currentHitPoints;
+	
+	#region Component Members
 	private SpriteRenderer spriteRenderer;
+	#endregion
 
+	
+	#region Unity Methods
 	void Start() {
 		currentHitPoints = totalHitPoints;
 		spriteRenderer = GetComponent<SpriteRenderer>();
@@ -29,7 +36,10 @@ public class PlayerShield : MonoBehaviour {
 			//Debug.Log("Not regenerating shield");
 		}
 	}
+	#endregion
 	
+	
+	#region Private Methods
 	void UpdateSprite() {
 		float level = (currentHitPoints / totalHitPoints) * 100;
 		Sprite sprite = (level > 0) ? shieldLevels[1] : shieldLevels[0];
@@ -42,7 +52,10 @@ public class PlayerShield : MonoBehaviour {
 		}
 		spriteRenderer.sprite = sprite;
 	}
+	#endregion
 	
+	
+	#region Public Methods
 	public void DestroyShield() {
 		currentHitPoints = -5f;
 		UpdateSprite();
@@ -59,4 +72,5 @@ public class PlayerShield : MonoBehaviour {
 	public bool shieldIsDown() {
 		return !(0f <= currentHitPoints);
 	}
+	#endregion
 }

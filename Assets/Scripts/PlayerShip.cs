@@ -125,12 +125,12 @@ public class PlayerShip : MonoBehaviour {
 	
 	#region Private Methods
 	void CalculateCameraDistance() {
-		Camera camera = Camera.main;
-		float distance = transform.position.z - camera.transform.position.z;
-		minX = camera.ViewportToWorldPoint (new Vector3 (0, 0, distance)).x + shipPadding;
-		minY = camera.ViewportToWorldPoint (new Vector3 (0, 0, distance)).y + shipPadding;
-		maxX = camera.ViewportToWorldPoint (new Vector3 (1, 1, distance)).x - shipPadding;
-		maxY = camera.ViewportToWorldPoint (new Vector3 (1, 1, distance)).y - shipPadding;
+		Hashtable b = GameCamera.GetBoundaries(Camera.main, transform, shipPadding);
+	
+		minX = (float) b["minX"];
+		minY = (float) b["minY"];
+		maxX = (float) b["maxX"];
+		maxY = (float) b["maxY"];
 	}
 	
 	void HitWith(float damage) {

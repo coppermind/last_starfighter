@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class EnemyLaser : MonoBehaviour {
@@ -9,9 +9,7 @@ public class EnemyLaser : MonoBehaviour {
 	private float screenBottomEdge;
 	
 	void Start () {
-		Camera camera  = Camera.main;
-		float distance = transform.position.z - camera.transform.position.z;
-		screenBottomEdge  = camera.ViewportToWorldPoint(new Vector3(0, 0, distance)).y;
+		screenBottomEdge = (float) GameCamera.GetBoundaries(Camera.main, transform)["minY"];
 	}
 	
 	void Update () {

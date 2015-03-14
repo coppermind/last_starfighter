@@ -46,9 +46,7 @@ public class EnemyShip : MonoBehaviour {
 		
 		warpTarget = new Vector3(transform.position.x, -10, transform.position.z);
 		
-		Camera camera     = Camera.main;
-		float distance    = transform.position.z - camera.transform.position.z;
-		screenBottomEdge  = camera.ViewportToWorldPoint(new Vector3(0, 0, distance)).y;
+		screenBottomEdge = (float) GameCamera.GetBoundaries(Camera.main, transform)["minY"];
 	}
 	
 	void Update() {

@@ -3,11 +3,15 @@ using System.Collections;
 
 public class MusicPlayer : MonoBehaviour {
 
+	private int currentTrack = 0;
+
 	private AudioSource audioSource;
 	private AudioClip[] playlist;
-	private MusicPlaylist musicPlaylist;
-	private int currentTrack = 0;
 	
+	private MusicPlaylist musicPlaylist;
+	
+	
+	#region Unity Methods
 	void Awake() {
 		DontDestroyOnLoad(gameObject);
 	}
@@ -21,7 +25,10 @@ public class MusicPlayer : MonoBehaviour {
 	void OnLevelWasLoaded(int level) {
 		LoadPlaylist();
 	}
+	#endregion
 	
+	
+	#region Private Methods
 	void LoadPlaylist() {
 		musicPlaylist = FindObjectOfType<MusicPlaylist>();
 		if (musicPlaylist) {
@@ -48,8 +55,12 @@ public class MusicPlayer : MonoBehaviour {
 		audioSource.Play();
 		Invoke("PlayNextTrack", playlist[currentTrack].length);
 	}
+	#endregion
 	
+	
+	#region Public Methods
 	public void SetVolume(float amount) {
 		audioSource.volume = amount;
 	}
+	#endregion
 }

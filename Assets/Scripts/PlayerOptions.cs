@@ -17,11 +17,12 @@ public class PlayerOptions : MonoBehaviour {
 	private Animator animator;
 	
 	void Start () {
-		animator = GetComponent<Animator>();
 		musicPlayer = FindObjectOfType<MusicPlayer>();
 		
-		musicSlider.value = PlayerPrefsManager.GetMusicVolume();
-		effectsSlider.value = PlayerPrefsManager.GetEffectsVolume();
+		animator = GetComponent<Animator>();
+		
+		musicSlider.value      = PlayerPrefsManager.GetMusicVolume();
+		effectsSlider.value    = PlayerPrefsManager.GetEffectsVolume();
 		difficultySlider.value = PlayerPrefsManager.GetDifficulty();
 	}
 	
@@ -49,8 +50,8 @@ public class PlayerOptions : MonoBehaviour {
 	}
 	
 	public void SetDefaults() {
-		musicSlider.value = PlayerPrefsManager.GetDefaultMusicVolume();
-		effectsSlider.value = PlayerPrefsManager.GetDefaultEffectsVolume();
+		musicSlider.value      = PlayerPrefsManager.GetDefaultMusicVolume();
+		effectsSlider.value    = PlayerPrefsManager.GetDefaultEffectsVolume();
 		difficultySlider.value = PlayerPrefsManager.GetDefaultDifficulty();
 		
 		SaveMusicVolume();
