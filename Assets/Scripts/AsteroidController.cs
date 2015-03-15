@@ -21,14 +21,23 @@ public class AsteroidController : MonoBehaviour {
 
 	[SerializeField]
 	private float spawnRate;
+	
+	private GameManager gameManager;
 	#endregion
 	
 	
 	#region Unity Methods	
-	void Update () {
-		if (GameMath.IsProbable(spawnRate)) {
-			Vector3 position = GetRandomPosition();
-			Instantiate(GetRandomAsteroid(), position, Quaternion.identity);
+	void Start() {
+		gameManager = FindObjectOfType<GameManager>();
+	}
+	
+	void Update() {
+		if (!gameManager.PlayerIsSpawning && !gameManager.PlayerHasWon && !gameManager.GameIsPaused) {
+			if (GameMath.IsProbable(spawnRate)) {
+				Vector3 position = GetRandomPosition();
+				GameObject asteroid = Instantiate(GetRandomAsteroid(), position, Quaternion.identity) as GameObject;
+				asteroid.transform.parent = transform;
+			}
 		}
 	}
 	#endregion
