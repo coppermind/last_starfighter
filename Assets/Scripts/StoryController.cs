@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using System.IO;
 
-public class TextController : MonoBehaviour {
+public class StoryController : MonoBehaviour {
 
 	[SerializeField]
 	private string[] text;
@@ -23,6 +24,16 @@ public class TextController : MonoBehaviour {
 			displayText.text = text[0];
 		} else {
 			CloseTextPanel();
+		}
+		
+		string filename = "Assets/Story/02 Level 01/00.txt";
+		if (File.Exists(filename)) {
+			Debug.Log("File - " + filename + " exists!");
+			byte[] contents = File.ReadAllBytes(filename);
+			string c = contents.ToString();
+			Debug.Log(c);
+		} else {
+			Debug.Log("File - " + filename + " missing!");
 		}
 	}
 	
