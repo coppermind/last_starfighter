@@ -13,6 +13,9 @@ public class UfoShip : MonoBehaviour {
 	[SerializeField]
 	private GameObject itemPrefab;
 	
+	[SerializeField]
+	private GameObject explosionPrefab;
+	
 	private Rigidbody2D rigidBody;
 	
 	private GameManager gameManager;
@@ -33,14 +36,21 @@ public class UfoShip : MonoBehaviour {
 	}
 	
 	void OnTriggerEnter2D(Collider2D collider) {
-		GameObject playerLaser = collider.GetComponent<PlayerLaser>();
+		PlayerLaser playerLaser = collider.GetComponent<PlayerLaser>();
 		
 		if (playerLaser) {
-			// Die and spawn prefabbed item
+			DieAndSpawnItem();
 		}
 	}
 	
-	void GetVelocity() {
+	void DieAndSpawnItem() {
+		GameObject explosion = Instantiate(explosionPrefab, transform.position, Quaternion.identity) as GameObject;
+		Instantiate(itemPrefab, transform.position, Quaternion.identity);
+		Destroy(gameObject);
+		Destroy(explosion, 0.4f);
+	}
+	
+	Vector3 GetVelocity() {
 		float speed = shipSpeed * shipDirection;
 		return new Vector3(speed , 0f, 0f);
 	}
