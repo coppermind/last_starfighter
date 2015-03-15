@@ -23,27 +23,34 @@ public class StoryController : MonoBehaviour {
 			currentTextIndex = 0;
 			displayText.text = text[0];
 		} else {
-			CloseTextPanel();
+			CloseStoryPanel();
 		}
 		
 		string filename = "Assets/Story/02 Level 01/00.txt";
 		if (File.Exists(filename)) {
-			Debug.Log("File - " + filename + " exists!");
+//			Debug.Log("File - " + filename + " exists!");
 			byte[] contents = File.ReadAllBytes(filename);
 			string c = contents.ToString();
-			Debug.Log(c);
+//			Debug.Log(c);
 		} else {
-			Debug.Log("File - " + filename + " missing!");
+//			Debug.Log("File - " + filename + " missing!");
 		}
+		
+		float test = 100;
+		
 	}
 	
 	public void Continue() {
 		if (currentTextIndex >= text.Length-1) {
-			CloseTextPanel();
+			CloseStoryPanel();
 		}
 	}
 	
-	public void CloseTextPanel() {
+	public void OpenStoryPanel() {
+		gameManager.PauseGame();
+	}
+	
+	public void CloseStoryPanel() {
 		gameObject.SetActive(false);
 		gameManager.UnpauseGame();
 	}
