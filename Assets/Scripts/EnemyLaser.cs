@@ -7,10 +7,10 @@ public class EnemyLaser : MonoBehaviour {
 	private float defaultProjectileSpeed = -10f;
 	private float currentProjectileSpeed;
 
+	private float screenBottomEdge;
+	
 	[SerializeField]
 	private float damagePoints = 20f;
-	
-	private float screenBottomEdge;
 	
 	private Rigidbody2D rigidBody;
 	
