@@ -68,6 +68,7 @@
      <Compile Include="Assets\Scripts\PlayerScore.cs" />
      <Compile Include="Assets\Scripts\PlayerShield.cs" />
      <Compile Include="Assets\Scripts\PlayerShip.cs" />
+     <Compile Include="Assets\Scripts\PowerUp.cs" />
      <Compile Include="Assets\Scripts\StoryController.cs" />
      <Compile Include="Assets\Scripts\UfoController.cs" />
      <Compile Include="Assets\Scripts\UfoShip.cs" />

@@ -45,9 +45,18 @@ public class UfoShip : MonoBehaviour {
 	
 	void DieAndSpawnItem() {
 		GameObject explosion = Instantiate(explosionPrefab, transform.position, Quaternion.identity) as GameObject;
-		Instantiate(itemPrefab, transform.position, Quaternion.identity);
-		Destroy(gameObject);
-		Destroy(explosion, 0.4f);
+		explosion.transform.parent = transform;
+		
+		Transform body = transform.Find("Body");
+		if (body) { 
+			Destroy(body.gameObject);
+		}
+		Destroy(gameObject, 0.4f);
+		
+		if (itemPrefab) {
+			// Spawn item
+			Instantiate(itemPrefab, transform.position, Quaternion.identity);
+		}
 	}
 	
 	Vector3 GetVelocity() {
