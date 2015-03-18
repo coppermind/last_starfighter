@@ -33,7 +33,7 @@ public class EnemyFormation : MonoBehaviour {
 	private int shipCount = 0;
 	
 	[SerializeField]
-	private int enemiesInThisLevel = 10;
+	private int enemiesInThisLevel = 100;
 	private int enemiesLeft;
 	#endregion
 
