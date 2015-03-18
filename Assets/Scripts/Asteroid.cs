@@ -72,10 +72,14 @@ public class Asteroid : MonoBehaviour {
 	
 	#region Public Methods
 	public void Destroy() {
-		Destroy(gameObject);
-		
 		GameObject explosion = Instantiate(explosionPrefab, transform.position, Quaternion.identity) as GameObject;
-		Destroy(explosion, 0.2f);
+		explosion.transform.parent = transform;
+		
+		Transform body = transform.Find("Body");
+		if (body) {
+			Destroy(body.gameObject);
+		}
+		Destroy(gameObject, 0.2f);
 	}
 	#endregion
 	
