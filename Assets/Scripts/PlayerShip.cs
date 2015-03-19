@@ -97,19 +97,16 @@ public class PlayerShip : MonoBehaviour {
 			}
 			
 		} else if (gameManager.PlayerHasWon) {
-			PlayerLaser[] lasers = FindObjectsOfType<PlayerLaser>();
-			
-			if (0 == lasers.Length) {
-				exitTarget = new Vector3(transform.position.x, exitTargetY, transform.position.z);
-				WarpOut();
-			
-				if (transform.position == exitTarget) {
-					levelManager.LoadNextLevel();
-				}
-			}
-			
+			FtlJump();
+		
 		} else {
 			ManeuverShip();
+			
+			if (gameManager.JumpIsReady) {
+				if (Input.GetKey(KeyCode.F) || Input.GetKey(KeyCode.J)) {
+					gameManager.PlayerHasWon = true;
+				}
+			}
 		}
 	}
 	
@@ -144,6 +141,17 @@ public class PlayerShip : MonoBehaviour {
 		minY = (float) b["minY"];
 		maxX = (float) b["maxX"];
 	}
+
+	void FtlJump ()	{
+		PlayerLaser[] lasers = FindObjectsOfType<PlayerLaser> ();
+		if (0 == lasers.Length) {
+			exitTarget = new Vector3(transform.position.x, exitTargetY, transform.position.z);
+			WarpOut ();
+			if (transform.position == exitTarget) {
+				levelManager.LoadNextLevel ();
+			}
+		}
+	}
 	
 	void HitWith(float damage) {
 		currentHitPoints -= damage;
@@ -154,24 +162,24 @@ public class PlayerShip : MonoBehaviour {
 	}
 
 	void ManeuverShip() {
-		Vector3 shipPosition = new Vector3 (transform.position.x, transform.position.y, transform.position.z);
+		Vector3 shipPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z);
 		float newXPosition = shipPosition.x;
 		float newYPosition = shipPosition.y;
-		if (Input.GetKey (KeyCode.A) || Input.GetKey (KeyCode.LeftArrow)) {
+		if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)) {
 			newXPosition = transform.position.x - shipSpeed * Time.deltaTime;
 		}
 		else
-			if (Input.GetKey (KeyCode.D) || Input.GetKey (KeyCode.RightArrow)) {
+			if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) {
 				newXPosition = transform.position.x + shipSpeed * Time.deltaTime;
 			}
-		if (Input.GetKey (KeyCode.W) || Input.GetKey (KeyCode.UpArrow)) {
+		if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)) {
 			newYPosition = transform.position.y + shipSpeed * Time.deltaTime;
 		}
 		else
-			if (Input.GetKey (KeyCode.S) || Input.GetKey (KeyCode.DownArrow)) {
+			if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)) {
 				newYPosition = transform.position.y - shipSpeed * Time.deltaTime;
 			}
-		UpdateShipPosition (shipPosition, newXPosition, newYPosition);
+		UpdateShipPosition(shipPosition, newXPosition, newYPosition);
 	}
 	
 	void UpdateShipPosition(Vector3 ship, float x, float y) {

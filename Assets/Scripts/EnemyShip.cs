@@ -98,14 +98,12 @@ public class EnemyShip : MonoBehaviour {
 		}
 		
 		Destroy(gameObject, 0.5f);
-		enemyFormation.KillEnemy();
 		
 		playerScore.AddScore(scorePoints);
 	}
 	
 	void Suicide() {
 		Destroy(gameObject);
-		enemyFormation.KillEnemy();
 	}
 	
 	void WarpIn() {

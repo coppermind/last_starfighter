@@ -28,13 +28,6 @@ public class EnemyFormation : MonoBehaviour {
 	#region Gameplay Members
 	[SerializeField]
 	private float spawnRate = 0.5f;
-	
-	[SerializeField]
-	private int shipCount = 0;
-	
-	[SerializeField]
-	private int enemiesInThisLevel = 100;
-	private int enemiesLeft;
 	#endregion
 
 
@@ -52,8 +45,6 @@ public class EnemyFormation : MonoBehaviour {
 	void Start () {
 		gameManager  = FindObjectOfType<GameManager>();
 		playerShip   = FindObjectOfType<PlayerShip>();
-		
-		enemiesLeft = enemiesInThisLevel;
 		
 		GetCameraPosition();
 	}
@@ -93,12 +84,10 @@ public class EnemyFormation : MonoBehaviour {
 	}
 	
 	void SpawnEnemyShip() {
-		if (0 < enemiesLeft) {
-			if (GameMath.IsProbable(spawnRate)) {
-				Transform freePosition = NextFreePosition();
-				if (null != freePosition) {
-					SpawnEnemyShipAt(freePosition, freePosition.position);
-				}
+		if (GameMath.IsProbable(spawnRate)) {
+			Transform freePosition = NextFreePosition();
+			if (null != freePosition) {
+				SpawnEnemyShipAt(freePosition, freePosition.position);
 			}
 		}
 	}
@@ -120,7 +109,6 @@ public class EnemyFormation : MonoBehaviour {
 		GameObject enemy         = Instantiate(enemyPrefab, shipPosition, Quaternion.identity) as GameObject;
 		enemy.transform.parent   = parentElement;
 		enemy.transform.position = new Vector3(shipPosition.x, spawnY, shipPosition.z);
-		shipCount++;
 	}
 	
 	bool AllShipsAreDead() {
@@ -133,13 +121,4 @@ public class EnemyFormation : MonoBehaviour {
 	}
 	#endregion
 	
-	
-	#region Public Methods
-	public void KillEnemy() {
-		enemiesLeft--;
-		if (0 >= enemiesLeft) {
-			playerShip.LoadNextLevel();
-		}
-	}
-	#endregion
 }

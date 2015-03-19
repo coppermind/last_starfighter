@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour {
 	private bool gamePaused = false;
 	private bool playerSpawnIn = true;
 	private bool playerWins = false;
+	private bool ftlSpinnerReady = false;
 	
 	public void PauseGame() {
 		gamePaused = true;
@@ -28,6 +29,11 @@ public class GameManager : MonoBehaviour {
 	public bool PlayerHasWon {
 		get { return playerWins; }
 		set { playerWins = value; }
+	}
+	
+	public bool JumpIsReady {
+		get { return ftlSpinnerReady; }
+		set { ftlSpinnerReady = value; }
 	}
 	
 	public void TogglePause() {
