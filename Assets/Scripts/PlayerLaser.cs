@@ -34,8 +34,8 @@ public class PlayerLaser : MonoBehaviour {
 			return;
 		}
 		
-		float laserBottomEdge = transform.position.y;
-		if (laserBottomEdge >= screenTopEdge) {
+		float laserEdge = transform.position.y;
+		if (laserEdge >= screenTopEdge) {
 			Destroy(gameObject);
 		}
 		

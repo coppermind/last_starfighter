@@ -14,6 +14,9 @@ public class PlayerShip : MonoBehaviour {
 	private float maxY = 4f;
 	
 	[SerializeField]
+	private float minY = 2f;
+	
+	[SerializeField]
 	private float spawnWarpSpeed = 2.5f;
 	
 	[SerializeField]
@@ -31,7 +34,7 @@ public class PlayerShip : MonoBehaviour {
 	private Vector3 spawnInTarget;
 	private Vector3 exitTarget;
 	
-	private float minX, maxX, minY;
+	private float minX, maxX;
 	#endregion	
 	
 	
@@ -138,7 +141,6 @@ public class PlayerShip : MonoBehaviour {
 		Hashtable b = GameCamera.GetBoundaries(Camera.main, transform, shipPadding);
 	
 		minX = (float) b["minX"];
-		minY = (float) b["minY"];
 		maxX = (float) b["maxX"];
 	}
 

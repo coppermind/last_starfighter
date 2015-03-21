@@ -4,7 +4,10 @@ using System.Collections;
 public class PlayerGun : MonoBehaviour {
 
 	[SerializeField]
-	private GameObject weaponPrefab;
+	private GameObject laserPrefab;
+	
+	[SerializeField]
+	private GameObject torpedoPrefab;
 	
 	[SerializeField]
 	private float defaultProjectileRate = 0.2f;
@@ -31,18 +34,20 @@ public class PlayerGun : MonoBehaviour {
 			if (Input.GetMouseButtonUp(0) || Input.GetKeyUp(KeyCode.Space)) {
 				StopFiringPrimaryWeapon();
 			}
-			if (Input.GetMouseButton(1)) {
-				Debug.Log("Mouse button 1 pressed.");
+			if (Input.GetMouseButtonDown(1)) {
+				FireSecondaryWeapon();
 			}
 		}
 	}
 	
 	void FirePrimaryWeapon() {
-		Instantiate(weaponPrefab, transform.position, Quaternion.identity);
+		Instantiate(laserPrefab, transform.position, Quaternion.identity);
 	}
 	
 	void FireSecondaryWeapon() {
-		
+		if (torpedoPrefab) {
+			Instantiate(torpedoPrefab, transform.position, Quaternion.identity);
+		}
 	}
 	
 	public void StartFiringPrimaryWeapon() {
