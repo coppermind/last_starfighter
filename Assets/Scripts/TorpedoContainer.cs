@@ -29,12 +29,12 @@ public class TorpedoContainer : MonoBehaviour {
 	}
 	
 	
-	private Transform GetUntargetedShip() {
+	private EnemyShip GetUntargetedShip() {
 		EnemyShip[] enemies = FindObjectsOfType<EnemyShip>();
 		foreach (EnemyShip e in enemies) {
 			if (!e.IsTargeted) {
 				e.IsTargeted = true;
-				return e.transform;
+				return e;
 			}
 		}
 		return null;

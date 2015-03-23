@@ -25,7 +25,7 @@ public class PlayerTorpedo : MonoBehaviour {
 	#endregion
 	
 	#region GameObject Members
-	public Transform targetObject;
+	public EnemyShip targetObject;
 	#endregion
 
 		
@@ -49,7 +49,7 @@ public class PlayerTorpedo : MonoBehaviour {
 			if (!IsEnemyDead()) {
 				Move();
 			} else {
-				AutoExplode();
+				Die();
 			}
 		}
 		
@@ -64,12 +64,12 @@ public class PlayerTorpedo : MonoBehaviour {
 		Asteroid asteroid = collider.gameObject.GetComponent<Asteroid>();
 		
 		if (enemy) {
-			Destroy(gameObject);
+			Die();
 			enemy.HitWith(damagePoints);
 		} 
 		
 		if (asteroid) {
-			Destroy(gameObject);
+			Die();
 			asteroid.Destroy();
 		}
 	}
@@ -77,13 +77,16 @@ public class PlayerTorpedo : MonoBehaviour {
 	
 	
 	#region Private Methods
-	private void AutoExplode() {
+	private void Die() {
 		Destroy(gameObject);
+		if (targetObject) {
+			targetObject.IsTargeted = false;
+		}
 	}
 	
 	private void Move() {
 		float step = moveSpeed * Time.deltaTime;
-		transform.position = Vector3.MoveTowards(transform.position, targetObject.position, step);
+		transform.position = Vector3.MoveTowards(transform.position, targetObject.transform.position, step);
 	}
 	
 	private bool IsEnemyDead() {
