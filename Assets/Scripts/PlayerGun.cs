@@ -10,6 +10,9 @@ public class PlayerGun : MonoBehaviour {
 	private GameObject torpedoPrefab;
 	
 	[SerializeField]
+	private int torpedoesLeft = 3;
+	
+	[SerializeField]
 	private float defaultProjectileRate = 0.2f;
 	private float currentProjectileRate;
 	

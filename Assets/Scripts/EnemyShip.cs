@@ -29,6 +29,7 @@ public class EnemyShip : MonoBehaviour {
 	
 	private bool isLeaving = false;
 	private bool isSpawning = true;
+	private bool isTargeted = false;
 	#endregion
 	
 	
@@ -117,6 +118,11 @@ public class EnemyShip : MonoBehaviour {
 	}
 	#endregion
 	
+	
+	public bool IsTargeted {
+		get { return isTargeted; }
+		set { isTargeted = value; }
+	}
 	
 	public void HitWith(float damage) {
 		currentHitPoints -= damage;

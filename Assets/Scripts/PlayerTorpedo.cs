@@ -3,21 +3,33 @@ using System.Collections;
 
 public class PlayerTorpedo : MonoBehaviour {
 
+	#region Transform Members
+	[SerializeField]
+	private Vector3 initialVelocity;
+	
+	[SerializeField]
+	private float moveSpeed = 10f;
+	
+	private float screenTopEdge;
+	#endregion
+
+	#region Gameplay Members
 	[SerializeField]
 	private float damagePoints = 20f;
 
-	[SerializeField]
 	private bool autoTarget = false;
+	#endregion
 	
-	[SerializeField]
-	private Vector3 initialVelocity;
-
-	private float screenTopEdge;
-
+	#region Component Members
 	Rigidbody2D rigidBody;
+	#endregion
 	
-	private Transform targetObject;
-	
+	#region GameObject Members
+	public Transform targetObject;
+	#endregion
+
+		
+	#region Unity Methods
 	void Start () {
 		rigidBody = GetComponent<Rigidbody2D>();
 		
@@ -25,12 +37,20 @@ public class PlayerTorpedo : MonoBehaviour {
 		
 		if (!autoTarget) {
 			rigidBody.velocity = initialVelocity;
+		} else {
+			if (targetObject == null) {
+				Destroy(gameObject);
+			}
 		}
 	}
 	
 	void Update () {
 		if (autoTarget) {
-			//
+			if (!IsEnemyDead()) {
+				Move();
+			} else {
+				AutoExplode();
+			}
 		}
 		
 		float torpedoEdge = transform.position.y;
@@ -52,5 +72,27 @@ public class PlayerTorpedo : MonoBehaviour {
 			Destroy(gameObject);
 			asteroid.Destroy();
 		}
+	}
+	#endregion
+	
+	
+	#region Private Methods
+	private void AutoExplode() {
+		Destroy(gameObject);
+	}
+	
+	private void Move() {
+		float step = moveSpeed * Time.deltaTime;
+		transform.position = Vector3.MoveTowards(transform.position, targetObject.position, step);
+	}
+	
+	private bool IsEnemyDead() {
+		return (!targetObject);
+	}
+	#endregion
+	
+	public bool IsAutoTarget {
+		get { return autoTarget; }
+		set { autoTarget = value; }
 	}
 }
