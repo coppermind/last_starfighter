@@ -73,6 +73,7 @@
      <Compile Include="Assets\Scripts\PowerUp.cs" />
      <Compile Include="Assets\Scripts\StoryController.cs" />
      <Compile Include="Assets\Scripts\TorpedoContainer.cs" />
+     <Compile Include="Assets\Scripts\TorpedoInterface.cs" />
      <Compile Include="Assets\Scripts\UfoController.cs" />
      <Compile Include="Assets\Scripts\UfoShip.cs" />
      <Compile Include="Assets\Scripts\Utilities\GameCamera.cs" />

@@ -39,15 +39,12 @@ public class EnemyShip : MonoBehaviour {
 	
 	private PlayerScore playerScore;
 	
-	private EnemyFormation enemyFormation;
-	
 	private GameManager gameManager;
 	#endregion
 
 
 	#region Unity Methods
 	void Start() {
-		enemyFormation = FindObjectOfType<EnemyFormation>();
 		gameManager    = FindObjectOfType<GameManager>();
 		playerScore    = FindObjectOfType<PlayerScore>();
 		

@@ -48,8 +48,9 @@ public class PlayerGun : MonoBehaviour {
 	}
 	
 	void FireSecondaryWeapon() {
-		if (torpedoPrefab) {
+		if (torpedoPrefab && 0 < torpedoesLeft) {
 			Instantiate(torpedoPrefab, transform.position, Quaternion.identity);
+			torpedoesLeft--;
 		}
 	}
 	
@@ -59,5 +60,10 @@ public class PlayerGun : MonoBehaviour {
 	
 	public void StopFiringPrimaryWeapon() {
 		CancelInvoke("FirePrimaryWeapon");
+	}
+	
+	public int TorpedoesLeft {
+		get { return torpedoesLeft; }
+		set { torpedoesLeft = value; }
 	}
 }

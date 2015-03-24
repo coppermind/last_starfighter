@@ -98,4 +98,8 @@ public class PlayerTorpedo : MonoBehaviour {
 		get { return autoTarget; }
 		set { autoTarget = value; }
 	}
+	
+	public void SetVelocity(Vector3 velocity) {
+		initialVelocity = velocity;
+	}
 }

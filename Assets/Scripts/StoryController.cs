@@ -26,18 +26,15 @@ public class StoryController : MonoBehaviour {
 			CloseStoryPanel();
 		}
 		
-		string filename = "Assets/Story/02 Level 01/00.txt";
-		if (File.Exists(filename)) {
+//		string filename = "Assets/Story/02 Level 01/00.txt";
+//		if (File.Exists(filename)) {
 //			Debug.Log("File - " + filename + " exists!");
-			byte[] contents = File.ReadAllBytes(filename);
-			string c = contents.ToString();
+//			byte[] contents = File.ReadAllBytes(filename);
+//			string c = contents.ToString();
 //			Debug.Log(c);
-		} else {
+//		} else {
 //			Debug.Log("File - " + filename + " missing!");
-		}
-		
-		float test = 100;
-		
+//		}
 	}
 	
 	public void Continue() {

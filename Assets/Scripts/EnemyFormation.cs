@@ -36,15 +36,12 @@ public class EnemyFormation : MonoBehaviour {
 	private GameObject enemyPrefab;
 	
 	private GameManager gameManager;
-	
-	private PlayerShip playerShip;
 	#endregion
 	
 	
 	#region Unity Methods
 	void Start () {
 		gameManager  = FindObjectOfType<GameManager>();
-		playerShip   = FindObjectOfType<PlayerShip>();
 		
 		GetCameraPosition();
 	}
