@@ -3,7 +3,9 @@ using System.Collections;
 
 public class UfoShip : MonoBehaviour {
 
-	public enum DIRECTION {RIGHT, LEFT};
+	public float minX = -5f;
+	
+	public float maxX = 37f;
 
 	[SerializeField]
 	private float shipSpeed = 4f;
@@ -24,6 +26,8 @@ public class UfoShip : MonoBehaviour {
 		gameManager = FindObjectOfType<GameManager>();
 		
 		rigidBody = GetComponent<Rigidbody2D>();
+		
+		SetDirection();
 	}
 	
 	void Update () {
@@ -32,7 +36,11 @@ public class UfoShip : MonoBehaviour {
 			return;
 		}
 		
-		rigidBody.velocity = GetVelocity();
+		if (minX <= transform.position.x && transform.position.x <= maxX) {
+			rigidBody.velocity = GetVelocity();
+		} else {
+			Destroy(gameObject);
+		}
 	}
 	
 	void OnTriggerEnter2D(Collider2D collider) {
@@ -59,13 +67,13 @@ public class UfoShip : MonoBehaviour {
 		}
 	}
 	
-	Vector3 GetVelocity() {
+	private Vector3 GetVelocity() {
 		float speed = shipSpeed * shipDirection;
 		return new Vector3(speed , 0f, 0f);
 	}
 	
-	public void SetDirect(DIRECTION direction) {
-		if (direction == DIRECTION.LEFT) {
+	private void SetDirection() {
+		if (0 < transform.position.x) {
 			shipDirection = -1;
 		} else {
 			shipDirection = 1;
