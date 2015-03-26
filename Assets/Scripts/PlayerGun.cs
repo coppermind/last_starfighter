@@ -66,4 +66,14 @@ public class PlayerGun : MonoBehaviour {
 		get { return torpedoesLeft; }
 		set { torpedoesLeft = value; }
 	}
+	
+	public GameObject LaserObject {
+		get { return laserPrefab; }
+		set { laserPrefab = value; }
+	}
+	
+	public GameObject TorpedoObject {
+		get { return torpedoPrefab; }
+		set { torpedoPrefab = value; }
+	}
 }

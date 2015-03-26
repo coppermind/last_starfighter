@@ -4,6 +4,9 @@ using System.Collections;
 public class PowerUp : MonoBehaviour {
 
 	[SerializeField]
+	private GameObject objPrefab;
+
+	[SerializeField]
 	private float gravityRate = -1f;
 
 	private Rigidbody2D rigidBody;
@@ -17,5 +20,10 @@ public class PowerUp : MonoBehaviour {
 		if (-1f >= transform.position.y) {
 			Destroy(gameObject);
 		}
+	}
+	
+	public GameObject PowerUpItem {
+		get { return objPrefab; }
+		set { objPrefab = value; }
 	}
 }

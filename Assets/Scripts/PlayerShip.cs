@@ -57,6 +57,7 @@ public class PlayerShip : MonoBehaviour {
 	private Animator animator;
 	
 	private PlayerShield shield;
+	private PlayerGun gun;
 	
 	private CircleCollider2D shipCollider;
 	#endregion
@@ -75,6 +76,7 @@ public class PlayerShip : MonoBehaviour {
 		gameManager  = FindObjectOfType<GameManager>();
 		
 		shield       = GetComponentInChildren<PlayerShield>();
+		gun          = GetComponentInChildren<PlayerGun>();
 
 		shipCollider = GetComponent<CircleCollider2D>();
 		shipCollider.enabled = false;
@@ -116,6 +118,7 @@ public class PlayerShip : MonoBehaviour {
 	void OnTriggerEnter2D(Collider2D collider) {
 		EnemyLaser enemyLaser = collider.GetComponent<EnemyLaser>();
 		Asteroid asteroid = collider.GetComponent<Asteroid>();
+		PowerUp powerUp = collider.GetComponent<PowerUp>();
 		
 		if (enemyLaser) {
 			if (!shield.shieldIsDown()) {
@@ -131,6 +134,18 @@ public class PlayerShip : MonoBehaviour {
 			} else {
 				HitWith(currentHitPoints);
 			}
+		}
+		
+		if (powerUp) {
+			GameObject itemObject = powerUp.PowerUpItem;
+			PlayerLaser laser = itemObject.GetComponent<PlayerLaser>();
+			if (laser) {
+				gun.LaserObject = itemObject;
+			} else {
+				gun.TorpedoObject = itemObject;
+				gun.TorpedoesLeft = 5;
+			}
+			Destroy(powerUp.gameObject);
 		}
 	}
 	#endregion
