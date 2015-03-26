@@ -53,6 +53,9 @@ public class UfoShip : MonoBehaviour {
 	
 	void DieAndSpawnItem() {
 		GameObject explosion = Instantiate(explosionPrefab, transform.position, Quaternion.identity) as GameObject;
+		CircleCollider2D collider = GetComponent<CircleCollider2D>();
+		
+		collider.enabled = false;
 		explosion.transform.parent = transform;
 		
 		Transform body = transform.Find("Body");
