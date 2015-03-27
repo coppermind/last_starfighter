@@ -3,12 +3,12 @@ using System.Collections;
 
 public class MusicPlayer : MonoBehaviour {
 
-	private int currentTrack = 0;
+	int currentTrack = 0;
 
-	private AudioSource audioSource;
-	private AudioClip[] playlist;
+	AudioSource audioSource;
+	AudioClip[] playlist;
 	
-	private MusicPlaylist musicPlaylist;
+	MusicPlaylist musicPlaylist;
 	
 	
 	#region Unity Methods

@@ -3,23 +3,16 @@ using System.Collections;
 
 public class BackgroundFight : MonoBehaviour {
 
-	[SerializeField]
-	private GameObject backgroundPrefab;
+	public float spawnRate = 0.5f;
 
-	[SerializeField]
-	private float spawnRate = 0.5f;
+	public float minX = 0f;
+	public float maxX = 30f;
+	public float minY = 0f;
+	public float maxY = 20f;
 	
 	[SerializeField]
-	private float minX = 0f;
+	GameObject backgroundPrefab;
 	
-	[SerializeField]
-	private float maxX = 30f;
-	
-	[SerializeField]
-	private float minY = 0f;
-	
-	[SerializeField]
-	private float maxY = 20f;
 
 	void Update () {
 		if (GameMath.IsProbable(spawnRate)) {

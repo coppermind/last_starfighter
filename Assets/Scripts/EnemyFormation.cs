@@ -4,38 +4,36 @@ using System.Collections;
 public class EnemyFormation : MonoBehaviour {
 
 	#region Transform Members
-	[SerializeField]
-	private float spawnY;
+	public float speed = 1.5f;
 	
 	[SerializeField]
-	private float width = 15f;
+	float spawnY;
 	
 	[SerializeField]
-	private float height = 10f;
+	float width = 15f;
 	
 	[SerializeField]
-	private float padding = 0.5f;
+	float height = 10f;
 	
 	[SerializeField]
-	private float speed = 1.5f;
+	float padding = 0.5f;
 	
-	private int direction = 1;
+	int direction = 1;
 	
-	private float screenRightEdge, screenLeftEdge;
+	float screenRightEdge, screenLeftEdge;
 	#endregion
 	
 	
 	#region Gameplay Members
-	[SerializeField]
-	private float spawnRate = 0.5f;
+	public float spawnRate = 0.5f;
 	#endregion
 
 
 	#region GameObject Members
 	[SerializeField]
-	private GameObject enemyPrefab;
+	GameObject enemyPrefab;
 	
-	private GameManager gameManager;
+	GameManager gameManager;
 	#endregion
 	
 	

@@ -4,69 +4,66 @@ using System.Collections;
 public class PlayerShip : MonoBehaviour {
 	
 	#region Transform Members
-	[SerializeField]
-	private float shipSpeed = 8f;
+	public float shipSpeed = 8f;
 	
 	[SerializeField]
-	private float shipPadding = 0.5f;
+	float maxY = 4f;
 	
 	[SerializeField]
-	private float maxY = 4f;
+	float minY = 2f;
 	
 	[SerializeField]
-	private float minY = 2f;
+	float spawnTargetX = 16f;
 	
 	[SerializeField]
-	private float spawnWarpSpeed = 2.5f;
+	float spawnTargetY = 1f;
 	
 	[SerializeField]
-	private float spawnTargetX = 16f;
+	float spawnWarpSpeed = 2.5f;
 	
 	[SerializeField]
-	private float spawnTargetY = 1f;
+	float exitWarpSpeed = 5f;
 	
 	[SerializeField]
-	private float exitWarpSpeed = 5f;
+	float exitTargetY = 21f;
 	
-	[SerializeField]
-	private float exitTargetY = 21f;
+	float shipPadding = 0.5f;
 	
-	private Vector3 spawnInTarget;
-	private Vector3 exitTarget;
+	Vector3 spawnInTarget, exitTarget;
 	
-	private float minX, maxX;
+	float minX, maxX;
 	#endregion	
 	
 	
 	#region Gameplay Members
 	[SerializeField]
-	private AudioClip defaultEffects;
+	AudioClip defaultEffects;
 	
 	[SerializeField]
-	private float hitPoints = 100f;
-	private float currentHitPoints;
+	float hitPoints = 100f;
+	float currentHitPoints;
 	
 	/*
 	[SerializeField]
-	private int numberOfLives = 3;
+	int numberOfLives = 3;
 	*/
 	#endregion
 
 
 	#region Component Members
-	private Animator animator;
+	Animator animator;
 	
-	private PlayerShield shield;
-	private PlayerGun gun;
+	PlayerShield shield;
+	PlayerGun gun;
 	
-	private CircleCollider2D shipCollider;
+	CircleCollider2D shipCollider;
 	#endregion
 
 		
 	#region GameObject Members
-	private LevelManager levelManager;
+	LevelManager levelManager;
 	
-	private GameManager gameManager;
+	GameManager gameManager;
 	#endregion
 	
 	

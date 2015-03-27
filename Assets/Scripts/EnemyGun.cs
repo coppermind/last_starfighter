@@ -5,16 +5,15 @@ public class EnemyGun : MonoBehaviour {
 
 	#region Gameplay Members
 	[SerializeField]
-	private GameObject weaponPrefab;
+	GameObject weaponPrefab;
 	
-	[SerializeField]
-	private float defaultProjectileRate = 0.2f;
-	private float currentProjectileRate;
+	public float defaultProjectileRate = 0.2f;
+	float currentProjectileRate;
 	#endregion
 	
 	
 	#region GameObject Members
-	private GameManager gameManager;
+	GameManager gameManager;
 	#endregion
 
 	

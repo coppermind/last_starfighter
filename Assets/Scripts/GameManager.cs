@@ -3,10 +3,10 @@ using System.Collections;
 
 public class GameManager : MonoBehaviour {
 	
-	private bool gamePaused = false;
-	private bool playerSpawnIn = true;
-	private bool playerWins = false;
-	private bool ftlSpinnerReady = false;
+	bool gamePaused = false;
+	bool playerSpawnIn = true;
+	bool playerWins = false;
+	bool ftlSpinnerReady = false;
 	
 	public void PauseGame() {
 		gamePaused = true;

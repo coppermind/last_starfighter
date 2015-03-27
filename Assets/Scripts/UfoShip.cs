@@ -8,19 +8,19 @@ public class UfoShip : MonoBehaviour {
 	public float maxX = 37f;
 
 	[SerializeField]
-	private float shipSpeed = 4f;
+	float shipSpeed = 4f;
 
-	private float shipDirection = -1;
+	float shipDirection = -1;
 
 	[SerializeField]
-	private GameObject itemPrefab;
+	GameObject itemPrefab;
 	
 	[SerializeField]
-	private GameObject explosionPrefab;
+	GameObject explosionPrefab;
 	
-	private Rigidbody2D rigidBody;
+	Rigidbody2D rigidBody;
 	
-	private GameManager gameManager;
+	GameManager gameManager;
 
 	void Start () {
 		gameManager = FindObjectOfType<GameManager>();
@@ -70,12 +70,12 @@ public class UfoShip : MonoBehaviour {
 		}
 	}
 	
-	private Vector3 GetVelocity() {
+	Vector3 GetVelocity() {
 		float speed = shipSpeed * shipDirection;
 		return new Vector3(speed , 0f, 0f);
 	}
 	
-	private void SetDirection() {
+	void SetDirection() {
 		if (0 < transform.position.x) {
 			shipDirection = -1;
 		} else {

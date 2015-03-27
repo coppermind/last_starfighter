@@ -4,15 +4,15 @@ using System.Collections;
 
 public class FtlSpinner : MonoBehaviour {
 
-	[SerializeField]
-	private float spinSeconds = 20f;
-	private float originalWidth = 0f;
+	public float spinSeconds = 20f;
 	
-	private RectTransform rectTrans;
+	float originalWidth = 0f;
 	
-	private Transform statusObject;
-	private Transform statusLabel;
-	private GameManager gameManager;
+	RectTransform rectTrans;
+	
+	Transform statusObject, statusLabel;
+	
+	GameManager gameManager;
 	
 	void Start () {
 		gameManager  = FindObjectOfType<GameManager>();

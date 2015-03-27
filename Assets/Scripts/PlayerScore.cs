@@ -4,9 +4,9 @@ using System.Collections;
 
 public class PlayerScore : MonoBehaviour {
 
-	private static int totalScore = 0;
+	static int totalScore = 0;
 	
-	private Text text;
+	Text text;
 	
 	void Start () {
 		text = GetComponent<Text>();

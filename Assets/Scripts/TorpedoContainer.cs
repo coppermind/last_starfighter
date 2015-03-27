@@ -4,13 +4,13 @@ using System.Collections;
 public class TorpedoContainer : MonoBehaviour {
 
 	[SerializeField]
-	private bool isAutoTarget = true;
+	bool isAutoTarget = true;
 	
 	[SerializeField]
-	private PlayerTorpedo torpedoPrefab;
+	PlayerTorpedo torpedoPrefab;
 	
 	[SerializeField]
-	private int totalTorpedoes = 10;
+	int totalTorpedoes = 10;
 
 	void Start() {
 		float targetX = -9f;
@@ -36,7 +36,7 @@ public class TorpedoContainer : MonoBehaviour {
 		}
 	}
 	
-	private EnemyShip GetUntargetedShip() {
+	EnemyShip GetUntargetedShip() {
 		EnemyShip[] enemies = FindObjectsOfType<EnemyShip>();
 		foreach (EnemyShip e in enemies) {
 			if (!e.IsTargeted) {

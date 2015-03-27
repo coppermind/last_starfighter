@@ -6,18 +6,18 @@ using System.Collections;
 public class PlayerOptions : MonoBehaviour {
 
 	[SerializeField]
-	private Slider musicSlider;
+	Slider musicSlider;
 	
 	[SerializeField]
-	private Slider effectsSlider;
+	Slider effectsSlider;
 	
 	[SerializeField]
-	private Slider difficultySlider;
+	Slider difficultySlider;
 	
-	private MusicPlayer musicPlayer;
-	private Animator animator;
+	MusicPlayer musicPlayer;
+	Animator animator;
 	
-	private GameManager gameManager;
+	GameManager gameManager;
 	
 	void Start () {
 		gameManager = FindObjectOfType<GameManager>();

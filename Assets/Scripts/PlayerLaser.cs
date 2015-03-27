@@ -3,18 +3,16 @@ using System.Collections;
 
 public class PlayerLaser : MonoBehaviour {
 
-	[SerializeField]
-	private float defaultProjectileSpeed = 10f;
-	private float currentProjectileSpeed;
+	public float defaultProjectileSpeed = 10f;
+	float currentProjectileSpeed;
 
-	[SerializeField]
-	private float damagePoints = 20f;
+	public float damagePoints = 20f;
 	
-	private float screenTopEdge;
+	float screenTopEdge;
 	
-	private Rigidbody2D rigidBody;
+	Rigidbody2D rigidBody;
 	
-	private GameManager gameManager;
+	GameManager gameManager;
 
 	void Start () {
 		gameManager = FindObjectOfType<GameManager>();

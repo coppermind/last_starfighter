@@ -4,11 +4,11 @@ using System.Collections;
 public class MainCamera : MonoBehaviour {
 
 	[SerializeField]
-	private Transform target;
+	Transform target;
 
-	private float width   = 32f;
-	private float height  = 18f;
-	private float padding = 0.5f;
+	float width   = 32f;
+	float height  = 18f;
+	float padding = 0.5f;
 
 	void OnDrawGizmos() {
 		GameGizmos.DrawBox(transform, width, height, padding);

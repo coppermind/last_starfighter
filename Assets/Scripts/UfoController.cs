@@ -3,21 +3,21 @@ using System.Collections;
 
 public class UfoController : MonoBehaviour {
 
-	[SerializeField]
-	private float leftSpawnX = -5f;
-	
-	[SerializeField]
-	private float rightSpawnX = 37f;
-	
-	[SerializeField]
-	private float maxY = 17f;
-	
-	[SerializeField]
-	private float minY = 7f;
-
 	public float spawnRate = 0.1f;
-
+	
 	public GameObject[] ufoPrefabs;
+
+	[SerializeField]
+	float leftSpawnX = -5f;
+	
+	[SerializeField]
+	float rightSpawnX = 37f;
+	
+	[SerializeField]
+	float maxY = 17f;
+	
+	[SerializeField]
+	float minY = 7f;
 	
 	void Update () {
 		if (GameMath.IsProbable(spawnRate)) {

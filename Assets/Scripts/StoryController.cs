@@ -6,14 +6,14 @@ using System.IO;
 public class StoryController : MonoBehaviour {
 
 	[SerializeField]
-	private string[] text;
+	string[] text;
 
 	[SerializeField]
-	private Text displayText;
+	Text displayText;
 
-	private int currentTextIndex;
+	int currentTextIndex;
 
-	private GameManager gameManager;
+	GameManager gameManager;
 
 	void Start () {
 		gameManager = FindObjectOfType<GameManager>();

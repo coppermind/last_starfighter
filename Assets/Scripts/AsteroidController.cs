@@ -4,14 +4,12 @@ using System.Collections;
 public class AsteroidController : MonoBehaviour {
 
 	#region Transform Members
-	[SerializeField]
-	private float spawnY;
+	public float spawnY;
+	
+	public float minX;
 	
 	[SerializeField]
-	private float minX;
-	
-	[SerializeField]
-	private float maxX;
+	float maxX;
 	#endregion
 		
 	
@@ -20,9 +18,9 @@ public class AsteroidController : MonoBehaviour {
 	GameObject[] asteroidPrefabs;
 
 	[SerializeField]
-	private float spawnRate;
+	float spawnRate;
 	
-	private GameManager gameManager;
+	GameManager gameManager;
 	#endregion
 	
 	

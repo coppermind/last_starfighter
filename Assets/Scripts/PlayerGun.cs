@@ -3,20 +3,19 @@ using System.Collections;
 
 public class PlayerGun : MonoBehaviour {
 
+	public float defaultProjectileRate = 0.2f;
+	float currentProjectileRate;
+
 	[SerializeField]
-	private GameObject laserPrefab;
+	GameObject laserPrefab;
 	
 	[SerializeField]
-	private GameObject torpedoPrefab;
+	GameObject torpedoPrefab;
 	
 	[SerializeField]
-	private int torpedoesLeft = 3;
+	int torpedoesLeft = 3;
 	
-	[SerializeField]
-	private float defaultProjectileRate = 0.2f;
-	private float currentProjectileRate;
-	
-	private GameManager gameManager;
+	GameManager gameManager;
 	
 	void Start() {
 		gameManager = FindObjectOfType<GameManager>();

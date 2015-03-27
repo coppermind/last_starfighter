@@ -4,34 +4,29 @@ using System.Collections;
 public class Asteroid : MonoBehaviour {
 	
 	#region Transform Properties
-	private float screenBottomEdge;
+	float screenBottomEdge;
 	#endregion
 	
 	
 	#region Gameplay Properties
-	[SerializeField]
-	private float damagePoints = 30f;
+	public float damagePoints = 30f;
 	
-	[SerializeField]
-	private float minGravity;
+	public float minGravity, maxGravity;
 	
-	[SerializeField]
-	private float maxGravity;
-	
-	private float gravityScale;
+	float gravityScale;
 	#endregion
 
 
 	#region Component Properties
-	private Rigidbody2D rigidBody;
+	Rigidbody2D rigidBody;
 	#endregion
 	
 	
 	#region GameObject Properties
 	[SerializeField]
-	private GameObject explosionPrefab;
+	GameObject explosionPrefab;
 	
-	private GameManager gameManager;
+	GameManager gameManager;
 	#endregion
 	
 	
@@ -89,7 +84,5 @@ public class Asteroid : MonoBehaviour {
 		get { return damagePoints; }
 		set { damagePoints = value; }
 	}
-	
-	
 	#endregion
 }

@@ -4,20 +4,17 @@ using System.Collections;
 public class PlayerTorpedo : MonoBehaviour {
 
 	#region Transform Members
-	[SerializeField]
-	private Vector3 initialVelocity;
+	public float moveSpeed = 10f;
 	
-	[SerializeField]
-	private float moveSpeed = 10f;
+	float screenTopEdge;
 	
-	private float screenTopEdge;
+	Vector3 initialVelocity;
 	#endregion
 
 	#region Gameplay Members
-	[SerializeField]
-	private float damagePoints = 20f;
+	public float damagePoints = 20f;
 
-	private bool autoTarget = false;
+	bool autoTarget = false;
 	#endregion
 	
 	#region Component Members
@@ -77,19 +74,19 @@ public class PlayerTorpedo : MonoBehaviour {
 	
 	
 	#region Private Methods
-	private void Die() {
+	void Die() {
 		Destroy(gameObject);
 		if (targetObject) {
 			targetObject.IsTargeted = false;
 		}
 	}
 	
-	private void Move() {
+	void Move() {
 		float step = moveSpeed * Time.deltaTime;
 		transform.position = Vector3.MoveTowards(transform.position, targetObject.transform.position, step);
 	}
 	
-	private bool IsEnemyDead() {
+	bool IsEnemyDead() {
 		return (!targetObject);
 	}
 	#endregion

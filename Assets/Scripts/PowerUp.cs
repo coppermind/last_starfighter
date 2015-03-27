@@ -4,12 +4,12 @@ using System.Collections;
 public class PowerUp : MonoBehaviour {
 
 	[SerializeField]
-	private GameObject objPrefab;
+	GameObject objPrefab;
 
 	[SerializeField]
-	private float gravityRate = -1f;
+	float gravityRate = -1f;
 
-	private Rigidbody2D rigidBody;
+	Rigidbody2D rigidBody;
 
 	void Start () {
 		rigidBody = GetComponent<Rigidbody2D>();

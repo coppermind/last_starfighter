@@ -4,42 +4,37 @@ using System.Collections;
 public class EnemyShip : MonoBehaviour {
 
 	#region Transform Members
-	[SerializeField]
-	private float warpInSpeed = 2f;
+	public float warpInSpeed = 2f;
 	
-	[SerializeField]
-	private float warpOutSpeed = 2f;
+	public float warpOutSpeed = 2f;
 	
-	private Vector3 warpTarget;
+	Vector3 warpTarget;
 	
-	private float screenBottomEdge;
+	float screenBottomEdge;
 	#endregion
 	
 	
 	#region Gameplay Members
-	[SerializeField]
-	private int scorePoints;
+	public float exitRate = 0.5f;
 	
-	[SerializeField]
-	private float hitPoints = 20f;
-	private float currentHitPoints;
+	public int scorePoints;
 	
-	[SerializeField]
-	private float exitRate = 0.5f;
+	public float hitPoints = 20f;
+	float currentHitPoints;
 	
-	private bool isLeaving = false;
-	private bool isSpawning = true;
-	private bool isTargeted = false;
+	bool isLeaving = false;
+	bool isSpawning = true;
+	bool isTargeted = false;
 	#endregion
 	
 	
 	#region GameObject Members
 	[SerializeField]
-	private GameObject explosionPrefab;
+	GameObject explosionPrefab;
 	
-	private PlayerScore playerScore;
+	PlayerScore playerScore;
 	
-	private GameManager gameManager;
+	GameManager gameManager;
 	#endregion
 
 

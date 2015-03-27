@@ -4,20 +4,18 @@ using System.Collections;
 public class PlayerShield : MonoBehaviour {
 
 	#region Gameplay Members
-	[SerializeField]
-	private Sprite[] shieldLevels;
+	public float totalHitPoints;
+	float currentHitPoints;
+	
+	public float regenerationRate;
 	
 	[SerializeField]
-	private float totalHitPoints;
-	private float currentHitPoints;
-	
-	[SerializeField]
-	private float regenerationRate;
+	Sprite[] shieldLevels;
 	#endregion
 	
 	
 	#region Component Members
-	private SpriteRenderer spriteRenderer;
+	SpriteRenderer spriteRenderer;
 	#endregion
 
 	

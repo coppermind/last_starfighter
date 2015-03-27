@@ -4,9 +4,9 @@ using System.Collections;
 
 public class TorpedoInterface : MonoBehaviour {
 
-	private Text torpedoesText;
+	Text torpedoesText;
 	
-	private PlayerGun playerGun;
+	PlayerGun playerGun;
 	
 	void Start () {
 		playerGun = FindObjectOfType<PlayerGun>();
