@@ -38,6 +38,8 @@ public class Asteroid : MonoBehaviour {
 		
 		screenBottomEdge = (float) GameCamera.GetBoundaries(Camera.main, transform)["minY"];
 
+		GameObjects.SetParent(transform, "Asteroid Container");
+		
 		SetRandomGravity();
 	}
 	

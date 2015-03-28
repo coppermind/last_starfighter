@@ -24,6 +24,8 @@ public class EnemyLaser : MonoBehaviour {
 		currentProjectileSpeed = defaultProjectileSpeed;
 		
 		rigidBody.velocity = new Vector3(0f, currentProjectileSpeed, 0f);
+		
+		GameObjects.SetParent(transform, "Enemy Laser Container");
 	}
 	
 	void Update () {

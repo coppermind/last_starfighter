@@ -39,6 +39,8 @@ public class PlayerTorpedo : MonoBehaviour {
 				Destroy(gameObject);
 			}
 		}
+		
+		GameObjects.SetParent(transform, "Player Torpedo Container");
 	}
 	
 	void Update () {
@@ -89,6 +91,7 @@ public class PlayerTorpedo : MonoBehaviour {
 	bool IsEnemyDead() {
 		return (!targetObject);
 	}
+
 	#endregion
 	
 	public bool IsAutoTarget {

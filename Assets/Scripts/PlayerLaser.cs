@@ -3,11 +3,11 @@ using System.Collections;
 
 public class PlayerLaser : MonoBehaviour {
 
+	public float damagePoints = 20f;
+	
 	public float defaultProjectileSpeed = 10f;
 	float currentProjectileSpeed;
 
-	public float damagePoints = 20f;
-	
 	float screenTopEdge;
 	
 	Rigidbody2D rigidBody;
@@ -24,6 +24,8 @@ public class PlayerLaser : MonoBehaviour {
 		currentProjectileSpeed = defaultProjectileSpeed;
 		
 		rigidBody.velocity = new Vector3(0f, currentProjectileSpeed, 0f);
+		
+		GameObjects.SetParent(transform, "Player Laser Container");
 	}
 	
 	void Update () {

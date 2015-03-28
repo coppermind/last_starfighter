@@ -27,6 +27,8 @@ public class UfoShip : MonoBehaviour {
 		
 		rigidBody = GetComponent<Rigidbody2D>();
 		
+		GameObjects.SetParent(transform, "UFO Container");
+		
 		SetDirection();
 	}
 	
