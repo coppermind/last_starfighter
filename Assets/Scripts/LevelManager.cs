@@ -5,9 +5,6 @@ public class LevelManager : MonoBehaviour {
 
 	public int autoloadNextLevelInSeconds;
 	
-	[SerializeField]
-	float levelTransition;
-
 	void Start() {
 		if (0 < autoloadNextLevelInSeconds) {
 			Invoke("LoadNextLevel", autoloadNextLevelInSeconds);

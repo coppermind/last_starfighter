@@ -14,11 +14,9 @@ public class AsteroidController : MonoBehaviour {
 		
 	
 	#region Gameplay Members
-	[SerializeField]
-	GameObject[] asteroidPrefabs;
+	public GameObject[] asteroidPrefabs;
 
-	[SerializeField]
-	float spawnRate;
+	public float spawnRate;
 	
 	GameManager gameManager;
 	#endregion

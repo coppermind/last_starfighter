@@ -15,6 +15,12 @@ public class PlayerGun : MonoBehaviour {
 	[SerializeField]
 	int torpedoesLeft = 3;
 	
+	[SerializeField]
+	AudioClip laserSoundFx;
+	
+	[SerializeField]
+	AudioClip torpedoSoundFx;
+	
 	GameManager gameManager;
 	
 	void Start() {
@@ -36,7 +42,7 @@ public class PlayerGun : MonoBehaviour {
 			if (Input.GetMouseButtonUp(0) || Input.GetKeyUp(KeyCode.Space)) {
 				StopFiringPrimaryWeapon();
 			}
-			if (Input.GetMouseButtonDown(1)) {
+			if (Input.GetMouseButtonDown(1) || Input.GetKeyDown(KeyCode.Return)) {
 				FireSecondaryWeapon();
 			}
 		}

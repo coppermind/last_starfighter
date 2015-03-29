@@ -6,28 +6,21 @@ public class PlayerShip : MonoBehaviour {
 	#region Transform Members
 	public float shipSpeed = 8f;
 	
-	[SerializeField]
-	float maxY = 4f;
+	public float minY = 2f;
 	
-	[SerializeField]
-	float minY = 2f;
+	public float maxY = 4f;
 	
-	[SerializeField]
-	float spawnTargetX = 16f;
+	public float spawnTargetX = 16f;
 	
-	[SerializeField]
-	float spawnTargetY = 1f;
+	public float spawnTargetY = 1f;
 	
-	[SerializeField]
-	float spawnWarpSpeed = 2.5f;
+	public float spawnWarpSpeed = 2.5f;
 	
-	[SerializeField]
-	float exitWarpSpeed = 5f;
+	public float exitWarpSpeed = 5f;
 	
-	[SerializeField]
-	float exitTargetY = 21f;
+	public float exitTargetY = 21f;
 	
-	float shipPadding = 0.5f;
+	public float shipPadding = 0.5f;
 	
 	Vector3 spawnInTarget, exitTarget;
 	
@@ -36,9 +29,6 @@ public class PlayerShip : MonoBehaviour {
 	
 	
 	#region Gameplay Members
-	[SerializeField]
-	AudioClip defaultEffects;
-	
 	[SerializeField]
 	float hitPoints = 100f;
 	float currentHitPoints;

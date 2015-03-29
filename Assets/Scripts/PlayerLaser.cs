@@ -1,11 +1,13 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class PlayerLaser : MonoBehaviour {
 
-	public float damagePoints = 20f;
+	[SerializeField]
+	float damagePoints = 20f;
 	
-	public float defaultProjectileSpeed = 10f;
+	[SerializeField]
+	float defaultProjectileSpeed = 10f;
 	float currentProjectileSpeed;
 
 	float screenTopEdge;

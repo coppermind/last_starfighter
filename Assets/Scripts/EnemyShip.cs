@@ -4,9 +4,11 @@ using System.Collections;
 public class EnemyShip : MonoBehaviour {
 
 	#region Transform Members
-	public float warpInSpeed = 2f;
+	[SerializeField]
+	float warpInSpeed = 2f;
 	
-	public float warpOutSpeed = 2f;
+	[SerializeField]
+	float warpOutSpeed = 2f;
 	
 	Vector3 warpTarget;
 	
@@ -15,11 +17,14 @@ public class EnemyShip : MonoBehaviour {
 	
 	
 	#region Gameplay Members
-	public float exitRate = 0.5f;
+	[SerializeField]
+	float exitRate = 0.5f;
 	
-	public int scorePoints;
+	[SerializeField]
+	int scorePoints;
 	
-	public float hitPoints = 20f;
+	[SerializeField]
+	float hitPoints = 20f;
 	float currentHitPoints;
 	
 	bool isLeaving = false;

@@ -6,18 +6,13 @@ public class UfoController : MonoBehaviour {
 	public float spawnRate = 0.1f;
 	
 	public GameObject[] ufoPrefabs;
+	
+	public float maxY = 17f;
+	
+	public float minY = 7f;
 
-	[SerializeField]
 	float leftSpawnX = -5f;
-	
-	[SerializeField]
 	float rightSpawnX = 37f;
-	
-	[SerializeField]
-	float maxY = 17f;
-	
-	[SerializeField]
-	float minY = 7f;
 	
 	void Update () {
 		if (GameMath.IsProbable(spawnRate)) {

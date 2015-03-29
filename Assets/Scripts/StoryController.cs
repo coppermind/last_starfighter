@@ -5,8 +5,7 @@ using System.IO;
 
 public class StoryController : MonoBehaviour {
 
-	[SerializeField]
-	string[] text;
+	public string[] text;
 
 	[SerializeField]
 	Text displayText;
@@ -29,15 +28,15 @@ public class StoryController : MonoBehaviour {
 //		string filename = "Assets/Story/02 Level 01/00.txt";
 //		if (File.Exists(filename)) {
 //			Debug.Log("File - " + filename + " exists!");
-//			byte[] contents = File.ReadAllBytes(filename);
-//			string c = contents.ToString();
-//			Debug.Log(c);
+//			string contents = File.ReadAllText(filename);
+//			displayText.text = contents;
+//			Debug.Log(contents);
 //		} else {
 //			Debug.Log("File - " + filename + " missing!");
 //		}
 	}
 	
-	public void Continue() {
+	public void Next() {
 		if (currentTextIndex >= text.Length-1) {
 			CloseStoryPanel();
 		}

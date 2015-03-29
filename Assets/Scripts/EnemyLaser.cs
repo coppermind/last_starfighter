@@ -3,9 +3,11 @@ using System.Collections;
 
 public class EnemyLaser : MonoBehaviour {
 
-	public float damagePoints = 20f;
+	[SerializeField]
+	private float damagePoints = 20f;
 
-	public float defaultProjectileSpeed = -10f;
+	[SerializeField]
+	private float defaultProjectileSpeed = -10f;
 	float currentProjectileSpeed;
 
 	float screenBottomEdge;

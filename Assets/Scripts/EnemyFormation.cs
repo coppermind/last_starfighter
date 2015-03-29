@@ -6,17 +6,13 @@ public class EnemyFormation : MonoBehaviour {
 	#region Transform Members
 	public float speed = 1.5f;
 	
-	[SerializeField]
-	float spawnY;
+	public float width = 15f;
 	
-	[SerializeField]
-	float width = 15f;
+	public float height = 10f;
 	
-	[SerializeField]
-	float height = 10f;
+	public float padding = 0.5f;
 	
-	[SerializeField]
-	float padding = 0.5f;
+	public float spawnY;
 	
 	int direction = 1;
 	
