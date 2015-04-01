@@ -46,11 +46,13 @@ public class PlayerLaser : MonoBehaviour {
 	
 	void OnTriggerEnter2D(Collider2D collider) {
 		EnemyShip enemy = collider.gameObject.GetComponent<EnemyShip>();
+		BomberShip bomber = collider.gameObject.GetComponent<BomberShip>();
 		Asteroid asteroid = collider.gameObject.GetComponent<Asteroid>();
 		
-		if (enemy) {
+		if (enemy || bomber) {
 			Destroy(gameObject);
-			enemy.HitWith(damagePoints);
+			if (enemy)  { enemy.HitWith(damagePoints); }
+			if (bomber) { bomber.HitWith(damagePoints); }
 		} 
 		
 		if (asteroid) {

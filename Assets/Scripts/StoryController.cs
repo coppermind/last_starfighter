@@ -2,19 +2,30 @@
 using UnityEngine.UI;
 using System.Collections;
 using System.IO;
+using System.Net;
 
 public class StoryController : MonoBehaviour {
+
+//	public DialogueObject dialogue;
 
 	public string[] text;
 
 	[SerializeField]
 	Text displayText;
-
+	
 	int currentTextIndex;
+	
+	string content;
 
 	GameManager gameManager;
+	
+	void Awake () {
+		WWW www = new WWW("http://coppermind.io/");
+		StartCoroutine( LoadWeb(www) );
+	}
 
 	void Start () {
+		Debug.Log("Story Controller Start()!!!!!!!!!!");
 		gameManager = FindObjectOfType<GameManager>();
 		gameManager.PauseGame();
 		
@@ -34,6 +45,16 @@ public class StoryController : MonoBehaviour {
 //		} else {
 //			Debug.Log("File - " + filename + " missing!");
 //		}
+	}
+	
+	IEnumerator LoadWeb(WWW www) {
+		yield return www;
+		
+		if (www.error == null) {
+			displayText.text = www.text;
+		} else {
+			Debug.Log("WWW Error: " + www.error);
+		}
 	}
 	
 	public void Next() {

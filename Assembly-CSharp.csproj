@@ -49,6 +49,9 @@
      <Compile Include="Assets\Scripts\Asteroid.cs" />
      <Compile Include="Assets\Scripts\AsteroidController.cs" />
      <Compile Include="Assets\Scripts\BackgroundFight.cs" />
+     <Compile Include="Assets\Scripts\BomberController.cs" />
+     <Compile Include="Assets\Scripts\BomberGun.cs" />
+     <Compile Include="Assets\Scripts\BomberShip.cs" />
      <Compile Include="Assets\Scripts\DistantFight.cs" />
      <Compile Include="Assets\Scripts\EnemyFormation.cs" />
      <Compile Include="Assets\Scripts\EnemyGun.cs" />
@@ -80,6 +83,7 @@
      <Compile Include="Assets\Scripts\Utilities\GameGizmos.cs" />
      <Compile Include="Assets\Scripts\Utilities\GameMath.cs" />
      <Compile Include="Assets\Scripts\Utilities\GameObjects.cs" />
+     <Compile Include="Assets\Story\DialogueBase.cs" />
      <None Include="Assets\Story\02 Level 01\00.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>/Applications/Unity 5/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
