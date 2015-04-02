@@ -68,7 +68,6 @@ public class EnemyShip : MonoBehaviour {
 				isSpawning = false;
 			}
 		} else {
-			
 			if (GameMath.IsProbable(exitRate)) {
 				isLeaving = true;
 			}

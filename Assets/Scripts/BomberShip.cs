@@ -22,6 +22,10 @@ public class BomberShip : MonoBehaviour {
 	float shipDirection = -1;
 	
 	[SerializeField]
+	float projectileRate = 1f;
+	bool isShooting = false;
+	
+	[SerializeField]
 	GameObject explosionPrefab;
 	
 	Rigidbody2D rigidBody;
