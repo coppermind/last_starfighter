@@ -24,10 +24,13 @@ public class PlayerTorpedo : MonoBehaviour {
 	#region GameObject Members
 	public EnemyShip targetObject;
 	#endregion
+	
+	GameManager gameManager;
 
 		
 	#region Unity Methods
 	void Start () {
+		gameManager = FindObjectOfType<GameManager>();
 		rigidBody = GetComponent<Rigidbody2D>();
 		
 		screenTopEdge  = (float) GameCamera.GetBoundaries(Camera.main, transform)["maxY"];
@@ -44,8 +47,13 @@ public class PlayerTorpedo : MonoBehaviour {
 	}
 	
 	void Update () {
+		if (gameManager.GameIsPaused) {
+			rigidBody.velocity = new Vector3(0f, 0f, 0f);
+			return;
+		}
+		
 		if (autoTarget) {
-			if (!IsEnemyDead()) {
+			if (!IsEnemyDead() ) {
 				Move();
 			} else {
 				Die();

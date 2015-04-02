@@ -59,6 +59,7 @@
      <Compile Include="Assets\Scripts\EnemyPosition.cs" />
      <Compile Include="Assets\Scripts\EnemyShip.cs" />
      <Compile Include="Assets\Scripts\EnemySpawnPoint.cs" />
+     <Compile Include="Assets\Scripts\EnemyTorpedo.cs" />
      <Compile Include="Assets\Scripts\FtlSpinner.cs" />
      <Compile Include="Assets\Scripts\GameManager.cs" />
      <Compile Include="Assets\Scripts\LevelManager.cs" />

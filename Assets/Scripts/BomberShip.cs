@@ -10,8 +10,6 @@ public class BomberShip : MonoBehaviour {
 	float hitPoints = 20f;
 	float currentHitPoints;
 	
-	public int barrageProjectileCount = 3;
-	
 	public float minX = -5f;
 	
 	public float maxX = 37f;
@@ -20,10 +18,6 @@ public class BomberShip : MonoBehaviour {
 	float shipSpeed = 4f;
 	
 	float shipDirection = -1;
-	
-	[SerializeField]
-	float projectileRate = 1f;
-	bool isShooting = false;
 	
 	[SerializeField]
 	GameObject explosionPrefab;

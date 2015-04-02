@@ -31,7 +31,7 @@ public class EnemyGun : MonoBehaviour {
 		
 		if (!gameManager.PlayerIsSpawning) {
 			if (GameMath.IsProbable(currentProjectileRate)) {
-				FirePrimaryWeapon();
+				FireWeapon();
 			}
 		}
 	}
@@ -39,23 +39,8 @@ public class EnemyGun : MonoBehaviour {
 	
 	
 	#region Private Methods
-	void FirePrimaryWeapon() {
+	void FireWeapon() {
 		Instantiate(weaponPrefab, transform.position, Quaternion.identity);
 	}
-	
-	void FireSecondaryWeapon() {
-		
-	}
 	#endregion
-	
-	
-	#region Public Methods
-	public void StartFiringPrimaryWeapon() {
-		InvokeRepeating("FirePrimaryWeapon", 0.0001f, currentProjectileRate);
-	}
-	
-	public void StopFiringPrimaryWeapon() {
-		CancelInvoke("FirePrimaryWeapon");
-	}
-	#endregion	
 }

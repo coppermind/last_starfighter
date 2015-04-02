@@ -103,15 +103,17 @@ public class PlayerShip : MonoBehaviour {
 	}
 	
 	void OnTriggerEnter2D(Collider2D collider) {
-		EnemyLaser enemyLaser = collider.GetComponent<EnemyLaser>();
-		Asteroid asteroid = collider.GetComponent<Asteroid>();
-		PowerUp powerUp = collider.GetComponent<PowerUp>();
+		EnemyLaser enemyLaser     = collider.GetComponent<EnemyLaser>();
+		EnemyTorpedo enemyTorpedo = collider.GetComponent<EnemyTorpedo>();
+		Asteroid asteroid         = collider.GetComponent<Asteroid>();
+		PowerUp powerUp           = collider.GetComponent<PowerUp>();
 		
-		if (enemyLaser) {
+		if (enemyLaser || enemyTorpedo) {
+			float damage = (enemyLaser) ? enemyLaser.DamagePoints : enemyTorpedo.DamagePoints;
 			if (!shield.shieldIsDown()) {
-				shield.HitWith(enemyLaser.DamagePoints);
+				shield.HitWith(damage);
 			} else {
-				HitWith(enemyLaser.DamagePoints);
+				HitWith(damage);
 			}
 		}
 		
