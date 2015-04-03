@@ -10,6 +10,7 @@ public class BomberGun : MonoBehaviour {
 	int currentBarrageCount = 0;
 	
 	public float firingRate = 4f;
+	
 	public float defaultProjectileRate = 0.2f;
 	float currentProjectileRate;
 	

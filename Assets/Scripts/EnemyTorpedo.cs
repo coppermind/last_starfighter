@@ -7,7 +7,7 @@ public class EnemyTorpedo : MonoBehaviour {
 	private float damagePoints = 20f;
 	
 	[SerializeField]
-	private float defaultProjectileSpeed = 6f;
+	private float defaultProjectileSpeed = 10f;
 	float currentProjectileSpeed;
 	
 	float screenBottomEdge;
@@ -42,8 +42,8 @@ public class EnemyTorpedo : MonoBehaviour {
 		if (laserBottomEdge <= screenBottomEdge) {
 			Destroy(gameObject);
 		}
-
-		rigidBody.velocity = currentTarget;
+		
+		Move();
 	}
 	
 	void OnTriggerEnter2D(Collider2D collider) {
@@ -56,10 +56,17 @@ public class EnemyTorpedo : MonoBehaviour {
 	
 	void Move() {
 		float step = currentProjectileSpeed * Time.deltaTime;
-		transform.position = Vector3.MoveTowards(transform.position, currentTarget, step);
+		Vector3 newPosition = Vector3.MoveTowards(transform.position, currentTarget, step);
+		transform.position = newPosition;
 	}
 	
 	Vector3 GetPlayerPosition() {
+		PlayerShip player = FindObjectOfType<PlayerShip>() as PlayerShip;
+		return player.transform.position;
+	}
+	
+	// UNUSED: Only kept for posterity
+	Vector3 GetProjectileVelocity() {
 		PlayerShip player = FindObjectOfType<PlayerShip>() as PlayerShip;
 		float x, y;
 		x = player.transform.position.x - transform.position.x;

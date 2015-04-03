@@ -37,6 +37,8 @@ public class EnemyShip : MonoBehaviour {
 	[SerializeField]
 	GameObject explosionPrefab;
 	
+	Animator animator;
+	
 	PlayerScore playerScore;
 	
 	GameManager gameManager;
@@ -47,6 +49,8 @@ public class EnemyShip : MonoBehaviour {
 	void Start() {
 		gameManager    = FindObjectOfType<GameManager>();
 		playerScore    = FindObjectOfType<PlayerScore>();
+		
+		animator = GetComponent<Animator>();
 		
 		isSpawning = true;
 		currentHitPoints = hitPoints;
@@ -121,6 +125,14 @@ public class EnemyShip : MonoBehaviour {
 	}
 	
 	public void HitWith(float damage) {
+		Debug.Log("HitWith: " + damage);
+		if (animator) { animator.SetTrigger("Hit trigger"); }
+//		GameObject body = transform.FindChild("Body").gameObject as GameObject;
+//		SpriteRenderer bodySprite = body.GetComponent<SpriteRenderer>();
+//		bodySprite.color = new Color(0, 0, 0, 0);
+//		Debug.Log("body: " + body);
+//		Debug.Log("sprite: " + bodySprite);
+		
 		currentHitPoints -= damage;
 		
 		if (0f >= currentHitPoints) {

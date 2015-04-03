@@ -53,7 +53,7 @@ public class PlayerLaser : MonoBehaviour {
 			Destroy(gameObject);
 			if (enemy)  { enemy.HitWith(damagePoints); }
 			if (bomber) { bomber.HitWith(damagePoints); }
-		} 
+		}
 		
 		if (asteroid) {
 			Destroy(gameObject);
