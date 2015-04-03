@@ -27,6 +27,7 @@ public class TorpedoContainer : MonoBehaviour {
 				t.SetVelocity(velocity);
 				targetX += 2f;
 			}
+			
 		}
 	}
 

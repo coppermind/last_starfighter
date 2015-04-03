@@ -52,6 +52,7 @@
      <Compile Include="Assets\Scripts\BomberController.cs" />
      <Compile Include="Assets\Scripts\BomberGun.cs" />
      <Compile Include="Assets\Scripts\BomberShip.cs" />
+     <Compile Include="Assets\Scripts\DifficultyModifier.cs" />
      <Compile Include="Assets\Scripts\DistantFight.cs" />
      <Compile Include="Assets\Scripts\EnemyFormation.cs" />
      <Compile Include="Assets\Scripts\EnemyGun.cs" />
