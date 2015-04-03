@@ -24,11 +24,13 @@ public class DifficultyModifier : MonoBehaviour {
 	
 	
 	#region Enemy modifiers
+	static float[] enemySpawnRate                 = {   0.90f,   1.00f,   1.10f  };
 	static float[] enemyHitPoints                 = {   0.90f,   1.00f,   1.10f  };
 	static float[] enemyExitRate                  = {   1.10f,   1.00f,   0.90f  };
 	static float[] enemyLaserDamage               = {   0.90f,   1.00f,   1.10f  };
 	static float[] enemyLaserRate                 = {   0.90f,   1.00f,   1.10f  };
 	static float[] enemyLaserSpeed                = {   0.90f,   1.00f,   1.10f  };
+	static float[] bomberSpawnRate                = {   0.90f,   1.00f,   1.10f  };
 	static float[] bomberHitPoints                = {   0.85f,   1.00f,   1.10f  };
 	static float[] bomberSpeed                    = {   0.90f,   1.00f,   1.10f  };
 	static float[] bomberTorpedoDamage            = {   0.90f,   1.00f,   1.10f  };
@@ -65,11 +67,13 @@ public class DifficultyModifier : MonoBehaviour {
 			case "FtlTimer":                           val = ftlTimer[i]; break;
 			
 			// Enemy modifiers
+			case "EnemySpawnRate":                     val = enemySpawnRate[i]; break;
 			case "EnemyHitPoints":                     val = enemyHitPoints[i]; break;
 			case "EnemyExitRate":                      val = enemyExitRate[i]; break;
 			case "EnemyLaserDamage":                   val = enemyLaserDamage[i]; break;
 			case "EnemyLaserRate":                     val = enemyLaserRate[i]; break;
 			case "EnemyLaserSpeed":                    val = enemyLaserSpeed[i]; break;
+			case "BomberSpawnRate":                    val = bomberSpawnRate[i]; break;
 			case "BomberHitPoints":                    val = bomberHitPoints[i]; break;
 			case "BomberSpeed":                        val = bomberSpeed[i]; break;
 			case "BomberTorpedoDamage":                val = bomberTorpedoDamage[i]; break;
