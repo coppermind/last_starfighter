@@ -86,6 +86,7 @@
      <Compile Include="Assets\Scripts\Utilities\GameMath.cs" />
      <Compile Include="Assets\Scripts\Utilities\GameObjects.cs" />
      <Compile Include="Assets\Story\DialogueBase.cs" />
+     <Compile Include="Assets\Story\PlayerLivesInterface.cs" />
      <None Include="Assets\Story\02 Level 01\00.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>/Applications/Unity 5/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>

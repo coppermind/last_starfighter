@@ -59,7 +59,6 @@ public class GameManager : MonoBehaviour {
 		} else {
 			SpawnNewPlayerShip();
 			currentLivesCount--;
-			Debug.Log("current lives count: " + currentLivesCount);
 		}
 	}
 	
