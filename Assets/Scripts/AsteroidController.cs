@@ -29,7 +29,7 @@ public class AsteroidController : MonoBehaviour {
 	
 	void Update() {
 		if (!gameManager.PlayerIsSpawning && !gameManager.PlayerHasWon && !gameManager.GameIsPaused) {
-			if (GameMath.IsProbable(spawnRate)) {
+			if (GameMath.IsProbable(CurrentSpawnRate())) {
 				Vector3 position = GetRandomPosition();
 				GameObject asteroid = Instantiate(GetRandomAsteroid(), position, Quaternion.identity) as GameObject;
 				asteroid.transform.parent = transform;
@@ -43,6 +43,10 @@ public class AsteroidController : MonoBehaviour {
 	GameObject GetRandomAsteroid() {
 		int i = Random.Range(0, asteroidPrefabs.Length);
 		return asteroidPrefabs[i];
+	}
+	
+	float CurrentSpawnRate() {
+		return spawnRate * DifficultyModifier.ForAsteroidSpawnRate();
 	}
 	
 	Vector3 GetRandomPosition() {

@@ -15,7 +15,7 @@ public class UfoController : MonoBehaviour {
 	float rightSpawnX = 37f;
 	
 	void Update () {
-		if (GameMath.IsProbable(spawnRate)) {
+		if (GameMath.IsProbable(CurrentSpawnRate())) {
 			SpawnUfo();
 		}
 	}
@@ -24,6 +24,10 @@ public class UfoController : MonoBehaviour {
 		int index = Random.Range(0, ufoPrefabs.Length-1);
 		Vector3 position = GetRandomPosition();
 		Instantiate(ufoPrefabs[index], position, Quaternion.identity);
+	}
+	
+	float CurrentSpawnRate() {
+		return spawnRate * DifficultyModifier.ForUfoSpawnRate();
 	}
 	
 	Vector3 GetRandomPosition() {

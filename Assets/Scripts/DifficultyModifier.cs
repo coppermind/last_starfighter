@@ -3,14 +3,11 @@ using System.Collections;
 
 public class DifficultyModifier : MonoBehaviour {
 
-	/**
-	 * Difficulty modifiers are stored in static arrays
-	 * with 3 elements
-	 * 0 = easy
-	 * 1 = normal
-	 * 2 = hard
-	 */
-	 
+	/*
+	Difficulty modifiers are stored in static arrays with 3 elements
+	0 = easy, 1 = normal, 2 = hard
+	*/
+	
 	#region Player modifiers
 	static float[] playerShield                   = {   1.20f,   1.00f,   0.90f  };
 	static float[] playerLaserDamage              = {   1.20f,   1.00f,   0.90f  };
@@ -47,49 +44,104 @@ public class DifficultyModifier : MonoBehaviour {
 	#endregion
 
 
-	public static int DifficultyIndex() {
+	public static int Index() {
 		return PlayerPrefsManager.GetDifficulty() - 1;
 	}
 
 	
-	public static float For(string element) {
-		int i = DifficultyIndex();
-		float val;
-		switch (element) {
-			// Player modifiers
-			case "PlayerShield":                       val = playerShield[i]; break;
-			case "PlayerLaserDamage":                  val = playerLaserDamage[i]; break;
-			case "PlayerLaserSpeed":                   val = playerLaserSpeed[i]; break;
-			case "PlayerTorpedoDamage":                val = playerTorpedoDamage[i]; break;
-			case "PlayerTorpedoSpeed":                 val = playerTorpedoSpeed[i]; break;
-			case "PlayerHitPoints":                    val = playerHitPoints[i]; break;
-			case "PlayerSpeed":                        val = playerSpeed[i]; break;
-			case "FtlTimer":                           val = ftlTimer[i]; break;
-			
-			// Enemy modifiers
-			case "EnemySpawnRate":                     val = enemySpawnRate[i]; break;
-			case "EnemyHitPoints":                     val = enemyHitPoints[i]; break;
-			case "EnemyExitRate":                      val = enemyExitRate[i]; break;
-			case "EnemyLaserDamage":                   val = enemyLaserDamage[i]; break;
-			case "EnemyLaserRate":                     val = enemyLaserRate[i]; break;
-			case "EnemyLaserSpeed":                    val = enemyLaserSpeed[i]; break;
-			case "BomberSpawnRate":                    val = bomberSpawnRate[i]; break;
-			case "BomberHitPoints":                    val = bomberHitPoints[i]; break;
-			case "BomberSpeed":                        val = bomberSpeed[i]; break;
-			case "BomberTorpedoDamage":                val = bomberTorpedoDamage[i]; break;
-			case "BomberTorpedoRate":                  val = bomberTorpedoRate[i]; break;
-			case "BomberTorpedoSpeed":                 val = bomberTorpedoSpeed[i]; break;
-			case "BomberTorpedoBarrage":               val = bomberTorpedoBarrage[i]; break;
-			case "BomberTorpedoBarrageRate":           val = bomberTorpedoBarrageRate[i]; break;
-			
-			// Environment modifiers
-			case "AsteroidSpawnRate":                  val = asteroidSpawnRate[i]; break;
-			case "UfoSpawnRate":                       val = ufoSpawnRate[i]; break;
-			
-			default:
-				val = 0; break;
-		}
-		return val;
+	public static float ForPlayerShield() {
+		return playerShield[Index()];
 	}
 	
+	public static float ForPlayerLaserDamage() {
+		return playerLaserDamage[Index()];
+	}
+	
+	public static float ForPlayerLaserSpeed() {
+		return playerLaserSpeed[Index()];
+	}
+	
+	public static float ForPlayerTorpedoDamage() {
+		return playerTorpedoDamage[Index()];
+	}
+	
+	public static float ForPlayerTorpedoSpeed() {
+		return playerTorpedoSpeed[Index()];
+	}
+	
+	public static float ForPlayerHitPoints() {
+		return playerHitPoints[Index()];
+	}
+	
+	public static float ForPlayerSpeed() {
+		return playerSpeed[Index()];
+	}
+	
+	public static float ForFtlTimer() {
+		return ftlTimer[Index()];
+	}
+	
+	public static float ForEnemySpawnRate() {
+		return enemySpawnRate[Index()];
+	}
+	
+	public static float ForEnemyHitPoints() {
+		return enemyHitPoints[Index()];
+	}
+	
+	public static float ForEnemyExitRate() {
+		return enemyExitRate[Index()];
+	}
+	
+	public static float ForEnemyLaserDamage() {
+		return enemyLaserDamage[Index()];
+	}
+	
+	public static float ForEnemyLaserRate() {
+		return enemyLaserRate[Index()];
+	}
+	
+	public static float ForEnemyLaserSpeed() {
+		return enemyLaserSpeed[Index()];
+	}
+	
+	public static float ForBomberSpawnRate() {
+		return bomberSpawnRate[Index()];
+	}
+	
+	public static float ForBomberHitPoints() {
+		return bomberHitPoints[Index()];
+	}
+	
+	public static float ForBomberSpeed() {
+		return bomberSpeed[Index()];
+	}
+	
+	public static float ForBomberTorpedoDamage() {
+		return bomberTorpedoDamage[Index()];
+	}
+	
+	public static float ForBomberTorpedoRate() {
+		return bomberTorpedoRate[Index()];
+	}
+	
+	public static float ForBomberTorpedoSpeed() {
+		return bomberTorpedoSpeed[Index()];
+	}
+	
+	public static float ForBomberTorpedoBarrage() {
+		return bomberTorpedoBarrage[Index()];
+	}
+	
+	public static float ForBomberTorpedoBarrageRate() {
+		return bomberTorpedoBarrageRate[Index()];
+	}
+	
+	public static float ForAsteroidSpawnRate() {
+		return asteroidSpawnRate[Index()];
+	}
+	
+	public static float ForUfoSpawnRate() {
+		return ufoSpawnRate[Index()];
+	}	
 }
