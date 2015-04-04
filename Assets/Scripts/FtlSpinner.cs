@@ -5,6 +5,7 @@ using System.Collections;
 public class FtlSpinner : MonoBehaviour {
 
 	public float spinSeconds = 20f;
+	float currentSpinSeconds;
 	
 	float originalWidth = 0f;
 	
@@ -22,6 +23,8 @@ public class FtlSpinner : MonoBehaviour {
 		
 		rectTrans = statusObject.GetComponent<RectTransform>();
 		originalWidth = rectTrans.sizeDelta.x;
+		
+		currentSpinSeconds = spinSeconds * DifficultyModifier.ForFtlTimer();
 	}
 	
 	void Update () {
@@ -29,7 +32,7 @@ public class FtlSpinner : MonoBehaviour {
 			float currentWidth = rectTrans.sizeDelta.x;
 			
 			if (currentWidth < 0) {
-				float step = originalWidth / spinSeconds * Time.deltaTime;
+				float step = originalWidth / currentSpinSeconds * Time.deltaTime;
 				
 				currentWidth -= step;
 				rectTrans.sizeDelta = new Vector2(currentWidth, 0);

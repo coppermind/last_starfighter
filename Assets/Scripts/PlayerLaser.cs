@@ -25,7 +25,7 @@ public class PlayerLaser : MonoBehaviour {
 		
 		currentProjectileSpeed = defaultProjectileSpeed;
 		
-		rigidBody.velocity = new Vector3(0f, currentProjectileSpeed, 0f);
+		rigidBody.velocity = new Vector3(0f, CurrentProjectileSpeed(), 0f);
 		
 		GameObjects.SetParent(transform, "Player Laser Container");
 	}
@@ -41,7 +41,7 @@ public class PlayerLaser : MonoBehaviour {
 			Destroy(gameObject);
 		}
 		
-		rigidBody.velocity = new Vector3(0f, currentProjectileSpeed, 0f);
+		rigidBody.velocity = new Vector3(0f, CurrentProjectileSpeed(), 0f);
 	}
 	
 	void OnTriggerEnter2D(Collider2D collider) {
@@ -61,8 +61,12 @@ public class PlayerLaser : MonoBehaviour {
 		}
 	}
 	
+	float CurrentProjectileSpeed() {
+		return currentProjectileSpeed * DifficultyModifier.ForEnemyLaserSpeed();
+	}
+	
 	public float DamagePoints {
-		get { return damagePoints; }
+		get { return damagePoints * DifficultyModifier.ForPlayerLaserDamage(); }
 		set { damagePoints = value; }
 	}
 }

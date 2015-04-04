@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class PlayerShip : MonoBehaviour {
@@ -71,7 +71,7 @@ public class PlayerShip : MonoBehaviour {
 		gameManager.PlayerIsSpawning = true;
 		spawnInTarget = new Vector3(spawnTargetX, spawnTargetY, transform.position.z);
 		
-		currentHitPoints = hitPoints;
+		currentHitPoints = hitPoints * DifficultyModifier.ForPlayerHitPoints();
 		CalculateCameraDistance();
 	}
 
@@ -104,7 +104,7 @@ public class PlayerShip : MonoBehaviour {
 	
 	void OnTriggerEnter2D(Collider2D collider) {
 		EnemyLaser enemyLaser     = collider.GetComponent<EnemyLaser>();
-		EnemyTorpedo enemyTorpedo = collider.GetComponent<EnemyTorpedo>();
+		BomberTorpedo enemyTorpedo = collider.GetComponent<BomberTorpedo>();
 		Asteroid asteroid         = collider.GetComponent<Asteroid>();
 		PowerUp powerUp           = collider.GetComponent<PowerUp>();
 		
@@ -172,18 +172,18 @@ public class PlayerShip : MonoBehaviour {
 		float newXPosition = shipPosition.x;
 		float newYPosition = shipPosition.y;
 		if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)) {
-			newXPosition = transform.position.x - shipSpeed * Time.deltaTime;
+			newXPosition = transform.position.x - CurrentSpeed() * Time.deltaTime;
 		}
 		else
 			if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) {
-				newXPosition = transform.position.x + shipSpeed * Time.deltaTime;
+				newXPosition = transform.position.x + CurrentSpeed() * Time.deltaTime;
 			}
 		if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)) {
-			newYPosition = transform.position.y + shipSpeed * Time.deltaTime;
+			newYPosition = transform.position.y + CurrentSpeed() * Time.deltaTime;
 		}
 		else
 			if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)) {
-				newYPosition = transform.position.y - shipSpeed * Time.deltaTime;
+				newYPosition = transform.position.y - CurrentSpeed() * Time.deltaTime;
 			}
 		UpdateShipPosition(shipPosition, newXPosition, newYPosition);
 	}
@@ -202,6 +202,12 @@ public class PlayerShip : MonoBehaviour {
 	void WarpOut() {
 		float step = exitWarpSpeed * Time.deltaTime;
 		transform.position = Vector3.MoveTowards(transform.position, exitTarget, step);
+	}
+	#endregion
+	
+	#region Difficulty Modifiers
+	float CurrentSpeed() {
+		return shipSpeed * DifficultyModifier.ForPlayerSpeed();
 	}
 	#endregion
 	

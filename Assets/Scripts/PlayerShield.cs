@@ -21,7 +21,7 @@ public class PlayerShield : MonoBehaviour {
 	
 	#region Unity Methods
 	void Start() {
-		currentHitPoints = totalHitPoints;
+		currentHitPoints = totalHitPoints * DifficultyModifier.ForPlayerShieldHitPoints();
 		spriteRenderer = GetComponent<SpriteRenderer>();
 		UpdateSprite();
 	}

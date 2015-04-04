@@ -4,7 +4,8 @@ using System.Collections;
 public class PlayerTorpedo : MonoBehaviour {
 
 	#region Transform Members
-	public float moveSpeed = 10f;
+	public float defaultProjectileSpeed = 10f;
+	float currentProjectileSpeed;
 	
 	float screenTopEdge;
 	
@@ -43,6 +44,8 @@ public class PlayerTorpedo : MonoBehaviour {
 			}
 		}
 		
+		currentProjectileSpeed = defaultProjectileSpeed;
+		
 		GameObjects.SetParent(transform, "Player Torpedo Container");
 	}
 	
@@ -73,8 +76,8 @@ public class PlayerTorpedo : MonoBehaviour {
 		
 		if (enemy || bomber) {
 			Die();
-			if (enemy)  { enemy.HitWith(damagePoints); }
-			if (bomber) { bomber.HitWith(damagePoints); }
+			if (enemy)  { enemy.HitWith(DamagePoints); }
+			if (bomber) { bomber.HitWith(DamagePoints); }
 		}
 		
 		if (asteroid) {
@@ -94,7 +97,7 @@ public class PlayerTorpedo : MonoBehaviour {
 	}
 	
 	void Move() {
-		float step = moveSpeed * Time.deltaTime;
+		float step = currentProjectileSpeed * DifficultyModifier.ForPlayerTorpedoSpeed() * Time.deltaTime;
 		transform.position = Vector3.MoveTowards(transform.position, targetObject.transform.position, step);
 	}
 	
@@ -111,5 +114,10 @@ public class PlayerTorpedo : MonoBehaviour {
 	
 	public void SetVelocity(Vector3 velocity) {
 		initialVelocity = velocity;
+	}
+	
+	public float DamagePoints {
+		get { return damagePoints * DifficultyModifier.ForPlayerTorpedoDamage(); }
+		set { damagePoints = value; }
 	}
 }

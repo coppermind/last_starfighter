@@ -59,8 +59,12 @@ public class PlayerGun : MonoBehaviour {
 		}
 	}
 	
+	float CurrentProjectileRate() {
+		return currentProjectileRate * DifficultyModifier.ForEnemyLaserRate();
+	}
+	
 	public void StartFiringPrimaryWeapon() {
-		InvokeRepeating("FirePrimaryWeapon", 0.0001f, currentProjectileRate);
+		InvokeRepeating("FirePrimaryWeapon", 0.0001f, CurrentProjectileRate());
 	}
 	
 	public void StopFiringPrimaryWeapon() {
