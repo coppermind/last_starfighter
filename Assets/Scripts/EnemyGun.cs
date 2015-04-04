@@ -30,7 +30,7 @@ public class EnemyGun : MonoBehaviour {
 		}
 		
 		if (!gameManager.PlayerIsSpawning) {
-			if (GameMath.IsProbable(currentProjectileRate)) {
+			if (GameMath.IsProbable(CurrentProjectileRate())) {
 				FireWeapon();
 			}
 		}
@@ -39,6 +39,10 @@ public class EnemyGun : MonoBehaviour {
 	
 	
 	#region Private Methods
+	float CurrentProjectileRate() {
+		return currentProjectileRate * DifficultyModifier.ForEnemyLaserRate();
+	}
+	
 	void FireWeapon() {
 		Instantiate(weaponPrefab, transform.position, Quaternion.identity);
 	}

@@ -9,32 +9,37 @@ public class DifficultyModifier : MonoBehaviour {
 	*/
 	
 	#region Player modifiers
-	static float[] playerShield                   = {   1.20f,   1.00f,   0.90f  };
+	static float[] playerSpeed                    = {   1.10f,   1.00f,   0.90f  };
+	static float[] playerLaserRate                = {   1.20f,   1.00f,   0.90f  };
 	static float[] playerLaserDamage              = {   1.20f,   1.00f,   0.90f  };
 	static float[] playerLaserSpeed               = {   1.20f,   1.00f,   0.90f  };
 	static float[] playerTorpedoDamage            = {   1.20f,   1.00f,   0.90f  };
 	static float[] playerTorpedoSpeed             = {   1.20f,   1.00f,   0.90f  };
+	
+	// Changes that need game/level reload
 	static float[] playerHitPoints                = {   1.20f,   1.00f,   0.90f  };
-	static float[] playerSpeed                    = {   1.10f,   1.00f,   0.90f  };
+	static float[] playerShieldHitPoints          = {   1.20f,   1.00f,   0.90f  };
 	static float[] ftlTimer                       = {   0.90f,   1.00f,   1.10f  };
 	#endregion
 	
 	
 	#region Enemy modifiers
 	static float[] enemySpawnRate                 = {   0.90f,   1.00f,   1.10f  };
-	static float[] enemyHitPoints                 = {   0.90f,   1.00f,   1.10f  };
 	static float[] enemyExitRate                  = {   1.10f,   1.00f,   0.90f  };
 	static float[] enemyLaserDamage               = {   0.90f,   1.00f,   1.10f  };
 	static float[] enemyLaserRate                 = {   0.90f,   1.00f,   1.10f  };
 	static float[] enemyLaserSpeed                = {   0.90f,   1.00f,   1.10f  };
 	static float[] bomberSpawnRate                = {   0.90f,   1.00f,   1.10f  };
-	static float[] bomberHitPoints                = {   0.85f,   1.00f,   1.10f  };
 	static float[] bomberSpeed                    = {   0.90f,   1.00f,   1.10f  };
 	static float[] bomberTorpedoDamage            = {   0.90f,   1.00f,   1.10f  };
 	static float[] bomberTorpedoRate              = {   0.90f,   1.00f,   1.10f  };
 	static float[] bomberTorpedoSpeed             = {   0.90f,   1.00f,   1.10f  };
 	static float[] bomberTorpedoBarrage           = {  -1.00f,   0.00f,   1.00f  };
 	static float[] bomberTorpedoBarrageRate       = {   1.10f,   1.00f,   0.90f  };
+	
+	// Changes that need game/level reload
+	static float[] enemyHitPoints                 = {   0.90f,   1.00f,   1.10f  };
+	static float[] bomberHitPoints                = {   0.85f,   1.00f,   1.10f  };
 	#endregion
 	
 	
@@ -49,8 +54,12 @@ public class DifficultyModifier : MonoBehaviour {
 	}
 
 	
-	public static float ForPlayerShield() {
-		return playerShield[Index()];
+	public static float ForPlayerShieldHitPoints() {
+		return playerShieldHitPoints[Index()];
+	}
+	
+	public static float ForPlayerLaserRate() {
+		return playerLaserRate[Index()];
 	}
 	
 	public static float ForPlayerLaserDamage() {

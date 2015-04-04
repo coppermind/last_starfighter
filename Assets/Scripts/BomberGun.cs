@@ -30,7 +30,7 @@ public class BomberGun : MonoBehaviour {
 			return;
 		}
 		
-		if (GameMath.IsProbable(firingRate)) {
+		if (GameMath.IsProbable(CurrentFiringRate())) {
 			StartFiringWeapon();
 		}
 	}
@@ -38,7 +38,7 @@ public class BomberGun : MonoBehaviour {
 	void FireWeapon() {
 		Instantiate(weaponPrefab, transform.position, Quaternion.identity);
 		currentBarrageCount++;
-		if (currentBarrageCount >= barrageTotalProjectiles) {
+		if (currentBarrageCount >= TotalTorpedoes()) {
 			StopFiringWeapon();
 		}
 	}
@@ -52,5 +52,13 @@ public class BomberGun : MonoBehaviour {
 		isFiring = false;
 		currentBarrageCount = 0;
 		CancelInvoke("FireWeapon");
+	}
+	
+	int TotalTorpedoes() {
+		return barrageTotalProjectiles + (int) DifficultyModifier.ForBomberTorpedoBarrage();
+	}
+	
+	float CurrentFiringRate() {
+		return firingRate * DifficultyModifier.ForBomberTorpedoBarrageRate();
 	}
 }

@@ -53,7 +53,7 @@ public class EnemyShip : MonoBehaviour {
 		animator = GetComponent<Animator>();
 		
 		isSpawning = true;
-		currentHitPoints = hitPoints;
+		currentHitPoints = hitPoints * DifficultyModifier.ForEnemyHitPoints();
 		
 		warpTarget = new Vector3(transform.position.x, -10, transform.position.z);
 		
@@ -72,7 +72,7 @@ public class EnemyShip : MonoBehaviour {
 				isSpawning = false;
 			}
 		} else {
-			if (GameMath.IsProbable(exitRate)) {
+			if (GameMath.IsProbable(CurrentExitRate())) {
 				isLeaving = true;
 			}
 			
@@ -115,6 +115,10 @@ public class EnemyShip : MonoBehaviour {
 	void WarpOut() {
 		float step = warpOutSpeed * Time.deltaTime;
 		transform.position = Vector3.MoveTowards(transform.position, warpTarget, step);
+	}
+	
+	float CurrentExitRate() {
+		return exitRate * DifficultyModifier.ForEnemyExitRate();
 	}
 	#endregion
 	

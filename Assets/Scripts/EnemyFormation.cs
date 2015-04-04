@@ -75,12 +75,16 @@ public class EnemyFormation : MonoBehaviour {
 	}
 	
 	void SpawnEnemyShip() {
-		if (GameMath.IsProbable(spawnRate)) {
+		if (GameMath.IsProbable(CurrentSpawnRate())) {
 			Transform freePosition = NextFreePosition();
 			if (null != freePosition) {
 				SpawnEnemyShipAt(freePosition, freePosition.position);
 			}
 		}
+	}
+	
+	float CurrentSpawnRate() {
+		return spawnRate * DifficultyModifier.ForEnemySpawnRate();
 	}
 	
 	Transform NextFreePosition() {

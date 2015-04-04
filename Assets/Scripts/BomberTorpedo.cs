@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class EnemyTorpedo : MonoBehaviour {
+public class BomberTorpedo : MonoBehaviour {
 
 	[SerializeField]
 	private float damagePoints = 20f;
@@ -55,7 +55,7 @@ public class EnemyTorpedo : MonoBehaviour {
 	}
 	
 	void Move() {
-		float step = currentProjectileSpeed * Time.deltaTime;
+		float step = CurrentProjectileSpeed() * Time.deltaTime;
 		Vector3 newPosition = Vector3.MoveTowards(transform.position, currentTarget, step);
 		transform.position = newPosition;
 	}
@@ -74,8 +74,12 @@ public class EnemyTorpedo : MonoBehaviour {
 		return new Vector3(x, y, 0f);
 	}
 	
+	float CurrentProjectileSpeed() {
+		return currentProjectileSpeed * DifficultyModifier.ForBomberTorpedoSpeed();
+	}
+	
 	public float DamagePoints {
-		get { return damagePoints; }
+		get { return damagePoints * DifficultyModifier.ForBomberTorpedoDamage(); }
 		set { damagePoints = value; }
 	}
 }

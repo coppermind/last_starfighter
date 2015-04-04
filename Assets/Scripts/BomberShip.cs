@@ -34,7 +34,7 @@ public class BomberShip : MonoBehaviour {
 		
 		rigidBody = GetComponent<Rigidbody2D>();
 		
-		currentHitPoints = hitPoints;
+		currentHitPoints = hitPoints * DifficultyModifier.ForBomberHitPoints();
 		
 		GameObjects.SetParent(transform, "Bomber Controller");
 		SetDirection();
@@ -75,8 +75,12 @@ public class BomberShip : MonoBehaviour {
 		playerScore.AddScore(scorePoints);
 	}
 	
+	float CurrentShipSpeed() {
+		return shipSpeed * DifficultyModifier.ForBomberSpeed();
+	}
+	
 	Vector3 GetVelocity() {
-		float speed = shipSpeed * shipDirection;
+		float speed = CurrentShipSpeed() * shipDirection;
 		return new Vector3(speed , 0f, 0f);
 	}
 	

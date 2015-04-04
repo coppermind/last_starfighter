@@ -15,7 +15,7 @@ public class BomberController : MonoBehaviour {
 	float rightSpawnX = 37f;
 	
 	void Update () {
-		if (GameMath.IsProbable(spawnRate)) {
+		if (GameMath.IsProbable(CurrentSpawnRate())) {
 			SpawnBomber();
 		}
 	}
@@ -23,6 +23,10 @@ public class BomberController : MonoBehaviour {
 	void SpawnBomber() {
 		Vector3 position = GetRandomPosition();
 		Instantiate(bomberPrefab, position, Quaternion.identity);
+	}
+	
+	float CurrentSpawnRate() {
+		return spawnRate * DifficultyModifier.ForBomberSpawnRate();
 	}
 	
 	Vector3 GetRandomPosition() {
