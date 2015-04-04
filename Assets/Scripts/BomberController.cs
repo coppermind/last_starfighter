@@ -14,7 +14,17 @@ public class BomberController : MonoBehaviour {
 	float leftSpawnX = -5f;
 	float rightSpawnX = 37f;
 	
+	GameManager gameManager;
+	
+	void Start () {
+		gameManager = FindObjectOfType<GameManager>();
+	}
+	
 	void Update () {
+		if (gameManager.GameIsPaused || gameManager.PlayerIsSpawning) {
+			return;
+		}
+		
 		if (GameMath.IsProbable(CurrentSpawnRate())) {
 			SpawnBomber();
 		}

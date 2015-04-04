@@ -3,10 +3,22 @@ using System.Collections;
 
 public class GameManager : MonoBehaviour {
 	
+	public static int totalPlayerLives = 3;
+	public static int currentLivesCount = 3;
+	
 	bool gamePaused = false;
 	bool playerSpawnIn = true;
 	bool playerWins = false;
 	bool ftlSpinnerReady = false;
+	
+	LevelManager levelManager;
+	
+	public GameObject playerShipPrefab;
+	public Vector3 playerShipSpawnVector;
+	
+	void Start () {
+		levelManager = FindObjectOfType<LevelManager>();
+	}
 	
 	public void PauseGame() {
 		gamePaused = true;
@@ -38,6 +50,21 @@ public class GameManager : MonoBehaviour {
 	
 	public void TogglePause() {
 		gamePaused = !gamePaused;
+	}
+	
+	public void PlayerIsDead() {
+		
+		if (0 >= currentLivesCount) {
+			levelManager.LoadLevel("04 Lose Screen");
+		} else {
+			SpawnNewPlayerShip();
+			currentLivesCount--;
+			Debug.Log("current lives count: " + currentLivesCount);
+		}
+	}
+	
+	void SpawnNewPlayerShip() {
+		Instantiate(playerShipPrefab, playerShipSpawnVector, Quaternion.identity);
 	}
 
 }

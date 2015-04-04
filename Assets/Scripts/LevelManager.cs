@@ -12,9 +12,10 @@ public class LevelManager : MonoBehaviour {
 	}
 	
 	void OnLevelWasLoaded() {
-		// Reset score if in Main Menu
+		// Reset score and player lives if in Main Menu
 		if (Application.loadedLevel == 1) {
 			PlayerScore.ResetScore();
+			GameManager.currentLivesCount = GameManager.totalPlayerLives;
 		}
 	}
 	

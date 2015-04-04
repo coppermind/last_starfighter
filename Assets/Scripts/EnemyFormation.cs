@@ -41,7 +41,7 @@ public class EnemyFormation : MonoBehaviour {
 	}
 	
 	void Update () {
-		if (gameManager.GameIsPaused) {
+		if (gameManager.GameIsPaused || gameManager.PlayerIsSpawning) {
 			return;
 		}
 			

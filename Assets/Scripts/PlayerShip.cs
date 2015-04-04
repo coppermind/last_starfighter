@@ -163,7 +163,7 @@ public class PlayerShip : MonoBehaviour {
 		currentHitPoints -= damage;
 		if (0f <= currentHitPoints) {
 			Destroy(gameObject);
-			levelManager.LoadLevel("04 Lose Screen");
+			gameManager.PlayerIsDead();
 		}
 	}
 
@@ -173,18 +173,18 @@ public class PlayerShip : MonoBehaviour {
 		float newYPosition = shipPosition.y;
 		if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)) {
 			newXPosition = transform.position.x - CurrentSpeed() * Time.deltaTime;
-		}
-		else
+		} else {
 			if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) {
 				newXPosition = transform.position.x + CurrentSpeed() * Time.deltaTime;
 			}
+		}
 		if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)) {
 			newYPosition = transform.position.y + CurrentSpeed() * Time.deltaTime;
-		}
-		else
+		} else {
 			if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)) {
 				newYPosition = transform.position.y - CurrentSpeed() * Time.deltaTime;
 			}
+		}
 		UpdateShipPosition(shipPosition, newXPosition, newYPosition);
 	}
 	
@@ -210,9 +210,4 @@ public class PlayerShip : MonoBehaviour {
 		return shipSpeed * DifficultyModifier.ForPlayerSpeed();
 	}
 	#endregion
-	
-	
-	public void LoadNextLevel() {
-		gameManager.PlayerHasWon = true;
-	}
 }

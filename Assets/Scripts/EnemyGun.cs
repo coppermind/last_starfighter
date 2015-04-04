@@ -25,14 +25,12 @@ public class EnemyGun : MonoBehaviour {
 	}
 	
 	void Update() {
-		if (gameManager.GameIsPaused) {
+		if (gameManager.GameIsPaused || gameManager.PlayerIsSpawning) {
 			return;
 		}
 		
-		if (!gameManager.PlayerIsSpawning) {
-			if (GameMath.IsProbable(CurrentProjectileRate())) {
-				FireWeapon();
-			}
+		if (GameMath.IsProbable(CurrentProjectileRate())) {
+			FireWeapon();
 		}
 	}
 	#endregion
