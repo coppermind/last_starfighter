@@ -5,11 +5,11 @@
 	<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
 	<ProductVersion>10.0.20506</ProductVersion>
 	<SchemaVersion>2.0</SchemaVersion>
-	<ProjectGuid>{BBBC41EA-E3BC-D3E7-C818-5C27AC1B2420}</ProjectGuid>
+	<ProjectGuid>{53112A24-2B0B-A211-CA56-09CE5326504D}</ProjectGuid>
 	<OutputType>Library</OutputType>
 	<AppDesignerFolder>Properties</AppDesignerFolder>
 	<RootNamespace></RootNamespace>
-	<AssemblyName>Assembly-CSharp</AssemblyName>
+	<AssemblyName>Assembly-UnityScript</AssemblyName>
 	<TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
 	<FileAlignment>512</FileAlignment>
 	<BaseDirectory>Assets</BaseDirectory>
@@ -46,48 +46,8 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\Asteroid.cs" />
-     <Compile Include="Assets\Scripts\AsteroidController.cs" />
-     <Compile Include="Assets\Scripts\BackgroundFight.cs" />
-     <Compile Include="Assets\Scripts\BomberController.cs" />
-     <Compile Include="Assets\Scripts\BomberGun.cs" />
-     <Compile Include="Assets\Scripts\BomberShip.cs" />
-     <Compile Include="Assets\Scripts\BomberTorpedo.cs" />
-     <Compile Include="Assets\Scripts\DifficultyModifier.cs" />
-     <Compile Include="Assets\Scripts\DistantFight.cs" />
-     <Compile Include="Assets\Scripts\EnemyFormation.cs" />
-     <Compile Include="Assets\Scripts\EnemyGun.cs" />
-     <Compile Include="Assets\Scripts\EnemyLaser.cs" />
-     <Compile Include="Assets\Scripts\EnemyPosition.cs" />
-     <Compile Include="Assets\Scripts\EnemyShip.cs" />
-     <Compile Include="Assets\Scripts\EnemySpawnPoint.cs" />
-     <Compile Include="Assets\Scripts\FtlSpinner.cs" />
-     <Compile Include="Assets\Scripts\GameManager.cs" />
-     <Compile Include="Assets\Scripts\LevelManager.cs" />
-     <Compile Include="Assets\Scripts\MainCamera.cs" />
-     <Compile Include="Assets\Scripts\MusicPlayer.cs" />
-     <Compile Include="Assets\Scripts\MusicPlaylist.cs" />
-     <Compile Include="Assets\Scripts\PlayerGun.cs" />
-     <Compile Include="Assets\Scripts\PlayerLaser.cs" />
-     <Compile Include="Assets\Scripts\PlayerOptions.cs" />
-     <Compile Include="Assets\Scripts\PlayerPrefsManager.cs" />
-     <Compile Include="Assets\Scripts\PlayerScore.cs" />
-     <Compile Include="Assets\Scripts\PlayerShield.cs" />
-     <Compile Include="Assets\Scripts\PlayerShip.cs" />
-     <Compile Include="Assets\Scripts\PlayerTorpedo.cs" />
-     <Compile Include="Assets\Scripts\PowerUp.cs" />
-     <Compile Include="Assets\Scripts\StoryController.cs" />
-     <Compile Include="Assets\Scripts\TorpedoContainer.cs" />
-     <Compile Include="Assets\Scripts\TorpedoInterface.cs" />
-     <Compile Include="Assets\Scripts\UfoController.cs" />
-     <Compile Include="Assets\Scripts\UfoShip.cs" />
-     <Compile Include="Assets\Scripts\Utilities\GameCamera.cs" />
-     <Compile Include="Assets\Scripts\Utilities\GameGizmos.cs" />
-     <Compile Include="Assets\Scripts\Utilities\GameMath.cs" />
-     <Compile Include="Assets\Scripts\Utilities\GameObjects.cs" />
-     <Compile Include="Assets\Scripts\plugins\SimpleJSON.cs" />
-     <Compile Include="Assets\Story\DialogueBase.cs" />
-     <Compile Include="Assets\Story\PlayerLivesInterface.cs" />
+     <Compile Include="Assets\JSON Tests\UnityScript\Test_UnityScript.js" />
+     <None Include="Assets\JSON Tests\TroubleShoot.txt" />
      <None Include="Assets\Story\02 Level 01\00.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>/Applications/Unity 5/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>

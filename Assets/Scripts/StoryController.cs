@@ -3,12 +3,16 @@ using UnityEngine.UI;
 using System.Collections;
 using System.IO;
 using System.Net;
+using SimpleJSON;
 
 public class StoryController : MonoBehaviour {
 
-//	public DialogueObject dialogue;
-
-	public string[] text;
+	public int phase = 1;
+	public int level = 1;
+	private int slide = 1;
+	
+	private string messageText;
+	private string messageSpeaker;
 
 	[SerializeField]
 	Text displayText;
@@ -20,47 +24,48 @@ public class StoryController : MonoBehaviour {
 	GameManager gameManager;
 	
 	void Awake () {
-		WWW www = new WWW("http://coppermind.io/");
-		StartCoroutine( LoadWeb(www) );
+		slide = 1;
+		LoadNextSlide();
 	}
 
 	void Start () {
-		Debug.Log("Story Controller Start()!!!!!!!!!!");
 		gameManager = FindObjectOfType<GameManager>();
 		gameManager.PauseGame();
+	}
+	
+	void LoadNextSlide() {
+		WWWForm form = new WWWForm();
+		form.AddField("phase", phase);
+		form.AddField("level", level);
+		form.AddField("slide", slide);
 		
-		if (0 < text.Length) {
-			currentTextIndex = 0;
-			displayText.text = text[0];
-		} else {
-			CloseStoryPanel();
-		}
+		WWW www = new WWW("http://local.coppermind.io:8080/index.php", form);
 		
-//		string filename = "Assets/Story/02 Level 01/00.txt";
-//		if (File.Exists(filename)) {
-//			Debug.Log("File - " + filename + " exists!");
-//			string contents = File.ReadAllText(filename);
-//			displayText.text = contents;
-//			Debug.Log(contents);
-//		} else {
-//			Debug.Log("File - " + filename + " missing!");
-//		}
+		StartCoroutine( LoadWeb(www) );
+		slide++;
 	}
 	
 	IEnumerator LoadWeb(WWW www) {
 		yield return www;
 		
 		if (www.error == null) {
-			displayText.text = www.text;
+			Debug.Log ("text:" + www.text);
+			ParseJsonData(www.text);
+			displayText.text = messageText;
 		} else {
 			Debug.Log("WWW Error: " + www.error);
+			CloseStoryPanel();
 		}
 	}
 	
+	void ParseJsonData(string text) {
+		JSONNode data = JSON.Parse(text);
+		messageText     = data["dialogue"];
+		messageSpeaker  = data["speaker"];
+	}
+	
 	public void Next() {
-		if (currentTextIndex >= text.Length-1) {
-			CloseStoryPanel();
-		}
+		LoadNextSlide();
 	}
 	
 	public void OpenStoryPanel() {
