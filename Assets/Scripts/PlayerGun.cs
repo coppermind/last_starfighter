@@ -54,7 +54,9 @@ public class PlayerGun : MonoBehaviour {
 	
 	void FirePrimaryWeapon() {
 		Instantiate(laserPrefab, transform.position, Quaternion.identity);
+		
 		audioSource.clip = laserSoundFx;
+		audioSource.volume = PlayerPrefsManager.GetEffectsVolume();
 		audioSource.Play();
 	}
 	
@@ -62,7 +64,9 @@ public class PlayerGun : MonoBehaviour {
 		if (torpedoPrefab && 0 < torpedoesLeft) {
 			Instantiate(torpedoPrefab, transform.position, Quaternion.identity);
 			torpedoesLeft--;
+			
 			audioSource.clip = torpedoSoundFx;
+			audioSource.volume = PlayerPrefsManager.GetEffectsVolume();
 			audioSource.Play();
 		}
 	}

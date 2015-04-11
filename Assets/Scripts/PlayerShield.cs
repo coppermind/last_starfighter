@@ -60,6 +60,7 @@ public class PlayerShield : MonoBehaviour {
 	}
 	
 	public void HitWith(float damage) {
+		audioSource.volume = PlayerPrefsManager.GetEffectsVolume();
 		audioSource.Play();
 		currentHitPoints -= damage;
 		if (0f >= currentHitPoints) {

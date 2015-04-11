@@ -17,9 +17,13 @@ public class BomberGun : MonoBehaviour {
 	bool isFiring = false;
 	
 	GameManager gameManager;
+	
+	AudioSource audioSource;
 
 	void Start () {
 		gameManager = FindObjectOfType<GameManager>();
+		
+		audioSource = GetComponent<AudioSource>();
 		
 		currentProjectileRate  = defaultProjectileRate;
 		currentBarrageCount = 0;
@@ -37,6 +41,10 @@ public class BomberGun : MonoBehaviour {
 	
 	void FireWeapon() {
 		Instantiate(weaponPrefab, transform.position, Quaternion.identity);
+		
+		audioSource.volume = PlayerPrefsManager.GetEffectsVolume();
+		audioSource.Play();
+		
 		currentBarrageCount++;
 		if (currentBarrageCount >= TotalTorpedoes()) {
 			StopFiringWeapon();

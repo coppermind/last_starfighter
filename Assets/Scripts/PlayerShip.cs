@@ -108,8 +108,9 @@ public class PlayerShip : MonoBehaviour {
 			if (gameManager.JumpIsReady) {
 				if (Input.GetKey(KeyCode.F) || Input.GetKey(KeyCode.J)) {
 					gameManager.PlayerHasWon = true;
+					
 					audioSource.clip = ftlJumpClip;
-					audioSource.Play();
+					PlayAudio();
 				}
 			}
 		}
@@ -148,8 +149,10 @@ public class PlayerShip : MonoBehaviour {
 				gun.TorpedoesLeft = 5;
 			}
 			Destroy(powerUp.gameObject);
+			
 			audioSource.clip = powerUpClip;
-			audioSource.Play();
+			audioSource.volume = PlayerPrefsManager.GetEffectsVolume();
+			PlayAudio();
 		}
 	}
 	#endregion
@@ -161,6 +164,11 @@ public class PlayerShip : MonoBehaviour {
 	
 		minX = (float) b["minX"];
 		maxX = (float) b["maxX"];
+	}
+	
+	void PlayAudio() {
+		audioSource.volume = PlayerPrefsManager.GetEffectsVolume();
+		audioSource.Play();
 	}
 
 	void FtlJump ()	{
@@ -183,7 +191,7 @@ public class PlayerShip : MonoBehaviour {
 		} else {
 			audioSource.clip = explodeClip;
 		}
-		audioSource.Play();
+		PlayAudio();
 	}
 
 	void ManeuverShip() {

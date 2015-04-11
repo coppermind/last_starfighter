@@ -71,6 +71,8 @@ public class BomberShip : MonoBehaviour {
 		} else {
 			audioSource.clip = hitClip;
 		}
+		
+		audioSource.volume = PlayerPrefsManager.GetEffectsVolume();
 		audioSource.Play();
 	}
 	

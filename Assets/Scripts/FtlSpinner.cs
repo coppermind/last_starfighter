@@ -32,26 +32,29 @@ public class FtlSpinner : MonoBehaviour {
 	}
 	
 	void Update () {
-		if (!gameManager.GameIsPaused && !gameManager.PlayerIsSpawning) {
-			float currentWidth = rectTrans.sizeDelta.x;
+		if (gameManager.GameIsPaused || gameManager.PlayerIsSpawning) {
+			return;
+		}
+		
+		float currentWidth = rectTrans.sizeDelta.x;
+		
+		if (currentWidth < 0) {
+			float step = originalWidth / currentSpinSeconds * Time.deltaTime;
 			
-			if (currentWidth < 0) {
-				float step = originalWidth / currentSpinSeconds * Time.deltaTime;
+			currentWidth -= step;
+			rectTrans.sizeDelta = new Vector2(currentWidth, 0);
+		} else {
+			if (!gameManager.JumpIsReady) {
+				Animator animator = statusLabel.GetComponent<Animator>();
+				Text text = statusLabel.GetComponent<Text>();
 				
-				currentWidth -= step;
-				rectTrans.sizeDelta = new Vector2(currentWidth, 0);
-			} else {
-				if (!gameManager.JumpIsReady) {
-					Animator animator = statusLabel.GetComponent<Animator>();
-					Text text = statusLabel.GetComponent<Text>();
-					
-					text.text = "FTL Ready";
-					animator.SetTrigger("SpinnerReady trigger");
-					
-					gameManager.JumpIsReady = true;
-					
-					audioSource.Play();
-				}
+				text.text = "FTL Ready";
+				animator.SetTrigger("SpinnerReady trigger");
+				
+				gameManager.JumpIsReady = true;
+				
+				audioSource.volume = PlayerPrefsManager.GetEffectsVolume();
+				audioSource.Play();
 			}
 		}
 	}

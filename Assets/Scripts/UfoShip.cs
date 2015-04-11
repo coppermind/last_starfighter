@@ -75,6 +75,7 @@ public class UfoShip : MonoBehaviour {
 			Instantiate(itemPrefab, transform.position, Quaternion.identity);
 		}
 		
+		audioSource.volume = PlayerPrefsManager.GetEffectsVolume();
 		audioSource.Play();
 	}
 	

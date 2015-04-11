@@ -47,6 +47,8 @@ public class EnemyGun : MonoBehaviour {
 	
 	void FireWeapon() {
 		Instantiate(weaponPrefab, transform.position, Quaternion.identity);
+		
+		audioSource.volume = PlayerPrefsManager.GetEffectsVolume();
 		audioSource.Play();
 	}
 	#endregion
