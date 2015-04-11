@@ -13,6 +13,8 @@ public class EnemyGun : MonoBehaviour {
 	
 	
 	#region GameObject Members
+	AudioSource audioSource;
+	
 	GameManager gameManager;
 	#endregion
 
@@ -20,6 +22,8 @@ public class EnemyGun : MonoBehaviour {
 	#region Unity Methods	
 	void Start() {
 		gameManager = FindObjectOfType<GameManager>();
+		
+		audioSource = GetComponent<AudioSource>();
 		
 		currentProjectileRate  = defaultProjectileRate;
 	}
@@ -43,6 +47,7 @@ public class EnemyGun : MonoBehaviour {
 	
 	void FireWeapon() {
 		Instantiate(weaponPrefab, transform.position, Quaternion.identity);
+		audioSource.Play();
 	}
 	#endregion
 }

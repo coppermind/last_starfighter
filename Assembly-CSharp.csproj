@@ -81,6 +81,7 @@
      <Compile Include="Assets\Scripts\TorpedoInterface.cs" />
      <Compile Include="Assets\Scripts\UfoController.cs" />
      <Compile Include="Assets\Scripts\UfoShip.cs" />
+     <Compile Include="Assets\Scripts\UiButton.cs" />
      <Compile Include="Assets\Scripts\Utilities\GameCamera.cs" />
      <Compile Include="Assets\Scripts\Utilities\GameGizmos.cs" />
      <Compile Include="Assets\Scripts\Utilities\GameMath.cs" />

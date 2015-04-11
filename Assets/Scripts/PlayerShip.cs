@@ -33,10 +33,17 @@ public class PlayerShip : MonoBehaviour {
 	float hitPoints = 100f;
 	float currentHitPoints;
 	
-	/*
 	[SerializeField]
-	int numberOfLives = 3;
-	*/
+	AudioClip hitClip;
+	
+	[SerializeField]
+	AudioClip explodeClip;
+	
+	[SerializeField]
+	AudioClip powerUpClip;
+	
+	[SerializeField]
+	AudioClip ftlJumpClip;
 	#endregion
 
 
@@ -47,6 +54,8 @@ public class PlayerShip : MonoBehaviour {
 	PlayerGun gun;
 	
 	CircleCollider2D shipCollider;
+	
+	AudioSource audioSource;
 	#endregion
 
 		
@@ -67,6 +76,8 @@ public class PlayerShip : MonoBehaviour {
 
 		shipCollider = GetComponent<CircleCollider2D>();
 		shipCollider.enabled = false;
+		
+		audioSource  = GetComponent<AudioSource>();
 		
 		gameManager.PlayerIsSpawning = true;
 		spawnInTarget = new Vector3(spawnTargetX, spawnTargetY, transform.position.z);
@@ -97,16 +108,18 @@ public class PlayerShip : MonoBehaviour {
 			if (gameManager.JumpIsReady) {
 				if (Input.GetKey(KeyCode.F) || Input.GetKey(KeyCode.J)) {
 					gameManager.PlayerHasWon = true;
+					audioSource.clip = ftlJumpClip;
+					audioSource.Play();
 				}
 			}
 		}
 	}
 	
 	void OnTriggerEnter2D(Collider2D collider) {
-		EnemyLaser enemyLaser     = collider.GetComponent<EnemyLaser>();
+		EnemyLaser enemyLaser      = collider.GetComponent<EnemyLaser>();
 		BomberTorpedo enemyTorpedo = collider.GetComponent<BomberTorpedo>();
-		Asteroid asteroid         = collider.GetComponent<Asteroid>();
-		PowerUp powerUp           = collider.GetComponent<PowerUp>();
+		Asteroid asteroid          = collider.GetComponent<Asteroid>();
+		PowerUp powerUp            = collider.GetComponent<PowerUp>();
 		
 		if (enemyLaser || enemyTorpedo) {
 			float damage = (enemyLaser) ? enemyLaser.DamagePoints : enemyTorpedo.DamagePoints;
@@ -135,6 +148,8 @@ public class PlayerShip : MonoBehaviour {
 				gun.TorpedoesLeft = 5;
 			}
 			Destroy(powerUp.gameObject);
+			audioSource.clip = powerUpClip;
+			audioSource.Play();
 		}
 	}
 	#endregion
@@ -162,9 +177,13 @@ public class PlayerShip : MonoBehaviour {
 	void HitWith(float damage) {
 		currentHitPoints -= damage;
 		if (0f <= currentHitPoints) {
+			audioSource.clip = hitClip;
 			Destroy(gameObject);
 			gameManager.PlayerIsDead();
+		} else {
+			audioSource.clip = explodeClip;
 		}
+		audioSource.Play();
 	}
 
 	void ManeuverShip() {

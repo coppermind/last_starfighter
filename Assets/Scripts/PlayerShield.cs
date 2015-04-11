@@ -16,6 +16,7 @@ public class PlayerShield : MonoBehaviour {
 	
 	#region Component Members
 	SpriteRenderer spriteRenderer;
+	AudioSource audioSource;
 	#endregion
 
 	
@@ -23,6 +24,7 @@ public class PlayerShield : MonoBehaviour {
 	void Start() {
 		currentHitPoints = totalHitPoints * DifficultyModifier.ForPlayerShieldHitPoints();
 		spriteRenderer = GetComponent<SpriteRenderer>();
+		audioSource    = GetComponent<AudioSource>();
 		UpdateSprite();
 	}
 	
@@ -58,6 +60,7 @@ public class PlayerShield : MonoBehaviour {
 	}
 	
 	public void HitWith(float damage) {
+		audioSource.Play();
 		currentHitPoints -= damage;
 		if (0f >= currentHitPoints) {
 			currentHitPoints = -5f;

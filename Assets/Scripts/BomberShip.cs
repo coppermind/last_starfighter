@@ -22,9 +22,17 @@ public class BomberShip : MonoBehaviour {
 	[SerializeField]
 	GameObject explosionPrefab;
 	
+	[SerializeField]
+	AudioClip hitClip;
+	
+	[SerializeField]
+	AudioClip explosionClip;
+	
 	Rigidbody2D rigidBody;
 	
 	PlayerScore playerScore;
+	
+	AudioSource audioSource;
 	
 	GameManager gameManager;
 	
@@ -33,6 +41,7 @@ public class BomberShip : MonoBehaviour {
 		playerScore = FindObjectOfType<PlayerScore>();
 		
 		rigidBody = GetComponent<Rigidbody2D>();
+		audioSource = GetComponent<AudioSource>();
 		
 		currentHitPoints = hitPoints * DifficultyModifier.ForBomberHitPoints();
 		
@@ -57,8 +66,12 @@ public class BomberShip : MonoBehaviour {
 		currentHitPoints -= damage;
 		
 		if (0f >= currentHitPoints) {
+			audioSource.clip = explosionClip;
 			Die();
+		} else {
+			audioSource.clip = hitClip;
 		}
+		audioSource.Play();
 	}
 	
 	void Die() {

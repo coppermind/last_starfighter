@@ -13,10 +13,14 @@ public class FtlSpinner : MonoBehaviour {
 	
 	Transform statusObject, statusLabel;
 	
+	AudioSource audioSource;
+	
 	GameManager gameManager;
 	
 	void Start () {
 		gameManager  = FindObjectOfType<GameManager>();
+		
+		audioSource  = GetComponent<AudioSource>();
 		
 		statusObject = transform.Find("Status");
 		statusLabel  = transform.Find("Status Label");
@@ -37,13 +41,17 @@ public class FtlSpinner : MonoBehaviour {
 				currentWidth -= step;
 				rectTrans.sizeDelta = new Vector2(currentWidth, 0);
 			} else {
-				Animator animator = statusLabel.GetComponent<Animator>();
-				Text text = statusLabel.GetComponent<Text>();
-				
-				text.text = "FTL Ready";
-				animator.SetTrigger("SpinnerReady trigger");
-				
-				gameManager.JumpIsReady = true;
+				if (!gameManager.JumpIsReady) {
+					Animator animator = statusLabel.GetComponent<Animator>();
+					Text text = statusLabel.GetComponent<Text>();
+					
+					text.text = "FTL Ready";
+					animator.SetTrigger("SpinnerReady trigger");
+					
+					gameManager.JumpIsReady = true;
+					
+					audioSource.Play();
+				}
 			}
 		}
 	}

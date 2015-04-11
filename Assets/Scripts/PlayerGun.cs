@@ -23,8 +23,12 @@ public class PlayerGun : MonoBehaviour {
 	
 	GameManager gameManager;
 	
+	AudioSource audioSource;
+	
 	void Start() {
 		gameManager = FindObjectOfType<GameManager>();
+		
+		audioSource = GetComponent<AudioSource>();
 		
 		currentProjectileRate  = defaultProjectileRate;
 	}
@@ -50,12 +54,16 @@ public class PlayerGun : MonoBehaviour {
 	
 	void FirePrimaryWeapon() {
 		Instantiate(laserPrefab, transform.position, Quaternion.identity);
+		audioSource.clip = laserSoundFx;
+		audioSource.Play();
 	}
 	
 	void FireSecondaryWeapon() {
 		if (torpedoPrefab && 0 < torpedoesLeft) {
 			Instantiate(torpedoPrefab, transform.position, Quaternion.identity);
 			torpedoesLeft--;
+			audioSource.clip = torpedoSoundFx;
+			audioSource.Play();
 		}
 	}
 	

@@ -30,6 +30,12 @@ public class EnemyShip : MonoBehaviour {
 	bool isLeaving = false;
 	bool isSpawning = true;
 	bool isTargeted = false;
+	
+	[SerializeField]
+	AudioClip hitClip;
+	
+	[SerializeField]
+	AudioClip explosionClip;
 	#endregion
 	
 	
@@ -38,6 +44,8 @@ public class EnemyShip : MonoBehaviour {
 	GameObject explosionPrefab;
 	
 	Animator animator;
+	
+	AudioSource audioSource;
 	
 	PlayerScore playerScore;
 	
@@ -51,6 +59,7 @@ public class EnemyShip : MonoBehaviour {
 		playerScore    = FindObjectOfType<PlayerScore>();
 		
 		animator = GetComponent<Animator>();
+		audioSource = GetComponent<AudioSource>();
 		
 		isSpawning = true;
 		currentHitPoints = hitPoints * DifficultyModifier.ForEnemyHitPoints();
@@ -134,7 +143,11 @@ public class EnemyShip : MonoBehaviour {
 		currentHitPoints -= damage;
 		
 		if (0f >= currentHitPoints) {
+			audioSource.clip = explosionClip;
 			Die();
+		} else {
+			audioSource.clip = hitClip;
 		}
+		audioSource.Play();
 	}
 }

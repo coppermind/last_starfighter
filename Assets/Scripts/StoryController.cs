@@ -12,7 +12,7 @@ public class StoryController : MonoBehaviour {
 	private int slide = 1;
 	
 	private string messageText;
-	private string messageSpeaker;
+	//private string messageSpeaker;
 
 	[SerializeField]
 	Text displayText;
@@ -61,7 +61,7 @@ public class StoryController : MonoBehaviour {
 	void ParseJsonData(string text) {
 		JSONNode data = JSON.Parse(text);
 		messageText     = data["dialogue"];
-		messageSpeaker  = data["speaker"];
+		//messageSpeaker  = data["speaker"];
 	}
 	
 	public void Next() {

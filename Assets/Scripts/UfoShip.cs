@@ -11,12 +11,14 @@ public class UfoShip : MonoBehaviour {
 	float shipSpeed = 4f;
 
 	float shipDirection = -1;
-
+	
 	[SerializeField]
 	GameObject itemPrefab;
 	
 	[SerializeField]
 	GameObject explosionPrefab;
+	
+	AudioSource audioSource;
 	
 	Rigidbody2D rigidBody;
 	
@@ -26,6 +28,8 @@ public class UfoShip : MonoBehaviour {
 		gameManager = FindObjectOfType<GameManager>();
 		
 		rigidBody = GetComponent<Rigidbody2D>();
+		
+		audioSource = GetComponent<AudioSource>();
 		
 		GameObjects.SetParent(transform, "UFO Container");
 		
@@ -70,6 +74,8 @@ public class UfoShip : MonoBehaviour {
 			// Spawn item
 			Instantiate(itemPrefab, transform.position, Quaternion.identity);
 		}
+		
+		audioSource.Play();
 	}
 	
 	Vector3 GetVelocity() {
