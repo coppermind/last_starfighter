@@ -39,6 +39,9 @@ public class PlayerOptions : MonoBehaviour {
 	
 	public void HidePanel() {
 		animator.SetTrigger("HideOptions trigger");
+	}
+	
+	public void UnpauseGame() {
 		if (gameManager) {
 			gameManager.UnpauseGame();
 		}
