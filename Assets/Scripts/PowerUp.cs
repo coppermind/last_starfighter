@@ -3,6 +3,8 @@ using System.Collections;
 
 public class PowerUp : MonoBehaviour {
 
+	public int scorePoints;
+
 	[SerializeField]
 	GameObject objPrefab;
 
