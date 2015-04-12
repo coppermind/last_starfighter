@@ -57,7 +57,12 @@ public class BomberTorpedo : MonoBehaviour {
 	void Move() {
 		float step = CurrentProjectileSpeed() * Time.deltaTime;
 		Vector3 newPosition = Vector3.MoveTowards(transform.position, currentTarget, step);
-		transform.position = newPosition;
+		if (transform.position == newPosition) {
+			Destroy(gameObject);
+		} else {
+			transform.position = newPosition;
+		}
+//		if (step == 0) { Destroy(gameObject); }
 	}
 	
 	Vector3 GetPlayerPosition() {
