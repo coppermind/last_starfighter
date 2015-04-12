@@ -69,6 +69,7 @@
      <Compile Include="Assets\Scripts\MusicPlaylist.cs" />
      <Compile Include="Assets\Scripts\PlayerGun.cs" />
      <Compile Include="Assets\Scripts\PlayerLaser.cs" />
+     <Compile Include="Assets\Scripts\PlayerLivesInterface.cs" />
      <Compile Include="Assets\Scripts\PlayerOptions.cs" />
      <Compile Include="Assets\Scripts\PlayerPrefsManager.cs" />
      <Compile Include="Assets\Scripts\PlayerScore.cs" />
@@ -87,9 +88,6 @@
      <Compile Include="Assets\Scripts\Utilities\GameMath.cs" />
      <Compile Include="Assets\Scripts\Utilities\GameObjects.cs" />
      <Compile Include="Assets\Scripts\plugins\SimpleJSON.cs" />
-     <Compile Include="Assets\Story\DialogueBase.cs" />
-     <Compile Include="Assets\Story\PlayerLivesInterface.cs" />
-     <None Include="Assets\Story\02 Level 01\00.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>/Applications/Unity 5/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
