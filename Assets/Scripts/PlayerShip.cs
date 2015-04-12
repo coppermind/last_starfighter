@@ -147,9 +147,11 @@ public class PlayerShip : MonoBehaviour {
 			PlayerLaser laser = itemObject.GetComponent<PlayerLaser>();
 			if (laser) {
 				gun.LaserObject = itemObject;
+				GameManager.playerLaser = itemObject;
 			} else {
 				gun.TorpedoObject = itemObject;
 				gun.TorpedoesLeft = 5;
+				GameManager.playerTorpedo = itemObject;
 			}
 			Destroy(powerUp.gameObject);
 			

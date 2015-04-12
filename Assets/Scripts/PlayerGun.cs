@@ -31,6 +31,13 @@ public class PlayerGun : MonoBehaviour {
 		audioSource = GetComponent<AudioSource>();
 		
 		currentProjectileRate  = defaultProjectileRate;
+		
+		if (GameManager.playerLaser != null) {
+			laserPrefab = GameManager.playerLaser;
+		}
+		if (GameManager.playerTorpedo != null) {
+			torpedoPrefab = GameManager.playerTorpedo;
+		}
 	}
 	
 	void Update() {

@@ -47,13 +47,15 @@ public class LevelManager : MonoBehaviour {
 		if (Application.loadedLevel == 1) {
 			PlayerScore.ResetScore();
 			GameManager.currentLivesCount = GameManager.totalPlayerLives;
+			GameManager.playerLaser = null;
+			GameManager.playerTorpedo = null;
 		}
 	}
 	
 	#region FadePanel Methods
 	void CreateFadePanel(string forAction) {
 		GameObject uiCanvas = GameObject.Find("UI Canvas");
-		fadePanel = Instantiate(fadePanelPrefab); //, new Vector3(0f, 0f, 0f), Quaternion.identity) as GameObject;
+		fadePanel = Instantiate(fadePanelPrefab);
 		fadePanel.transform.SetParent(uiCanvas.transform, false);
 		
 		float alpha = 1f;

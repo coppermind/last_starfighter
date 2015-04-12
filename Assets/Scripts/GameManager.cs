@@ -6,6 +6,9 @@ public class GameManager : MonoBehaviour {
 	public static int totalPlayerLives = 3;
 	public static int currentLivesCount = 3;
 	
+	public static GameObject playerLaser;
+	public static GameObject playerTorpedo;
+	
 	bool gamePaused = false;
 	bool playerSpawnIn = true;
 	bool playerWins = false;
@@ -53,13 +56,14 @@ public class GameManager : MonoBehaviour {
 	}
 	
 	public void PlayerIsDead() {
-		
 		if (0 >= currentLivesCount) {
 			levelManager.LoadLevel("04 Lose Screen");
 		} else {
 			SpawnNewPlayerShip();
 			currentLivesCount--;
 		}
+		GameManager.playerLaser = null;
+		GameManager.playerTorpedo = null;
 	}
 	
 	void SpawnNewPlayerShip() {
