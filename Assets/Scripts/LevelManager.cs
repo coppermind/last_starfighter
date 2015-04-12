@@ -13,11 +13,12 @@ public class LevelManager : MonoBehaviour {
 	private string nextLevelName = null;
 	private int nextLevelNumber = 0;
 	
+	[SerializeField]
+	private GameObject fadePanelPrefab;
 	private GameObject fadePanel;
 	
 	void Start() {
-		fadePanel = GameObject.Find("Fade Panel");
-		
+		CreateFadePanel("fade in");
 		isFadingIn = true;
 		
 		if (0 < autoloadNextLevelInSeconds) {
@@ -30,29 +31,6 @@ public class LevelManager : MonoBehaviour {
 			FadeIn();
 		} else if (isFadingOut) {
 			FadeOut();
-		}
-	}
-	
-	void FadeIn() {
-		float step = fadeTransitionInSeconds * Time.deltaTime;
-		Image panelImage = fadePanel.GetComponent<Image>();
-		float alpha = panelImage.color.a - step;
-		panelImage.color = new Color(0, 0, 0, alpha);
-		if (alpha <= 0) {
-			fadePanel.SetActive(false);
-			isFadingIn = false;
-		}
-	}
-	
-	void FadeOut() {
-		fadePanel.SetActive(true);
-		float step = fadeTransitionInSeconds * Time.deltaTime;
-		Image panelImage = fadePanel.GetComponent<Image>();
-		float alpha = panelImage.color.a + step;
-		panelImage.color = new Color(0, 0, 0, alpha);
-		if (alpha >= 1) {
-			isFadingOut = false;
-			GotoLevel();
 		}
 	}
 	
@@ -72,6 +50,54 @@ public class LevelManager : MonoBehaviour {
 		}
 	}
 	
+	#region FadePanel Methods
+	void CreateFadePanel(string forAction) {
+		GameObject uiCanvas = GameObject.Find("UI Canvas");
+		fadePanel = Instantiate(fadePanelPrefab); //, new Vector3(0f, 0f, 0f), Quaternion.identity) as GameObject;
+		fadePanel.transform.SetParent(uiCanvas.transform, false);
+		
+		float alpha = 1f;
+		if (forAction == "fade out") { alpha = 0f; }
+		
+		Image panelImage = fadePanel.GetComponent<Image>();
+		panelImage.color = new Color(0f, 0f, 0f, alpha);
+		
+		
+	}
+	
+	void DestroyFadePanel() {
+		Destroy(fadePanel.gameObject);
+		fadePanel = null;
+	}
+	
+	void FadeIn() {
+		float step = fadeTransitionInSeconds * Time.deltaTime;
+		Image panelImage = fadePanel.GetComponent<Image>();
+		float alpha = panelImage.color.a - step;
+		panelImage.color = new Color(0, 0, 0, alpha);
+		if (alpha <= 0) {
+			DestroyFadePanel();
+			isFadingIn = false;
+		}
+	}
+	
+	void FadeOut() {
+		if (!fadePanel) {
+			CreateFadePanel("fade out");
+		}
+		float step = fadeTransitionInSeconds * Time.deltaTime;
+		Image panelImage = fadePanel.GetComponent<Image>();
+		float alpha = panelImage.color.a + step;
+		panelImage.color = new Color(0, 0, 0, alpha);
+		if (alpha >= 1) {
+			isFadingOut = false;
+			GotoLevel();
+		}
+	}
+	#endregion
+	
+	
+	#region Public Members
 	public void LoadLevel(string name) {
 		nextLevelName = name;
 		isFadingOut = true;
@@ -86,4 +112,5 @@ public class LevelManager : MonoBehaviour {
 		Debug.Log("Quit game request sent.");
 		Application.Quit();
 	}
+	#endregion
 }
