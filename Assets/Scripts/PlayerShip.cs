@@ -7,15 +7,12 @@ public class PlayerShip : MonoBehaviour {
 	public float shipSpeed = 8f;
 	
 	public float minY = 2f;
-	
 	public float maxY = 4f;
 	
 	public float spawnTargetX = 16f;
-	
 	public float spawnTargetY = 1f;
 	
 	public float spawnWarpSpeed = 2.5f;
-	
 	public float exitWarpSpeed = 5f;
 	
 	public float exitTargetY = 21f;
@@ -63,6 +60,11 @@ public class PlayerShip : MonoBehaviour {
 	LevelManager levelManager;
 	
 	GameManager gameManager;
+	
+	[SerializeField]
+	GameObject explosionPrefab;
+	
+	PlayerScore playerScore;
 	#endregion
 	
 	
@@ -70,6 +72,7 @@ public class PlayerShip : MonoBehaviour {
 	void Start() {
 		levelManager = FindObjectOfType<LevelManager>();
 		gameManager  = FindObjectOfType<GameManager>();
+		playerScore  = FindObjectOfType<PlayerScore>();
 		
 		shield       = GetComponentInChildren<PlayerShield>();
 		gun          = GetComponentInChildren<PlayerGun>();
@@ -117,25 +120,25 @@ public class PlayerShip : MonoBehaviour {
 	}
 	
 	void OnTriggerEnter2D(Collider2D collider) {
-		EnemyLaser enemyLaser      = collider.GetComponent<EnemyLaser>();
-		BomberTorpedo enemyTorpedo = collider.GetComponent<BomberTorpedo>();
 		Asteroid asteroid          = collider.GetComponent<Asteroid>();
+		BomberTorpedo enemyTorpedo = collider.GetComponent<BomberTorpedo>();
+		EnemyLaser enemyLaser      = collider.GetComponent<EnemyLaser>();
 		PowerUp powerUp            = collider.GetComponent<PowerUp>();
 		
 		if (enemyLaser || enemyTorpedo) {
 			float damage = (enemyLaser) ? enemyLaser.DamagePoints : enemyTorpedo.DamagePoints;
-			if (!shield.shieldIsDown()) {
-				shield.HitWith(damage);
-			} else {
+			if (shield.shieldIsDown()) {
 				HitWith(damage);
+			} else {
+				shield.HitWith(damage);
 			}
 		}
 		
 		if (asteroid) {
-			if (!shield.shieldIsDown()) {
-				shield.DestroyShield();
-			} else {
+			if (shield.shieldIsDown()) {
 				HitWith(currentHitPoints);
+			} else {
+				shield.DestroyShield();
 			}
 		}
 		
@@ -149,6 +152,8 @@ public class PlayerShip : MonoBehaviour {
 				gun.TorpedoesLeft = 5;
 			}
 			Destroy(powerUp.gameObject);
+			
+			playerScore.AddScore(powerUp.scorePoints);
 			
 			audioSource.clip = powerUpClip;
 			audioSource.volume = PlayerPrefsManager.GetEffectsVolume();
@@ -184,20 +189,39 @@ public class PlayerShip : MonoBehaviour {
 	
 	void HitWith(float damage) {
 		currentHitPoints -= damage;
-		if (0f <= currentHitPoints) {
-			audioSource.clip = hitClip;
-			Destroy(gameObject);
-			gameManager.PlayerIsDead();
-		} else {
+		if (0f >= currentHitPoints) {
+			CircleCollider2D collider = GetComponent<CircleCollider2D>();
+			collider.enabled = false;
+			
+			Transform body = transform.Find("Body");
+			if (body) { Destroy(body.gameObject); }
+			
+			GameObject explosion = Instantiate(explosionPrefab, transform.position, Quaternion.identity) as GameObject;
+			explosion.transform.parent = transform;
+			
+			StartCoroutine("DestroyObject");
+			
 			audioSource.clip = explodeClip;
+		} else {
+			audioSource.clip = hitClip;
 		}
 		PlayAudio();
 	}
+	
+	IEnumerator DestroyObject() {
+		yield return new WaitForSeconds(1);
+		Destroy(gameObject);
+		gameManager.PlayerIsDead();
+	}
 
 	void ManeuverShip() {
+		Transform body = transform.Find("Body");
+		if (!body) { return; }
+		
 		Vector3 shipPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z);
 		float newXPosition = shipPosition.x;
 		float newYPosition = shipPosition.y;
+		
 		if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)) {
 			newXPosition = transform.position.x - CurrentSpeed() * Time.deltaTime;
 		} else {
