@@ -85,6 +85,8 @@ public class BomberShip : MonoBehaviour {
 			Destroy(body.gameObject);
 		}
 		
+		BoxCollider2D collider = GetComponent<BoxCollider2D>();
+		collider.enabled = false;
 		Destroy(gameObject, 0.5f);
 		
 		playerScore.AddScore(scorePoints);

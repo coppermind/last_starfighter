@@ -103,10 +103,10 @@ public class EnemyShip : MonoBehaviour {
 		explosion.transform.parent = transform;
 		
 		Transform body = transform.Find("Body");
-		if (body) {
-			Destroy(body.gameObject);
-		}
+		if (body) { Destroy(body.gameObject); }
 		
+		CircleCollider2D collider = GetComponent<CircleCollider2D>();
+		collider.enabled = false;
 		Destroy(gameObject, 0.5f);
 		
 		playerScore.AddScore(scorePoints);
