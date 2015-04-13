@@ -152,4 +152,8 @@ public class EnemyShip : MonoBehaviour {
 		audioSource.volume = PlayerPrefsManager.GetEffectsVolume();
 		audioSource.Play();
 	}
+	
+	public void HitWith() {
+		HitWith(currentHitPoints);
+	}
 }

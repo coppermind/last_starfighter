@@ -62,20 +62,6 @@ public class BomberShip : MonoBehaviour {
 		}
 	}
 	
-	public void HitWith(float damage) {
-		currentHitPoints -= damage;
-		
-		if (0f >= currentHitPoints) {
-			audioSource.clip = explosionClip;
-			Die();
-		} else {
-			audioSource.clip = hitClip;
-		}
-		
-		audioSource.volume = PlayerPrefsManager.GetEffectsVolume();
-		audioSource.Play();
-	}
-	
 	void Die() {
 		GameObject explosion = Instantiate(explosionPrefab, transform.position, Quaternion.identity) as GameObject;
 		explosion.transform.parent = transform;
@@ -110,5 +96,23 @@ public class BomberShip : MonoBehaviour {
 			shipDirection = 1;
 			bodyTransform.Rotate(new Vector3(0f, 0f, -180f));
 		}
+	}
+	
+	public void HitWith(float damage) {
+		currentHitPoints -= damage;
+		
+		if (0f >= currentHitPoints) {
+			audioSource.clip = explosionClip;
+			Die();
+		} else {
+			audioSource.clip = hitClip;
+		}
+		
+		audioSource.volume = PlayerPrefsManager.GetEffectsVolume();
+		audioSource.Play();
+	}
+	
+	public void HitWith() {
+		HitWith(currentHitPoints);
 	}
 }

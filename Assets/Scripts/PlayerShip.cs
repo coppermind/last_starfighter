@@ -142,6 +142,10 @@ public class PlayerShip : MonoBehaviour {
 			} else {
 				shield.DestroyShield();
 			}
+			
+			if (asteroid)   { asteroid.Destroy(); }
+			if (bomberShip) { bomberShip.HitWith(); }
+			if (enemyShip)  { enemyShip.HitWith(); }
 		}
 		
 		if (powerUp) {
