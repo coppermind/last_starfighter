@@ -120,13 +120,15 @@ public class PlayerShip : MonoBehaviour {
 	}
 	
 	void OnTriggerEnter2D(Collider2D collider) {
-		Asteroid asteroid          = collider.GetComponent<Asteroid>();
-		BomberTorpedo enemyTorpedo = collider.GetComponent<BomberTorpedo>();
-		EnemyLaser enemyLaser      = collider.GetComponent<EnemyLaser>();
-		PowerUp powerUp            = collider.GetComponent<PowerUp>();
+		Asteroid asteroid           = collider.GetComponent<Asteroid>();
+		BomberShip bomberShip       = collider.GetComponent<BomberShip>();
+		BomberTorpedo bomberTorpedo = collider.GetComponent<BomberTorpedo>();
+		EnemyLaser enemyLaser       = collider.GetComponent<EnemyLaser>();
+		EnemyShip enemyShip         = collider.GetComponent<EnemyShip>();
+		PowerUp powerUp             = collider.GetComponent<PowerUp>();
 		
-		if (enemyLaser || enemyTorpedo) {
-			float damage = (enemyLaser) ? enemyLaser.DamagePoints : enemyTorpedo.DamagePoints;
+		if (bomberTorpedo || enemyLaser) {
+			float damage = (enemyLaser) ? enemyLaser.DamagePoints : bomberTorpedo.DamagePoints;
 			if (shield.shieldIsDown()) {
 				HitWith(damage);
 			} else {
@@ -134,7 +136,7 @@ public class PlayerShip : MonoBehaviour {
 			}
 		}
 		
-		if (asteroid) {
+		if (asteroid || bomberShip || enemyShip) {
 			if (shield.shieldIsDown()) {
 				HitWith(currentHitPoints);
 			} else {
