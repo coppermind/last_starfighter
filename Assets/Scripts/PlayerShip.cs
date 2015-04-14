@@ -110,10 +110,7 @@ public class PlayerShip : MonoBehaviour {
 			
 			if (gameManager.JumpIsReady) {
 				if (Input.GetKey(KeyCode.F) || Input.GetKey(KeyCode.J)) {
-					gameManager.PlayerHasWon = true;
-					
-					audioSource.clip = ftlJumpClip;
-					PlayAudio();
+					StartFtlJump();
 				}
 			}
 		}
@@ -269,4 +266,10 @@ public class PlayerShip : MonoBehaviour {
 		return shipSpeed * DifficultyModifier.ForPlayerSpeed();
 	}
 	#endregion
+	
+	public void StartFtlJump() {
+		gameManager.PlayerHasWon = true;
+		audioSource.clip = ftlJumpClip;
+		PlayAudio();
+	}
 }

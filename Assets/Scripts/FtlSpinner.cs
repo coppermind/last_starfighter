@@ -58,4 +58,11 @@ public class FtlSpinner : MonoBehaviour {
 			}
 		}
 	}
+	
+	public void Jump() {
+		if (!gameManager.JumpIsReady) { return; }
+		
+		PlayerShip playerShip = FindObjectOfType<PlayerShip>();
+		playerShip.StartFtlJump();
+	}
 }
