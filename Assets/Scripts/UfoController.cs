@@ -25,9 +25,17 @@ public class UfoController : MonoBehaviour {
 			return;
 		}
 		
-		if (GameMath.IsProbable(CurrentSpawnRate())) {
+		if (GameMath.IsProbable(CurrentSpawnRate()) && NoUfoInPlay()) {
 			SpawnUfo();
 		}
+	}
+	
+	bool NoUfoInPlay() {
+		GameObject ufoContainer = GameObject.Find("UFO Container");
+		if (ufoContainer) {
+			return (0 >= ufoContainer.transform.childCount);
+		}
+		return true;
 	}
 	
 	void SpawnUfo() {
