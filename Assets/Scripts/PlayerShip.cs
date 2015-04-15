@@ -268,6 +268,7 @@ public class PlayerShip : MonoBehaviour {
 	#endregion
 	
 	public void StartFtlJump() {
+		shipCollider.enabled = false;
 		gameManager.PlayerHasWon = true;
 		audioSource.clip = ftlJumpClip;
 		PlayAudio();
