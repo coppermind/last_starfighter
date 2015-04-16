@@ -9,13 +9,14 @@ public class GameManager : MonoBehaviour {
 	public static GameObject playerLaser;
 	public static GameObject playerTorpedo;
 	
-	bool gamePaused = false;
-	bool playerSpawnIn = true;
-	bool playerWins = false;
-	bool playerDead = false;
-	bool ftlSpinnerReady = false;
-	
 	LevelManager levelManager;
+	
+	bool gameIsPaused   = false;
+	bool jumpIsReady    = false;
+	bool playerHasWon   = false;
+	bool playerIsDead   = false;
+	bool playerIsGod    = false;
+	bool playerSpawning = false;
 	
 	public GameObject playerShipPrefab;
 	public Vector3 playerShipSpawnVector;
@@ -24,41 +25,44 @@ public class GameManager : MonoBehaviour {
 		levelManager = FindObjectOfType<LevelManager>();
 	}
 	
-	public void PauseGame() {
-		gamePaused = true;
-	}
-	
-	public void UnpauseGame() {
-		gamePaused = false;
-	}
-	
-	public bool GameIsPaused {
-		get { return gamePaused; }
-		set { gamePaused = value; }
-	}
-	
-	public bool PlayerIsSpawning {
-		get { return playerSpawnIn; }
-		set { playerSpawnIn = value; }
-	}
-	
-	public bool PlayerHasWon {
-		get { return playerWins; }
-		set { playerWins = value; }
-	}
-	
-	public bool PlayerIsDead {
-		get { return playerDead; }
-		set { playerDead = value; }
+	#region Properties
+	public bool GameIsPaused { 
+		get { return gameIsPaused; }
+		set { gameIsPaused = value; }
 	}
 	
 	public bool JumpIsReady {
-		get { return ftlSpinnerReady; }
-		set { ftlSpinnerReady = value; }
+		get { return jumpIsReady; }
+		set { jumpIsReady = value; }
 	}
 	
-	public void TogglePause() {
-		gamePaused = !gamePaused;
+	public bool PlayerHasWon {
+		get { return playerHasWon; }
+		set { playerHasWon = value; }
+	}
+	
+	public bool PlayerIsDead {
+		get { return playerIsDead; }
+		set { playerIsDead = value; }
+	}
+	
+	public bool PlayerIsInvincible {
+		get { return playerIsGod; }
+		set { playerIsGod = value; }
+	}
+	
+	public bool PlayerIsSpawning {
+		get { return playerSpawning; }
+		set { playerSpawning = value; }
+	}
+	#endregion
+	
+	public void PauseGame() {
+		GameIsPaused = true;
+	}
+	
+	public void UnpauseGame() {
+		GameIsPaused = false;
 	}
 	
 	public void PlayerDied() {
