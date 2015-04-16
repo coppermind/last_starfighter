@@ -48,8 +48,8 @@ public class GameManager : MonoBehaviour {
 	}
 	
 	public bool PlayerIsDead {
-		get { return PlayerIsDead; }
-		set { PlayerIsDead = value; }
+		get { return playerDead; }
+		set { playerDead = value; }
 	}
 	
 	public bool JumpIsReady {
