@@ -41,12 +41,12 @@ public class PlayerGun : MonoBehaviour {
 	}
 	
 	void Update() {
-		if (gameManager.GameIsPaused || gameManager.PlayerHasWon) {
+		if (gameManager.GameIsPaused || gameManager.PlayerHasWon || gameManager.PlayerIsDead) {
 			CancelInvoke("FirePrimaryWeapon");
 			return;
 		}
 		
-		if (!gameManager.PlayerIsSpawning && !gameManager.PlayerHasWon) {
+		if (!gameManager.PlayerIsSpawning && !gameManager.PlayerHasWon && !gameManager.PlayerIsDead) {
 			if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space)) {
 				StartFiringPrimaryWeapon();
 			}

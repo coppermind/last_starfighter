@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour {
 	bool gamePaused = false;
 	bool playerSpawnIn = true;
 	bool playerWins = false;
+	bool playerDead = false;
 	bool ftlSpinnerReady = false;
 	
 	LevelManager levelManager;
@@ -46,6 +47,11 @@ public class GameManager : MonoBehaviour {
 		set { playerWins = value; }
 	}
 	
+	public bool PlayerIsDead {
+		get { return PlayerIsDead; }
+		set { PlayerIsDead = value; }
+	}
+	
 	public bool JumpIsReady {
 		get { return ftlSpinnerReady; }
 		set { ftlSpinnerReady = value; }
@@ -55,7 +61,7 @@ public class GameManager : MonoBehaviour {
 		gamePaused = !gamePaused;
 	}
 	
-	public void PlayerIsDead() {
+	public void PlayerDied() {
 		if (0 >= currentLivesCount) {
 			levelManager.LoadLevel("04 Lose Screen");
 		} else {

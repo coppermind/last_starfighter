@@ -195,6 +195,8 @@ public class PlayerShip : MonoBehaviour {
 	void HitWith(float damage) {
 		currentHitPoints -= damage;
 		if (0f >= currentHitPoints) {
+			gameManager.PlayerIsDead = true;
+			
 			CircleCollider2D collider = GetComponent<CircleCollider2D>();
 			collider.enabled = false;
 			
@@ -216,7 +218,7 @@ public class PlayerShip : MonoBehaviour {
 	IEnumerator DestroyObject() {
 		yield return new WaitForSeconds(1);
 		Destroy(gameObject);
-		gameManager.PlayerIsDead();
+		gameManager.PlayerDied();
 	}
 
 	void ManeuverShip() {
