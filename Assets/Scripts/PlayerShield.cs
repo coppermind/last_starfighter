@@ -19,16 +19,25 @@ public class PlayerShield : MonoBehaviour {
 	AudioSource audioSource;
 	#endregion
 
+	GameManager gameManager;
 	
 	#region Unity Methods
 	void Start() {
-		currentHitPoints = totalHitPoints * DifficultyModifier.ForPlayerShieldHitPoints();
+		gameManager = FindObjectOfType<GameManager>();
+		
 		spriteRenderer = GetComponent<SpriteRenderer>();
 		audioSource    = GetComponent<AudioSource>();
+		
+		currentHitPoints = totalHitPoints * DifficultyModifier.ForPlayerShieldHitPoints();
+		
 		UpdateSprite();
 	}
 	
 	void Update() {
+		if (gameManager.GameIsPaused || gameManager.PlayerIsDead) {
+			return;
+		}
+		
 		if (0f < regenerationRate && currentHitPoints < totalHitPoints) {
 			currentHitPoints += regenerationRate * Time.deltaTime;
 			UpdateSprite();
