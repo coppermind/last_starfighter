@@ -41,14 +41,22 @@ public class PlayerShip : MonoBehaviour {
 	
 	[SerializeField]
 	AudioClip ftlJumpClip;
+	
+	[SerializeField]
+	float invincibleInSeconds = 5f;
+	float startTime;
+	
+	[SerializeField]
+	float explosionLengthInSeconds = 1f;
 	#endregion
 
 
 	#region Component Members
 	Animator animator;
 	
-	PlayerShield shield;
+	PlayerBody body;
 	PlayerGun gun;
+	PlayerShield shield;
 	
 	CircleCollider2D shipCollider;
 	
@@ -74,8 +82,9 @@ public class PlayerShip : MonoBehaviour {
 		gameManager  = FindObjectOfType<GameManager>();
 		playerScore  = FindObjectOfType<PlayerScore>();
 		
-		shield       = GetComponentInChildren<PlayerShield>();
+		body         = GetComponentInChildren<PlayerBody>();
 		gun          = GetComponentInChildren<PlayerGun>();
+		shield       = GetComponentInChildren<PlayerShield>();
 
 		shipCollider = GetComponent<CircleCollider2D>();
 		shipCollider.enabled = false;
@@ -83,6 +92,11 @@ public class PlayerShip : MonoBehaviour {
 		audioSource  = GetComponent<AudioSource>();
 		
 		gameManager.PlayerIsSpawning = true;
+		gameManager.PlayerIsDead     = false;
+		gameManager.PlayerIsInvincible = true;
+		
+		startTime = Time.time;
+		
 		spawnInTarget = new Vector3(spawnTargetX, spawnTargetY, transform.position.z);
 		
 		currentHitPoints = hitPoints * DifficultyModifier.ForPlayerHitPoints();
@@ -90,16 +104,13 @@ public class PlayerShip : MonoBehaviour {
 	}
 
 	void Update() {
-		if (gameManager.GameIsPaused) {
-			return;
-		}
+		if (gameManager.GameIsPaused) { return; }
 		
 		if (gameManager.PlayerIsSpawning) {
 			WarpIn();
 			
 			if (transform.position == spawnInTarget) {
 				gameManager.PlayerIsSpawning = false;
-				shipCollider.enabled = true;
 			}
 			
 		} else if (gameManager.PlayerHasWon) {
@@ -112,6 +123,15 @@ public class PlayerShip : MonoBehaviour {
 				if (Input.GetKey(KeyCode.F) || Input.GetKey(KeyCode.J)) {
 					StartFtlJump();
 				}
+			}
+		}
+		
+		if (gameManager.PlayerIsInvincible) {
+			float elapsedTime = Time.time - startTime;
+			if (elapsedTime >= invincibleInSeconds) {
+				shipCollider.enabled = true;
+				gameManager.PlayerIsInvincible = false;
+				body.MakeVulnerable();
 			}
 		}
 	}
@@ -145,26 +165,8 @@ public class PlayerShip : MonoBehaviour {
 			if (enemyShip)  { enemyShip.HitWith(); }
 		}
 		
-		if (powerUp) {
-			GameObject itemObject = powerUp.PowerUpItem;
-			PlayerLaser laser = itemObject.GetComponent<PlayerLaser>();
-			if (laser) {
-				gun.LaserObject = itemObject;
-				GameManager.playerLaser = itemObject;
-			} else {
-				gun.TorpedoObject = itemObject;
-				gun.TorpedoesLeft = 5;
-				GameManager.playerTorpedo = itemObject;
-			}
-			Destroy(powerUp.gameObject);
-			
-			playerScore.AddScore(powerUp.scorePoints);
-			
-			audioSource.clip = powerUpClip;
-			audioSource.volume = PlayerPrefsManager.GetEffectsVolume();
-			PlayAudio();
-		}
-	}
+		if (powerUp) { PickupItem(powerUp); }
+	} 
 	#endregion
 	
 	
@@ -181,13 +183,13 @@ public class PlayerShip : MonoBehaviour {
 		audioSource.Play();
 	}
 
-	void FtlJump ()	{
-		PlayerLaser[] lasers = FindObjectsOfType<PlayerLaser> ();
+	void FtlJump()	{
+		PlayerLaser[] lasers = FindObjectsOfType<PlayerLaser>();
 		if (0 == lasers.Length) {
 			exitTarget = new Vector3(transform.position.x, exitTargetY, transform.position.z);
-			WarpOut ();
+			WarpOut();
 			if (transform.position == exitTarget) {
-				levelManager.LoadNextLevel ();
+				levelManager.LoadNextLevel();
 			}
 		}
 	}
@@ -200,8 +202,7 @@ public class PlayerShip : MonoBehaviour {
 			CircleCollider2D collider = GetComponent<CircleCollider2D>();
 			collider.enabled = false;
 			
-			Transform body = transform.Find("Body");
-			if (body) { Destroy(body.gameObject); }
+			body.Kill();
 			
 			GameObject explosion = Instantiate(explosionPrefab, transform.position, Quaternion.identity) as GameObject;
 			explosion.transform.parent = transform;
@@ -216,7 +217,7 @@ public class PlayerShip : MonoBehaviour {
 	}
 	
 	IEnumerator DestroyObject() {
-		yield return new WaitForSeconds(1);
+		yield return new WaitForSeconds(explosionLengthInSeconds);
 		Destroy(gameObject);
 		gameManager.PlayerDied();
 	}
@@ -244,6 +245,25 @@ public class PlayerShip : MonoBehaviour {
 			}
 		}
 		UpdateShipPosition(shipPosition, newXPosition, newYPosition);
+	}
+
+	void PickupItem(PowerUp powerUp) {
+		GameObject itemObject = powerUp.PowerUpItem;
+		PlayerLaser laser = itemObject.GetComponent<PlayerLaser>();
+		if (laser) {
+			gun.LaserObject = itemObject;
+			GameManager.playerLaser = itemObject;
+		}
+		else {
+			gun.TorpedoObject = itemObject;
+			gun.TorpedoesLeft = 5;
+			GameManager.playerTorpedo = itemObject;
+		}
+		Destroy(powerUp.gameObject);
+		playerScore.AddScore(powerUp.scorePoints);
+		audioSource.clip = powerUpClip;
+		audioSource.volume = PlayerPrefsManager.GetEffectsVolume();
+		PlayAudio();
 	}
 	
 	void UpdateShipPosition(Vector3 ship, float x, float y) {

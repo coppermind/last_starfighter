@@ -67,6 +67,7 @@
      <Compile Include="Assets\Scripts\MainCamera.cs" />
      <Compile Include="Assets\Scripts\MusicPlayer.cs" />
      <Compile Include="Assets\Scripts\MusicPlaylist.cs" />
+     <Compile Include="Assets\Scripts\PlayerBody.cs" />
      <Compile Include="Assets\Scripts\PlayerGun.cs" />
      <Compile Include="Assets\Scripts\PlayerLaser.cs" />
      <Compile Include="Assets\Scripts\PlayerLivesInterface.cs" />
