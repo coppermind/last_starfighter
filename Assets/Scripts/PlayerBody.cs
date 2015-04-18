@@ -14,7 +14,6 @@ public class PlayerBody : MonoBehaviour {
 	}
 	
 	public void MakeVulnerable() {
-		Debug.Log("MakeVulnerable!!!!");
 		animator.SetTrigger("Idle trigger");
 	}
 }

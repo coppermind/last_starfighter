@@ -10,5 +10,14 @@ public class GameObjects : MonoBehaviour {
 		}
 		t.parent = container.transform;
 	}
+	
+	public static bool HasChildren(string parentName) {
+		GameObject container = GameObject.Find(parentName);
+		
+		if (container) {
+			return 0 < container.transform.childCount;
+		}
+		return false;
+	}
 
 }

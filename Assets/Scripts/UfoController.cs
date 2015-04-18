@@ -31,11 +31,7 @@ public class UfoController : MonoBehaviour {
 	}
 	
 	bool NoUfoInPlay() {
-		GameObject ufoContainer = GameObject.Find("UFO Container");
-		if (ufoContainer) {
-			return (0 >= ufoContainer.transform.childCount);
-		}
-		return true;
+		return !GameObjects.HasChildren("UFO Container");
 	}
 	
 	void SpawnUfo() {
