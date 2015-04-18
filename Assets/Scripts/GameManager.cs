@@ -67,7 +67,7 @@ public class GameManager : MonoBehaviour {
 	
 	public void PlayerDied() {
 		if (0 >= currentLivesCount) {
-			levelManager.LoadLevel("04 Lose Screen");
+			levelManager.LoadLevel("06 Lose Screen");
 		} else {
 			SpawnNewPlayerShip();
 			currentLivesCount--;
