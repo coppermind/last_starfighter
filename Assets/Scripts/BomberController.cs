@@ -25,7 +25,7 @@ public class BomberController : MonoBehaviour {
 			return;
 		}
 		
-		if (GameMath.IsProbable(CurrentSpawnRate())) {
+		if (GameMath.IsProbable(CurrentSpawnRate()) && 0 >= transform.childCount) {
 			SpawnBomber();
 		}
 	}
