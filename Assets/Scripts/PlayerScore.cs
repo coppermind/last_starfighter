@@ -26,4 +26,7 @@ public class PlayerScore : MonoBehaviour {
 		PlayerScore.totalScore = 0;
 	}
 	
+	public static int TotalScore() {
+		return totalScore;
+	}
 }
